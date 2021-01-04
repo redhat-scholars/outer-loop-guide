@@ -1,0 +1,15 @@
+= Welcome to Outer Loop Workshop
+:page-layout: home
+:!sectids:
+
+[.text-center.strong]
+== Ready to become a Cloud Native Developer?
+
+This immersive workshop will put you in the Cloud Native world as a Developer: code, run and deploy modern applications on OpenShift using rich and advanced development services.
+
+image::outer-loop.png[Developer Outer Loop, 400]
+
+The goal of this hands-workshop is to provide a Developer Experience through the Outer Loop using Cloud Native Technologies.
+
+To be a part of this journey, all you need is to come your modern web browser. 
+Everything else is running on the Cloud, on OpenShift
