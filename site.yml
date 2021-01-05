@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: OpenShift Outer Loop Workshop
-  url: https://redhat-scholars.github.io/outer-loop-guide
+  url: https://redhat-scholars.github.io/course-template
   start_page: outer-loop::index.adoc
 
 content:
