@@ -5,7 +5,7 @@
 [.text-center.strong]
 == Ready to become a Cloud Native Developer?
 
-This immersive workshop will put you in the Cloud Native world as a Developer: code, run and deploy modern applications on OpenShift using rich and advanced development services.
+This immersive workshop will put you in the Cloud Native world as a Developer: Promote applications to the different environments (QA, staging and production) on OpenShift using rich and advanced development services.
 
 image::outer-loop.png[Developer Outer Loop, 400]
 
