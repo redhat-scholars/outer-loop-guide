@@ -271,15 +271,22 @@ In the Container section, we should have 2 containers: <strong>One for the inven
 <p>In a OpenShift environment, the OpenShift Route is used to specify services that should be exposed outside the cluster.
 In an OpenShift Service Mesh, a better approach is to use a different configuration model, namely <strong>Istio Gateway</strong>.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>A <strong>Gateway</strong> describes a load balancer operating at the edge of the mesh receiving incoming or outgoing HTTP/TCP connections. The specification describes a set of ports that should be exposed, the type of protocol to use, SNI configuration for the load balancer, etc.</p>
-</li>
-<li>
-<p>A <strong>VirtualService</strong> defines a set of traffic routing rules to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.</p>
-</li>
-</ul>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Gateway</strong> describes a load balancer operating at the edge of the mesh receiving incoming or outgoing HTTP/TCP connections. The specification describes a set of ports that should be exposed, the type of protocol to use, SNI configuration for the load balancer, etc.</p>
+</div>
+<div class="paragraph">
+<p><strong>VirtualService</strong> defines a set of traffic routing rules to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
@@ -316,8 +323,7 @@ spec:
 <p><code><strong>Click on 'create'</strong></code>. Your Istio Gateway is now created.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Search' &#8594; 'Resources' &#8594; 'VS VirtualService' &#8594; 'Create VirtualService'</strong></code>.</p>
+<p>Then, <code><strong>click on 'Search' &#8594; 'Resources' &#8594; 'VS VirtualService' &#8594; 'Create VirtualService'</strong></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -357,7 +363,7 @@ spec:
 </div>
 <div class="paragraph">
 <p>To confirm that the <strong>Istio Gateway</strong> is properly configured,
-<code><strong>click on <a href="http://istio-ingressgateway-istio-system.%APPS_HOSTNAME_SUFFIX%/cn-project%USER_ID%/api/products" target="_blank" rel="noopener">http://istio-ingressgateway-istio-system.%APPS_HOSTNAME_SUFFIX%/cn-project%USER_ID%/api/products</a></strong></code></p>
+<code><strong>click on <a href="http://istio-ingressgateway-istio-system.%APPS_HOSTNAME_SUFFIX%/cn-project%USER_ID%/api/products" class="params-link" target="_blank" rel="noopener">http://istio-ingressgateway-istio-system.%APPS_HOSTNAME_SUFFIX%/cn-project%USER_ID%/api/products</a></strong></code></p>
 </div>
 <div class="paragraph">
 <p>You should have the following result:</p>
@@ -492,7 +498,7 @@ from abstract Applications to Services and Workloads.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>From the <strong>'Graph' view</strong>, <code><strong>enter the following configuration</strong></code>:</p>
+<p>In the <strong>'Graph' view</strong>, <code><strong>enter the following configuration</strong></code>:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. Graph Settings</caption>
@@ -703,13 +709,13 @@ you likely see <strong>'Gateway &#8658; Catalog Spring Boot (v1)'</strong> or <s
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can also go to the Web interface and refresh the page to see that product descriptions is sometimes in uppercase (v2) or not (v1).
+You can also access <a href="http://web-coolstore-cn-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">your CoolStore from your browser</a>  and refresh the page to see that product descriptions is sometimes in uppercase (v2) or not (v1).
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Kiali Console</a>, from the <strong>'Graph' view</strong>,
+<p>In <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Kiali Console</a>, from the <strong>'Graph' view</strong>,
 <code><strong>enter the following parameters</strong></code> to see the traffic distribution between Catalog v1 and v2:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -758,10 +764,10 @@ You can also go to the Web interface and refresh the page to see that product de
 <div class="sectionbody">
 <div class="paragraph">
 <p>After one week trial, you have collected enough information to confirm that product descriptions in uppercase do increate sales rates.
-So you will route all the traffic to <strong>Catalog Service v2</strong>.</p>
+So <strong>you will route all the traffic to Catalog Service v2</strong>.</p>
 </div>
 <div class="paragraph">
-<p>In <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Kiali Console</a>, <code><strong>click on 'Istio Config' then 'catalog-coolstore' VirtualService</strong></code></p>
+<p>In <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Kiali Console</a>, <code><strong>click on 'Istio Config' then 'catalog-coolstore' VirtualService</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -769,7 +775,7 @@ So you will route all the traffic to <strong>Catalog Service v2</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then, <code><strong>click on the 'YAML' tab and change the configuration as follows</strong></code></p>
+<p>Then, <code><strong>change the configuration as follows</strong></code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -799,7 +805,7 @@ you likely see only <strong>'Gateway &#8658; Catalog GoLang (v2)'</strong> in th
 </div>
 </div>
 <div class="paragraph">
-<p>And from <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Kiali Console</a>, you can visualize that <strong>100%</strong> of the traffic is switching gradually to <strong>Catalog Service v2</strong>.</p>
+<p>And from <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Kiali Console</a>, you can visualize that <strong>100%</strong> of the traffic is switching gradually to <strong>Catalog Service v2</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
