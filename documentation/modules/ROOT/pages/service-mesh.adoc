@@ -8,6 +8,7 @@
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project{USER_ID}
 :WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
 :WORKSHOP_GIT_REF: %WORKSHOP_GIT_REF%
+:WEB_COOLSTORE_URL: http://web-coolstore-cn-project{USER_ID}.%APPS_HOSTNAME_SUFFIX%
 
 _45 MINUTE EXERCISE_
 
@@ -72,7 +73,6 @@ image::openshift-istio-inventory-details.png[OpenShift - Istio Inventory, 700]
 Congratulations!! You successfully put the Inventory Service under Service Mesh control.
 
 
-
 == Enabling Service Mesh to Catalog and Gateway Service
 
 Now, we understand how to enable Service Mesh for a service, `*reproduce the previous step for Catalog and Gateway Services*`.
@@ -90,8 +90,12 @@ image::openshift-istio-gateway-details.png[OpenShift - Istio Gateway, 700]
 In a OpenShift environment, the OpenShift Route is used to specify services that should be exposed outside the cluster. 
 In an OpenShift Service Mesh, a better approach is to use a different configuration model, namely **Istio Gateway**. 
 
-* A **Gateway** describes a load balancer operating at the edge of the mesh receiving incoming or outgoing HTTP/TCP connections. The specification describes a set of ports that should be exposed, the type of protocol to use, SNI configuration for the load balancer, etc.
-* A **VirtualService** defines a set of traffic routing rules to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.
+[TIP]
+====
+**Gateway** describes a load balancer operating at the edge of the mesh receiving incoming or outgoing HTTP/TCP connections. The specification describes a set of ports that should be exposed, the type of protocol to use, SNI configuration for the load balancer, etc.
+
+**VirtualService** defines a set of traffic routing rules to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.
+====
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Search' -> 'Resources' -> 'G Gateway' -> 'Create Gateway'*`.
@@ -121,8 +125,7 @@ spec:
 
 `*Click on 'create'*`. Your Istio Gateway is now created.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*click on 'Search' -> 'Resources' -> 'VS VirtualService' -> 'Create VirtualService'*`.
+Then, `*click on 'Search' -> 'Resources' -> 'VS VirtualService' -> 'Create VirtualService'*`.
 
 image::openshift-create-virtualservice.png[OpenShift - Create VirtualService, 700]
 
@@ -156,7 +159,7 @@ spec:
 `*Then click on 'create'*`. The Virtual Service for the Gateway Service is now created.
 
 To confirm that the **Istio Gateway** is properly configured, 
-`*click on http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}/api/products[http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}/api/products^]*`
+`*click on http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}/api/products[http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}/api/products^,role='params-link']*`
 
 You should have the following result:
 
@@ -241,7 +244,7 @@ Then, `*log in with OpenShift as user{USER_ID}/{OPENSHIFT_PASSWORD}'*`
 
 image::kiali-login.png[Kiali- Log In,300]
 
-From the **'Graph' view**, `*enter the following configuration*`:
+In the **'Graph' view**, `*enter the following configuration*`:
 
 .Graph Settings
 [%header,cols=2*]
@@ -379,9 +382,9 @@ you likely see **'Gateway => Catalog Spring Boot (v1)'** or **'Gateway => Catalo
 
 image::che-run-gateway-90-10.png[Terminal - RunGatewayService,400]
 
-TIP: You can also go to the Web interface and refresh the page to see that product descriptions is sometimes in uppercase (v2) or not (v1).
+TIP: You can also access {WEB_COOLSTORE_URL}[your CoolStore from your browser^,role='params-link']  and refresh the page to see that product descriptions is sometimes in uppercase (v2) or not (v1).
 
-In {KIALI_URL}[Kiali Console^], from the **'Graph' view**,
+In {KIALI_URL}[Kiali Console^,role='params-link'], from the **'Graph' view**,
 `*enter the following parameters*` to see the traffic distribution between Catalog v1 and v2:
 
 .Graph Settings
@@ -412,13 +415,13 @@ You can see that the traffic between the two version of the **Catalog** is share
 == Validate the result
 
 After one week trial, you have collected enough information to confirm that product descriptions in uppercase do increate sales rates. 
-So you will route all the traffic to **Catalog Service v2**.
+So **you will route all the traffic to Catalog Service v2**.
 
-In {KIALI_URL}[Kiali Console^], `*click on 'Istio Config' then 'catalog-coolstore' VirtualService*`
+In {KIALI_URL}[Kiali Console^,role='params-link'], `*click on 'Istio Config' then 'catalog-coolstore' VirtualService*`
 
 image::kiali-edit-catalog-coolstore-vs.png[Kiali- Edit Catalog Coolstore VirtualService,700]
 
-Then, `*click on the 'YAML' tab and change the configuration as follows*`
+Then, `*change the configuration as follows*`
 
 [source,yaml,subs="{markup-in-source}"]
 ----
@@ -443,9 +446,9 @@ you likely see only *'Gateway => Catalog GoLang (v2)'* in the **'>_ Gateway - Ge
 
 image::che-run-gateway-100-0.png[Terminal - RunGatewayService,400]
 
-And from {KIALI_URL}[Kiali Console^], you can visualize that **100%** of the traffic is switching gradually to **Catalog Service v2**.
+And from {KIALI_URL}[Kiali Console^,role='params-link'], you can visualize that **100%** of the traffic is switching gradually to **Catalog Service v2**.
 
 image::kiali-abtesting-100-0.png[Kiali- Graph,900]
 
-
 That's all for this lab! You are ready to move on to the next lab.
+
