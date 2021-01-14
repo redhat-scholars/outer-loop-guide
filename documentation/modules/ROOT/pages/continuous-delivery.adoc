@@ -1,10 +1,10 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: %CHE_URL%
-:GIT_URL: %GIT_URL%
-:GITOPS_URL: %GITOPS_URL%
+:CHE_URL: https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
+:GIT_URL: https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%
+:GITOPS_URL: https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
-:OPENSHIFT_CONSOLE_URL: %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project{USER_ID}
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project{USER_ID}
 
 _20 MINUTE EXERCISE_
 
@@ -31,20 +31,22 @@ the platform and enables defining truly complex workflows directly from within O
 == Create a custom Task
 
 You have learnt and understood how to create a simple **Pipeline**.
-Now, let's `*create a task to deploy the OpenShift Configuration from Argo CD*` and add it the existing pipeline.
+Now, let's **create a task to deploy the OpenShift Configuration from Argo CD and add it the existing pipeline**.
 
+[TIP]
+====
 A **Task** consists of a collection of steps that are executed sequentially. 
 
 Each **Task** is executed in a separate container within the same pod. 
 They can also have inputs and outputs in order to interact with other tasks in the pipeline.
+====
 
-
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Search' -> 'Task' -> 'T Task' -> 'Create Task'*`.
 
-`*Then update the content as following:*`
+`*Then update the content as follows:*`
 
-[source,yaml,subs="{markup-in-source}",role=copy]
+[source,yaml,subs="{markup-in-source}",role=copypaste]
 ----
 apiVersion: tekton.dev/v1beta1
 kind: Task
@@ -92,16 +94,16 @@ spec:
 
 image::openshift-argocd-task.png[OpenShift - ArgoCD Task, 500]
 
-Now let's define the Argo CD server endpoint as well as the credentials to access to.
+Now let's **define the Argo CD server endpoint as well as the credentials to access to**.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Config Maps' then click on the 'Create Config Map' button*`.
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
 
 Then `*replace the content*` with the following input:
 
-[source,yaml,subs="{markup-in-source}",role=copy]
+[source,yaml,subs="{markup-in-source}",role=copypaste]
 ----
 apiVersion: v1
 kind: ConfigMap
@@ -112,9 +114,11 @@ data:
   ARGOCD_SERVER: argocd-server.argocd.svc
 ----
 
-`*Click on the 'Create button. Then click on 'Secret' then click on the 'Create Secret' button*`.
+`*Click on the 'Create' button.*` 
 
-image::openshift-create-keyvalue-secret.png[Che - OpenShift Create Secret, 900]
+Then `*click on 'Secrets' -> 'Create' -> 'Key/Value Secret'*`.
+
+image::openshift-create-keyvalue-secret-menu.png[Che - OpenShift Create Secret, 900]
 
 `*Enter the following configuration*`:
 
@@ -135,17 +139,19 @@ image::openshift-create-keyvalue-secret.png[Che - OpenShift Create Secret, 900]
 
 |===
 
-`*Click on the 'Create button*` 
+image::openshift-create-keyvalue-secret.png[Che - OpenShift Create Secret, 500]
+
+`*Click on the 'Create' button*` 
 
 
 == Expand your Pipeline
 
-Now let's expand your Inventory Pipeline to cover the Continuous Deployment.
+Now let's **expand your Inventory Pipeline to cover the Continuous Deployment**.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
-`*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'Actions' -> 'Edit'*`
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
+`*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'Actions' -> 'Edit Pipeline'*`
 
-then, `*complete your pipeline with the two following tasks and their configurations*`
+then, `*complete your pipeline*` with the two following tasks and their configurations:
 
 image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 
@@ -190,7 +196,7 @@ image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 
 == Run the Full Pipeline
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'Actions' -> 'Start' and enter the following parameters*`
 
 .Pipeline Workspaces
@@ -206,13 +212,13 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer vie
 
 |===
 
-`*Finally click on 'Start'*`
+Finally, `*click on 'Start'*`
 
 Congratulations!! You have deployed your first application using OpenShift Pipeline!!
 
 image::openshift-run-full-inventory-pipeline.png[OpenShift Pipeline,900]
 
-Once finished,from the **Topology view**, `*select the 'cn-project{USER_ID}'*`.
+Once finished, from the **Topology view**, `*select the 'cn-project{USER_ID}'*`.
 
 image::openshift-tekton-inventory-deployed.png[OpenShift - Inventory Deployed by Tekton, 700]
 
@@ -222,7 +228,7 @@ In the {GITOPS_URL}[Argo CD^], `*Select the 'Application menu' then click on the
 
 image::argocd-outofsync-application.png[Argo CD - Out Of Sync Application, 500]
 
-`*Filter to only display  the _Synced_ resources*`. Argo CD has synchronized all the Inventory OpenShift manifests stored into your {GIT_URL}/user{USER_ID}/gitops-cn-project['gitops-cn-project' Git Repository^] 
+`*Filter to only display  the _Synced_ resources*`. Argo CD has synchronized all the Inventory OpenShift manifests stored into your {GIT_URL}/user{USER_ID}/gitops-cn-project[Git Repository^,role='params-link'] 
 with your 'cn-project{USER_ID}' project on OpenShift.
 
 image::argocd-synced-inventory.png[Argo CD - Synced Inventory, 900]
@@ -242,7 +248,7 @@ image::che-runtask.png[Che - RunTask, 500]
 
 image::che-pipeline-deploy-coolstore.png[Che - Pipeline Deploy Coolstore, 500]
 
-Once executed, in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+Once executed, in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Pipelines' -> 'PL - coolstore-java-pipeline' -> 'Pipeline Runs'*`
 
 image::openshift-coolstore-java-pipeline-run.png[OpenShift Pipeline Runs, 700]
@@ -255,16 +261,16 @@ image::openshift-coolstore-nodejs-pipeline-run.png[OpenShift Pipeline Runs, 700]
 
 You should see 1 pipeline running for the Web services.
 
-`*Click on 'Topology'*` from the **Developer view** of the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^]
+`*Click on 'Topology'*` from the **Developer view** of the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link']
 and validate that the CoolStore application is deployed, up and running in the **cn-project{USER_ID}** project.
 
 image::openshift-tekton-coolstore-deployed.png[OpenShift - Coolstore Deployed by Tekton, 700]
 
-Finally, in the {GITOPS_URL}[Argo CD^], `*Select the 'Application menu' then click on the 'cn-project{USER_ID}' application*`:
+Finally, in {GITOPS_URL}[Argo CD^,role='params-link'], `*Select the 'Application menu' then click on the 'cn-project{USER_ID}' application*`:
 
 image::argocd-sync-application.png[Argo CD - Sync Application, 500]
 
-Argo CD has synchronized all the OpenShift manifests stored into your {GIT_URL}/user{USER_ID}/gitops-cn-project['gitops-cn-project' Git Repository^] 
+Argo CD has synchronized all the OpenShift manifests stored into your {GIT_URL}/user{USER_ID}/gitops-cn-project[Git Repository^,role='params-link'] 
 with your 'cn-project{USER_ID}' project on OpenShift.
 
 image::argocd-synced-coolstore.png[Argo CD - Synced Coolstore, 900]

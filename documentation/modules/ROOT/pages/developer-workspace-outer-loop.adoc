@@ -1,8 +1,8 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: %CHE_URL%
+:CHE_URL: https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
-:OPENSHIFT_CONSOLE_URL: %OPENSHIFT_CONSOLE_URL%/topology/ns/my-project{USER_ID}/graph
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}/graph
 
 = Get your Developer Workspace
 :navtitle: Get your Developer Workspace
@@ -45,7 +45,7 @@ https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Worksp
 [NOTE]
 .Devfile
 ====
-https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] uses https://access.redhat.com/documentation/en-us/red_hat_codeready_workspaces/2.2/html/end-user_guide/workspaces-overview_crw#configuring-a-workspace-using-a-devfile_crw[Devfiles^] to automate the provisioning 
+https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] uses https://docs.devfile.io/devfile/index.html[Devfiles^] to automate the provisioning 
 of a specific workspace by defining:
 
 * projects to clone
@@ -54,27 +54,20 @@ of a specific workspace by defining:
 * tools that you need
 * application runtime definition
 
-Providing a https://github.com/mcouliba/cloud-native-workshop/blob/ocp4.5/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
+Providing a https://github.com/mcouliba/cloud-native-workshop/blob/ocp4.6/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
 to this file.
 ====
 
-`*Click on the below button called 'Developer Workspace'*`
+`*Click on the 'Developer Workspace' button below*`
 
 [link={CHE_URL}/dashboard/#/ide/user{USER_ID}/wksp-cloud-native]
 [window=_blank, align="center"]
+[role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
 
 Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let's the magic happens...
 
 image::che-login.png[Che - Login, 500]
-
-
-[TIP]
-====
-If you have the following screen, please `*click on 'Allow selected permissions'*`
-
-image::che-openshift-authorize-access.png[Che - OpenShift OAuth Authorize Access, 600]
-====
 
 Once completed, you will have a fully functional Browser-based IDE within the source code already imported.
 
@@ -83,35 +76,56 @@ image::che-workspace.png[Che - Workspace, 800]
 [#connect_your_workspace]
 == Connect Your Workspace to Your OpenShift User
 
-First, in your {CHE_URL}[Workspace^], 
-`*click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Login'*`
+First, in your {CHE_URL}[Workspace^, role='params-link'],
+
+[tabs, subs="attributes+,+macros"]
+====
+
+IDE Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Login'*`
 
 image::che-runtask.png[Che - RunTask, 500]
+--
 
-image::che-openshift-login.png[Che - OpenShift Login, 500]
+CLI::
++
+--
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
 
-A terminal should be opened with the following output:
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+odo login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
+----
+
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+
+--
+====
+
+The output should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
+Connecting to the OpenShift cluster
+
 Login successful.
 
-You have access to the following projects and can switch between them with 'oc project <projectname>':
-
-  * cn-project{USER_ID}
+You have one project on this server: "cn-project{USER_ID}"
 
 Using project "cn-project{USER_ID}".
+
+Welcome! See 'odo help' to get started.
 ----
 
 [#deploy_coolstore_application]
 == Deploy the CoolStore Application in your Development Environment
 
-In your {CHE_URL}[Workspace^], 
+In your {CHE_URL}[Workspace^,role='params-link'], 
 `*click on 'Terminal' -> 'Run Task...' ->  'Inner Loop - Deploy Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 500]
-
-image::che-innerloop-deploycoolstore.png[Che - Inner Loop Deploy Coolstore, 500]
 
 A terminal should be opened with the following output:
 
@@ -141,10 +155,11 @@ The deployment of the Coolstore Application by Inner Loop has succeeded
 OpenShift ships with a web-based console that will allow users to
 perform various tasks via a browser.
 
-`*Click on the below button called 'Developer Console'*`
+`*Click on the 'Developer Console' button below*`
 
 [link={OPENSHIFT_CONSOLE_URL}]
 [window=_blank, align="center"]
+[role='params-link']
 image::developer-console-button.png[Developer Workspace - Button, 300]
 
 `*Enter your username and password (user{USER_ID}/{OPENSHIFT_PASSWORD})*` and 

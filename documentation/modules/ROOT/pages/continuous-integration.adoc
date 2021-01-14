@@ -1,10 +1,10 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: %CHE_URL%
-:GIT_URL: %GIT_URL%
-:GITOPS_URL: %GITOPS_URL%
+:CHE_URL: https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
+:GIT_URL: https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%
+:GITOPS_URL: https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
-:OPENSHIFT_CONSOLE_URL: %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project{USER_ID}
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project{USER_ID}
 
 = Continuous Integration with Openshift Pipelines
 :navtitle: Continuous Integration with Openshift Pipelines
@@ -36,10 +36,11 @@ The first step is to create a Git repository to store your source code.
 You can use any Git server (e.g. GitHub, BitBucket, etc). For this lab we will use a 
 Gitea git server.
 
-`*Click on the below button called 'Developer Repository'*`
+`*Click on the 'Developer Repository' button below*`
 
 [link={GIT_URL}]
 [window=_blank, align="center"]
+[role='params-link']
 image::developer-repository-button.png[Developer Repository - Button, 300]
 
 Then, `*click on 'Sign In' and login via OpenShift as user{USER_ID}/{OPENSHIFT_PASSWORD}*`
@@ -75,13 +76,39 @@ The Git repository is created now.
 Now that you have a Git repository for the Inventory service, you should push the 
 source code into this Git repository.
 
-In your {CHE_URL}[Workspace^], `*click on 'Terminal' -> 'Run Task...' ->  'Inventory - Commit'*`
+
+[tabs, subs="attributes+,+macros"]
+====
+
+IDE Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Commit'*`
 
 image::che-runtask.png[Che - RunTask, 500]
+--
 
-image::che-inventory-commit.png[Che - Inventory Commit, 500]
+CLI::
++
+--
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
 
-A terminal should be opened with the following output:
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+cd /projects/workshop/labs/inventory-quarkus
+git init
+git remote add origin http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-quarkus.git
+git add *
+git commit -m "Initial"
+git push http://user{USER_ID}:openshift@gitea-server.gitea.svc:3000/user{USER_ID}/inventory-quarkus.git
+----
+
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+
+--
+====
+
+The output should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
@@ -101,7 +128,7 @@ To http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-quarkus.git
  * [new branch]      master -> master
 ----
 
-Once done, in {GIT_URL}/user{USER_ID}/inventory-quarkus, `*refresh the page of your 'inventory-quarkus' repository*`. You should 
+Once done, in your {GIT_URL}/user{USER_ID}/inventory-quarkus[Git Repository^, role='params-link'], `*refresh the page of your 'inventory-quarkus' repository*`. You should 
 see the project files in the repository.
 
 image::cd-gitea-inventory-repo.png[Inventory Repository,900]
@@ -114,7 +141,7 @@ image::cd-gitea-inventory-repo.png[Inventory Repository,900]
 image::tekton-logo.png[Tekton, 300]
 
 OpenShift Pipelines is a cloud-native, continuous integration and continuous delivery (CI/CD) solution 
-for building pipelines based on  https://github.com/tektoncd/pipeline[Tekton Pipelines^] project.
+for building pipelines based on https://tekton.dev/[Tekton^] project.
 
 * Standard CI/CD pipeline definition based on Tekton
 * Build images with Kubernetes tools such as S2I, Buildah, Buildpacks, Kaniko, etc
@@ -125,7 +152,7 @@ for building pipelines based on  https://github.com/tektoncd/pipeline[Tekton Pip
 * Designed for microservices and decentralized teams
 * Integrated with the OpenShift Developer Console
 
-https://github.com/tektoncd/pipeline[Tekton Pipelines^] provides Kubernetes-style resources for creating serverless 
+https://tekton.dev/[Tekton^] provides Kubernetes-style resources for creating serverless 
 CI/CD-style pipelines on Kubernetes.
 
 The custom resources needed to define a pipeline are:
@@ -145,7 +172,7 @@ image::tekton-architecture.png[Tekton Architecture, 600]
 
 First, let's switch your OpenShift Console to your Staging Environement eg 'cn-project{USER_ID}'.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Topology' then select your 'cn-project{USER_ID}'*`.
 
 image::openshift-staging-project.png[OpenShift - Staging Project, 700]
@@ -160,14 +187,14 @@ It provides an abstraction for referencing container images from within OpenShif
 tags allow you to see what images are available and ensure that you are using the specific image you need even if the image 
 in the repository changes.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Search' -> 'Resources' -> 'IS ImageStream' -> 'Create Image Stream'*`.
 
 image::openshift-create-imagestream.png[OpenShift - Create ImageStream, 700]
 
-`*Then update the content as following:*`
+`*Then update the content as follows:*`
 
-[source,yaml,subs="{markup-in-source}",role=copy]
+[source,yaml,subs="{markup-in-source}",role=copypaste]
 ----
 apiVersion: image.openshift.io/v1
 kind: ImageStream
@@ -186,7 +213,7 @@ image::openshift-inventory-imagestream.png[OpenShift - Inventory ImageStream, 90
 A **Pipeline** defines a number of **Task** that should be executed and how they interact 
 with each other via *Workspace*.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Pipelines' -> 'Create Pipeline'*`.
 
 image::openshift-create-pipeline.png[OpenShift - Create Pipeline, 700]
@@ -261,7 +288,7 @@ A TaskRun can make these parts of the filesystem available in many ways: using a
 
 **Workspaces** are similar to Volumes except that they allow a Task author to defer to users and their TaskRuns when deciding which class of storage to use.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Search' -> 'Resources' -> 'PVC PersistentVolumeClaim' -> 'Create Persistent Volume Claim'*`.
 
 image::openshift-create-pvc.png[OpenShift - Create PVC, 700]
@@ -292,12 +319,12 @@ Then, `*Click on 'Create'*`. The Shared Storage for your pipeline is ready.
 
 image::openshift-inventory-pvc.png[OpenShift - Inventory PVC, 500]
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'YAML'*`
 
 image::openshift-inventory-pipeline-yaml.png[OpenShift - Inventory Pipeline YAML, 700]
 
-`*Add the three (3) workspace configurations*` as following:
+`*Add the three (3) workspace configurations*` as follows:
 
 [source,yaml,subs="{markup-in-source}"]
 ----
@@ -339,7 +366,7 @@ Finally, `*Click on 'Save'*`. A shared workspace is now configured into your Pip
 
 Now that your pipeline is created and configured, let's run it.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'Actions' -> 'Start'*`
 
 image::openshift-start-inventory-pipeline.png[OpenShift Start Inventory Pipeline,900]

@@ -1,10 +1,10 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: %CHE_URL%
-:GIT_URL: %GIT_URL%
-:GITOPS_URL: %GITOPS_URL%
+:CHE_URL: https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
+:GIT_URL: https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%
+:GITOPS_URL: https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
-:OPENSHIFT_CONSOLE_URL: %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project{USER_ID}
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project{USER_ID}
 
 _20 MINUTE EXERCISE_
 
@@ -41,7 +41,7 @@ OpenShift provides the flexibility to choose when and how you integrate GitOps m
 
 First, you need to export the project resources from OpenShift.
 
-In your {CHE_URL}[Workspace^], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Export Coolstore'*`
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Export Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 500]
 
@@ -69,7 +69,7 @@ image::che-gitops-export-result.png[Che - GitOps Export Result, 300]
 The next step is to store all Kubernetes/OpenShift resources in 
 a source code repository.
 
-In {GIT_URL}[Gitea^], `*create a new Repository*` as following:
+In your {GIT_URL}[Git Repository^,role='params-link'], `*create a new Repository*` as follows:
 
 .GitOps Repository
 [%header,cols=2*]
@@ -85,16 +85,11 @@ In {GIT_URL}[Gitea^], `*create a new Repository*` as following:
 
 |===
 
-`*Click on 'Create Repository' button*`.
-
-The Git repository is created now. 
-
-
 == Push the Configuration of Inventory Service into the Git Repository
 
 Now that you have a Git repository for the configuration, you should push it into this Git repository.
 
-In your {CHE_URL}[Workspace^], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Commit Inventory'*`
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Commit Inventory'*`
 
 image::che-runtask.png[Che - RunTask, 500]
 
@@ -123,7 +118,7 @@ To http://gitea-server.gitea.svc:3000/user{USER_ID}/gitops-cn-project.git
  * [new branch]      master -> master
 ----
 
-Once done, in {GIT_URL}/user{USER_ID}/gitops-cn-project, `*refresh the page of your 'gitops-cn-project' repository*`. You should 
+Once done, in {GIT_URL}/user{USER_ID}/gitops-cn-project[Git Repository^, role='params-link'], `*refresh the page of your 'gitops-cn-project' repository*`. You should 
 see the files in the repository.
 
 image::gitea-inventory-gitops-repo.png[GitOps Repository,900]
@@ -147,10 +142,11 @@ deployments can track updates to branches, tags, or pinned to a specific version
 
 == Log in to Argo CD
 
-`*Click on the below button called 'Developer GitOps'*`
+`*Click on the 'Developer GitOps' button below*`
 
 [link={GITOPS_URL}]
 [window=_blank, align="center"]
+[role='params-link']
 image::developer-gitops-button.png[Developer GitOps - Button, 300]
 
 Then `*login via OpenShift as user{USER_ID}/{OPENSHIFT_PASSWORD}*`, `*click on 'Allow selected permissions'*`
@@ -165,7 +161,7 @@ image::argocd-home.png[Argo CD - Home Page, 500]
 
 == Add your Newly Created GitOps Repository 
 
-In {GITOPS_URL}[Argo CD^], `*Select the 'Configuration menu' then click on 'Repositories'*`
+In {GITOPS_URL}[Argo CD^,role='params-link'], `*Select the 'Configuration menu' then click on 'Repositories'*`
 
 image::argocd-configure-repositories.png[Argo CD - Configure Repositories, 500]
 
@@ -194,7 +190,7 @@ image::argocd-repository.png[Argo CD - Repository, 800]
 
 == Create a GitOps Application
 
-In {GITOPS_URL}[Argo CD^], `*Select the 'Application menu' then click on '+ New App'*` and enter the following details:
+In {GITOPS_URL}[Argo CD^,role='params-link'], `*Select the 'Application menu' then click on '+ New App'*` and enter the following details:
 
 image::argocd-configure-application.png[Argo CD - Configure Application, 500]
 
@@ -257,14 +253,14 @@ image::argocd-outofsync-inventory-details.png[Argo CD - OutOfSync Application, 9
 
 == Deploy a Resource on OpenShift
 
-In {GITOPS_URL}[Argo CD^], `*click on the 3 points at the left of the 'CM Inventory' resource then select 'Sync'*`
+In {GITOPS_URL}[Argo CD^,role='params-link'], `*click on the 3 points at the left of the 'CM Inventory' resource then select 'Sync'*`
 
 image::argocd-cm-inventory-sync.png[Argo CD - CM Inventory Sync, 700]
 
 Then `*click on the 'Synchonize' button*`. Now the ConfigMap of Inventory has been deployed and synchronized 
 with your environment.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*select your 'cn-project{USER_ID}'*` and `*click on 'Config Maps'. You should find the resource you just 
 deployed via Argo CD.
 
@@ -276,19 +272,19 @@ image::openshift-cm-inventory-deployed.png[OpenShift - CM Inventory Deployed, 50
 A _Configuration Drift_ is a term used whenever someone makes ad hoc changes in a (production) environment
 which are not recorded or tracked.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*select your 'cn-project{USER_ID}'*` and `*click on 'Config Maps' -> 'CM inventory' -> 'YAML'*`.
 
 `*Add the following line in your configuration then click on 'Save'*`
 
-[source,yaml,subs="{markup-in-source}",role=copy]
+[source,properties,subs="{markup-in-source}",role=copypaste]
 ----
 simple.adhoc.change=This is a configuration drift
 ----
 
 image::openshift-cm-inventory-drift.png[OpenShift - CM Inventory Configuration Drift, 900]
 
-In {GITOPS_URL}[Argo CD^], the 'CM Inventory' resource is no longer synchronized. 
+In {GITOPS_URL}[Argo CD^,role='params-link'], the 'CM Inventory' resource is no longer synchronized. 
 `*Click on it then select 'Diff' tab and check 'Compact diff'*`.
 
 image::argocd-cm-inventory-diff.png[Argo CD - CM Inventory Diff, 700]
@@ -304,7 +300,7 @@ You can leave the configuration drift as it is. You will fix it in the next lab.
 
 To prepare the next lab, you need to push, on the Git repository, the configuration of the other services of the coolstore application.
 
-In your {CHE_URL}[Workspace^], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Commit Coolstore'*`
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Commit Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 500]
 
@@ -328,12 +324,12 @@ To http://gitea-server.gitea.svc:3000/user{USER_ID}/gitops-cn-project.git
    d35eafe..7d5e824  master -> master
 ----
 
-Once done, in {GIT_URL}/user{USER_ID}/gitops-cn-project, `*refresh the page of your 'gitops-cn-project' repository*`. You should 
+Once done, in your {GIT_URL}/user{USER_ID}/gitops-cn-project[Git Repository^,role='params-link'], `*refresh the page of your 'gitops-cn-project' repository*`. You should 
 see the project files in the repository.
 
 image::gitea-gitops-repo.png[GitOps Repository,900]
 
-In {GITOPS_URL}[Argo CD^], the application status  is once again in yellow **OutOfSync** state since the Catalog, Gateway and Web services 
+In {GITOPS_URL}[Argo CD^,role='params-link'], the application status  is once again in yellow **OutOfSync** state since the Catalog, Gateway and Web services 
 have not yet been deployed into cn-project{USER_ID} OpenShift project.
 
 image::argocd-outofsync-coolstore-details.png[Argo CD - OutOfSync Application, 700]

@@ -1,11 +1,11 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: %CHE_URL%
-:KIALI_URL: %KIALI_URL%
-:JAEGER_URL: %JAEGER_URL%
+:CHE_URL: https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
+:KIALI_URL: https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%
+:JAEGER_URL: https://jaeger-istio-system.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :APPS_HOSTNAME_SUFFIX: %APPS_HOSTNAME_SUFFIX%
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
-:OPENSHIFT_CONSOLE_URL: %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project{USER_ID}
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project{USER_ID}
 :WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
 :WORKSHOP_GIT_REF: %WORKSHOP_GIT_REF%
 
@@ -45,7 +45,7 @@ The components that make up the data plane and the control plane are:
 
 OpenShift Service Mesh automatically injects the sidecar into the Pod by specifying **sidecar.istio.io/inject:true** annotation in the DeploymentConfig.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on the 'DC inventory-coolstore' bubble -> 'DC inventory-coolstore'*`
 
 image::openshift-dc-inventory-topology.png[OpenShift - Inventory Topology, 700]
@@ -93,14 +93,14 @@ In an OpenShift Service Mesh, a better approach is to use a different configurat
 * A **Gateway** describes a load balancer operating at the edge of the mesh receiving incoming or outgoing HTTP/TCP connections. The specification describes a set of ports that should be exposed, the type of protocol to use, SNI configuration for the load balancer, etc.
 * A **VirtualService** defines a set of traffic routing rules to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Search' -> 'Resources' -> 'G Gateway' -> 'Create Gateway'*`.
 
 image::openshift-create-gateway.png[OpenShift - Create Gateway, 700]
 
-`*Then update the content as following:*`
+`*Then update the content as follows:*`
 
-[source,yaml,subs="{markup-in-source}",role=copy]
+[source,yaml,subs="{markup-in-source}",role=copypaste]
 ----
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
@@ -121,14 +121,14 @@ spec:
 
 `*Click on 'create'*`. Your Istio Gateway is now created.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Search' -> 'Resources' -> 'VS VirtualService' -> 'Create VirtualService'*`.
 
 image::openshift-create-virtualservice.png[OpenShift - Create VirtualService, 700]
 
-`*Then update the content as following:*`
+`*Then update the content as follows:*`
 
-[source,yaml,subs="{markup-in-source}",role=copy]
+[source,yaml,subs="{markup-in-source}",role=copypaste]
 ----
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -180,7 +180,7 @@ You should have the following result:
 
 Configure the WebUI Service to use the Istio Gateway instead of the OpenShift Route.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on the 'D web-coolstore' bubble -> 'D web-coolstore' and go to the 'Environement' tab*`
 
 `*Click on '+ Add Value' then add the following environment variable*`
@@ -230,10 +230,11 @@ from abstract Applications to Services and Workloads.
 
 Kiali provides an interactive graph view of your namespace in real time, being able to display the interactions at several levels (applications, versions, workloads), with contextual information and charts on the selected graph node or edge.
 
-`*Click on the below button called 'Developer Observability'*`
+`*Click on the 'Developer Observability' button below*`
 
 [link={KIALI_URL}]
 [window=_blank, align="center"]
+[role='params-link']
 image::developer-observability-button.png[Developer Observability - Button, 300]
 
 Then, `*log in with OpenShift as user{USER_ID}/{OPENSHIFT_PASSWORD}'*`
@@ -271,7 +272,7 @@ A new **Catalog Service v2** has been implemented in https://golang.org/[Golang^
 except that all product descriptions are returned in **UPPERCASE**.
 
 
-Let's deploy the service. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+Let's deploy the service. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on '+ Add' and select 'From Docker'*`
 
 image::openshift-add-from-docker.png[OpenShift - Add from Docker, 700]
@@ -331,14 +332,14 @@ The only step is to define the rules to distribute the traffic between the servi
 to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. 
 If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Search' -> 'Resources' -> 'VS VirtualService' -> 'Create VirtualService'*`.
 
 image::openshift-create-virtualservice.png[OpenShift - Create VirtualService, 700]
 
-Then `*update the content as following:*`
+Then `*update the content as follows:*`
 
-[source,yaml,subs="{markup-in-source}",role=copy]
+[source,yaml,subs="{markup-in-source}",role=copypaste]
 ----
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -367,13 +368,13 @@ the **10%** remaining to pods of the **Catalog Service v2**.
 Let's now see the A/B testing with Site Mesh in action.
 First, we need to generate HTTP traffic by sending several requests to the **Gateway Service** from the **Istio Gateway**
 
-In your {CHE_URL}[Workspace^], `*click on 'Terminal' -> 'Run Task...' ->  'Gateway - Generate Traffic'*`
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Gateway - Generate Traffic'*`
 
 image::che-runtask.png[Che - RunTask, 500]
 
 image::che-gateway-traffic.png[Che - Gateway Traffic, 500]
 
-In the window called **'>_ Gateway - Generate Traffic terminal'**, 
+In the ''>_ Gateway - Generate Traffic' terminal window, 
 you likely see **'Gateway => Catalog Spring Boot (v1)'** or **'Gateway => Catalog GoLang (v2)'**
 
 image::che-run-gateway-90-10.png[Terminal - RunGatewayService,400]
@@ -417,7 +418,7 @@ In {KIALI_URL}[Kiali Console^], `*click on 'Istio Config' then 'catalog-coolstor
 
 image::kiali-edit-catalog-coolstore-vs.png[Kiali- Edit Catalog Coolstore VirtualService,700]
 
-Then, `*click on the 'YAML' tab and change the configuration as following*`
+Then, `*click on the 'YAML' tab and change the configuration as follows*`
 
 [source,yaml,subs="{markup-in-source}"]
 ----
@@ -437,7 +438,7 @@ spec:
 [...]
 ----
 
-Now, In your {CHE_URL}[Workspace^], in the window called **'>_ Gateway - Generate Traffic terminal'**, 
+Now, in your {CHE_URL}[Workspace^,role='params-link'], in the '>_ Gateway - Generate Traffic' terminal window, 
 you likely see only *'Gateway => Catalog GoLang (v2)'* in the **'>_ Gateway - Generate Traffic terminal'**.
 
 image::che-run-gateway-100-0.png[Terminal - RunGatewayService,400]
