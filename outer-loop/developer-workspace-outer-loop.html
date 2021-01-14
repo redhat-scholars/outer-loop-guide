@@ -207,7 +207,7 @@ and getting familiar with the OpenShift CLI and OpenShift Web Console.</p>
 <td class="content">
 <div class="title">Devfile</div>
 <div class="paragraph">
-<p><a href="https://access.redhat.com/products/red-hat-codeready-workspaces" target="_blank" rel="noopener">CodeReady Workspaces</a> uses <a href="https://access.redhat.com/documentation/en-us/red_hat_codeready_workspaces/2.2/html/end-user_guide/workspaces-overview_crw#configuring-a-workspace-using-a-devfile_crw" target="_blank" rel="noopener">Devfiles</a> to automate the provisioning
+<p><a href="https://access.redhat.com/products/red-hat-codeready-workspaces" target="_blank" rel="noopener">CodeReady Workspaces</a> uses <a href="https://docs.devfile.io/devfile/index.html" target="_blank" rel="noopener">Devfiles</a> to automate the provisioning
 of a specific workspace by defining:</p>
 </div>
 <div class="ulist">
@@ -230,7 +230,7 @@ of a specific workspace by defining:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Providing a <a href="https://github.com/mcouliba/cloud-native-workshop/blob/ocp4.5/devfile.yaml" target="_blank" rel="noopener">devfile.yaml</a> file inside a Git source repository signals to <a href="https://access.redhat.com/products/red-hat-codeready-workspaces" target="_blank" rel="noopener">CodeReady Workspaces</a> to configure the project and runtime according
+<p>Providing a <a href="https://github.com/mcouliba/cloud-native-workshop/blob/ocp4.6/devfile.yaml" target="_blank" rel="noopener">devfile.yaml</a> file inside a Git source repository signals to <a href="https://access.redhat.com/products/red-hat-codeready-workspaces" target="_blank" rel="noopener">CodeReady Workspaces</a> to configure the project and runtime according
 to this file.</p>
 </div>
 </td>
@@ -238,11 +238,11 @@ to this file.</p>
 </table>
 </div>
 <div class="paragraph">
-<p><code><strong>Click on the below button called 'Developer Workspace'</strong></code></p>
+<p><code><strong>Click on the 'Developer Workspace' button below</strong></code></p>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock text-center params-link">
 <div class="content">
-<a class="image" href="%CHE_URL%/dashboard/#/ide/user%USER_ID%/wksp-cloud-native" target="_blank" rel="noopener"><img src="_images/developer-workspace-button.svg" alt="Developer Workspace - Button" width="300"></a>
+<a class="image" href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%/dashboard/#/ide/user%USER_ID%/wksp-cloud-native" target="_blank" rel="noopener"><img src="_images/developer-workspace-button.svg" alt="Developer Workspace - Button" width="300"></a>
 </div>
 </div>
 <div class="paragraph">
@@ -252,25 +252,6 @@ to this file.</p>
 <div class="content">
 <img src="_images/che-login.png" alt="Che - Login" width="500">
 </div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>If you have the following screen, please <code><strong>click on 'Allow selected permissions'</strong></code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/che-openshift-authorize-access.png" alt="Che - OpenShift OAuth Authorize Access" width="600">
-</div>
-</div>
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>Once completed, you will have a fully functional Browser-based IDE within the source code already imported.</p>
@@ -286,31 +267,68 @@ to this file.</p>
 <h2 id="connect_your_workspace"><a class="anchor" href="#connect_your_workspace"></a>Connect Your Workspace to Your OpenShift User</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>First, in your %CHE_URL%[Workspace^],
-<code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'OpenShift - Login'</strong></code></p>
+<p>First, in your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset1_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'OpenShift - Login'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
 </div>
 </div>
-<div class="imageblock">
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
 <div class="content">
-<img src="_images/che-openshift-login.png" alt="Che - OpenShift Login" width="500">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">odo login $(oc whoami --show-server) --username=user%USER_ID% --password=%OPENSHIFT_PASSWORD% --insecure-skip-tls-verify</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
-<p>A terminal should be opened with the following output:</p>
+<p>The output should be as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Login successful.
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Connecting to the OpenShift cluster
 
-You have access to the following projects and can switch between them with 'oc project &lt;projectname&gt;':
+Login successful.
 
-  * cn-project%USER_ID%
+You have one project on this server: "cn-project%USER_ID%"
 
-Using project "cn-project%USER_ID%".</code></pre>
+Using project "cn-project%USER_ID%".
+
+Welcome! See 'odo help' to get started.</code></pre>
 </div>
 </div>
 </div>
@@ -319,17 +337,12 @@ Using project "cn-project%USER_ID%".</code></pre>
 <h2 id="deploy_coolstore_application"><a class="anchor" href="#deploy_coolstore_application"></a>Deploy the CoolStore Application in your Development Environment</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In your %CHE_URL%[Workspace^],
+<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,
 <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inner Loop - Deploy Coolstore'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/che-innerloop-deploycoolstore.png" alt="Che - Inner Loop Deploy Coolstore" width="500">
 </div>
 </div>
 <div class="paragraph">
@@ -365,11 +378,11 @@ The deployment of the Coolstore Application by Inner Loop has succeeded</code></
 perform various tasks via a browser.</p>
 </div>
 <div class="paragraph">
-<p><code><strong>Click on the below button called 'Developer Console'</strong></code></p>
+<p><code><strong>Click on the 'Developer Console' button below</strong></code></p>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock text-center params-link">
 <div class="content">
-<a class="image" href="%OPENSHIFT_CONSOLE_URL%/topology/ns/my-project%USER_ID%/graph" target="_blank" rel="noopener"><img src="_images/developer-console-button.png" alt="Developer Workspace - Button" width="300"></a>
+<a class="image" href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%/graph" target="_blank" rel="noopener"><img src="_images/developer-console-button.png" alt="Developer Workspace - Button" width="300"></a>
 </div>
 </div>
 <div class="paragraph">

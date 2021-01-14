@@ -193,7 +193,7 @@
 <p>OpenShift Service Mesh automatically injects the sidecar into the Pod by specifying <strong>sidecar.istio.io/inject:true</strong> annotation in the DeploymentConfig.</p>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on the 'DC inventory-coolstore' bubble &#8594; 'DC inventory-coolstore'</strong></code></p>
 </div>
 <div class="imageblock">
@@ -282,7 +282,7 @@ In an OpenShift Service Mesh, a better approach is to use a different configurat
 </ul>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Search' &#8594; 'Resources' &#8594; 'G Gateway' &#8594; 'Create Gateway'</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -291,9 +291,9 @@ In an OpenShift Service Mesh, a better approach is to use a different configurat
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Then update the content as following:</strong></code></p>
+<p><code><strong>Then update the content as follows:</strong></code></p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: networking.istio.io/v1beta1
 kind: Gateway
@@ -316,7 +316,7 @@ spec:
 <p><code><strong>Click on 'create'</strong></code>. Your Istio Gateway is now created.</p>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Search' &#8594; 'Resources' &#8594; 'VS VirtualService' &#8594; 'Create VirtualService'</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -325,9 +325,9 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Then update the content as following:</strong></code></p>
+<p><code><strong>Then update the content as follows:</strong></code></p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -386,7 +386,7 @@ spec:
 <p>Configure the WebUI Service to use the Istio Gateway instead of the OpenShift Route.</p>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on the 'D web-coolstore' bubble &#8594; 'D web-coolstore' and go to the 'Environement' tab</strong></code></p>
 </div>
 <div class="paragraph">
@@ -476,11 +476,11 @@ from abstract Applications to Services and Workloads.</p>
 <p>Kiali provides an interactive graph view of your namespace in real time, being able to display the interactions at several levels (applications, versions, workloads), with contextual information and charts on the selected graph node or edge.</p>
 </div>
 <div class="paragraph">
-<p><code><strong>Click on the below button called 'Developer Observability'</strong></code></p>
+<p><code><strong>Click on the 'Developer Observability' button below</strong></code></p>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock text-center params-link">
 <div class="content">
-<a class="image" href="%KIALI_URL%" target="_blank" rel="noopener"><img src="_images/developer-observability-button.png" alt="Developer Observability - Button" width="300"></a>
+<a class="image" href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener"><img src="_images/developer-observability-button.png" alt="Developer Observability - Button" width="300"></a>
 </div>
 </div>
 <div class="paragraph">
@@ -540,7 +540,7 @@ You can see how the services interact with each other.</p>
 except that all product descriptions are returned in <strong>UPPERCASE</strong>.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s deploy the service. In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>Let&#8217;s deploy the service. In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on '+ Add' and select 'From Docker'</strong></code></p>
 </div>
 <div class="imageblock">
@@ -630,7 +630,7 @@ to apply when a host is addressed. Each routing rule defines matching criteria f
 If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.</p>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Search' &#8594; 'Resources' &#8594; 'VS VirtualService' &#8594; 'Create VirtualService'</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -639,9 +639,9 @@ If the traffic is matched, then it is sent to a named destination service (or su
 </div>
 </div>
 <div class="paragraph">
-<p>Then <code><strong>update the content as following:</strong></code></p>
+<p>Then <code><strong>update the content as follows:</strong></code></p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -675,7 +675,7 @@ the <strong>10%</strong> remaining to pods of the <strong>Catalog Service v2</st
 First, we need to generate HTTP traffic by sending several requests to the <strong>Gateway Service</strong> from the <strong>Istio Gateway</strong></p>
 </div>
 <div class="paragraph">
-<p>In your %CHE_URL%[Workspace^], <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Gateway - Generate Traffic'</strong></code></p>
+<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Gateway - Generate Traffic'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -688,7 +688,7 @@ First, we need to generate HTTP traffic by sending several requests to the <stro
 </div>
 </div>
 <div class="paragraph">
-<p>In the window called <strong>'&gt;_ Gateway - Generate Traffic terminal'</strong>,
+<p>In the ''&gt;_ Gateway - Generate Traffic' terminal window,
 you likely see <strong>'Gateway &#8658; Catalog Spring Boot (v1)'</strong> or <strong>'Gateway &#8658; Catalog GoLang (v2)'</strong></p>
 </div>
 <div class="imageblock">
@@ -709,7 +709,7 @@ You can also go to the Web interface and refresh the page to see that product de
 </table>
 </div>
 <div class="paragraph">
-<p>In %KIALI_URL%[Kiali Console^], from the <strong>'Graph' view</strong>,
+<p>In <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Kiali Console</a>, from the <strong>'Graph' view</strong>,
 <code><strong>enter the following parameters</strong></code> to see the traffic distribution between Catalog v1 and v2:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -761,7 +761,7 @@ You can also go to the Web interface and refresh the page to see that product de
 So you will route all the traffic to <strong>Catalog Service v2</strong>.</p>
 </div>
 <div class="paragraph">
-<p>In %KIALI_URL%[Kiali Console^], <code><strong>click on 'Istio Config' then 'catalog-coolstore' VirtualService</strong></code></p>
+<p>In <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Kiali Console</a>, <code><strong>click on 'Istio Config' then 'catalog-coolstore' VirtualService</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -769,7 +769,7 @@ So you will route all the traffic to <strong>Catalog Service v2</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then, <code><strong>click on the 'YAML' tab and change the configuration as following</strong></code></p>
+<p>Then, <code><strong>click on the 'YAML' tab and change the configuration as follows</strong></code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -790,7 +790,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Now, In your %CHE_URL%[Workspace^], in the window called <strong>'&gt;_ Gateway - Generate Traffic terminal'</strong>,
+<p>Now, in your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, in the '&gt;_ Gateway - Generate Traffic' terminal window,
 you likely see only <strong>'Gateway &#8658; Catalog GoLang (v2)'</strong> in the <strong>'&gt;_ Gateway - Generate Traffic terminal'</strong>.</p>
 </div>
 <div class="imageblock">
@@ -799,7 +799,7 @@ you likely see only <strong>'Gateway &#8658; Catalog GoLang (v2)'</strong> in th
 </div>
 </div>
 <div class="paragraph">
-<p>And from %KIALI_URL%[Kiali Console^], you can visualize that <strong>100%</strong> of the traffic is switching gradually to <strong>Catalog Service v2</strong>.</p>
+<p>And from <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Kiali Console</a>, you can visualize that <strong>100%</strong> of the traffic is switching gradually to <strong>Catalog Service v2</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">

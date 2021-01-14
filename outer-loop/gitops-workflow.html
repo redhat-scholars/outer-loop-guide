@@ -190,7 +190,7 @@ different clusters in different environments, like development, stage, and produ
 <p>First, you need to export the project resources from OpenShift.</p>
 </div>
 <div class="paragraph">
-<p>In your %CHE_URL%[Workspace^], <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Export Coolstore'</strong></code></p>
+<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Export Coolstore'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -230,7 +230,7 @@ the <strong>/projects/workshop/labs/gitops</strong> folder.</p>
 a source code repository.</p>
 </div>
 <div class="paragraph">
-<p>In %GIT_URL%[Gitea^], <code><strong>create a new Repository</strong></code> as following:</p>
+<p>In your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Git Repository</a>, <code><strong>create a new Repository</strong></code> as follows:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. GitOps Repository</caption>
@@ -255,12 +255,6 @@ a source code repository.</p>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p><code><strong>Click on 'Create Repository' button</strong></code>.</p>
-</div>
-<div class="paragraph">
-<p>The Git repository is created now.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -270,7 +264,7 @@ a source code repository.</p>
 <p>Now that you have a Git repository for the configuration, you should push it into this Git repository.</p>
 </div>
 <div class="paragraph">
-<p>In your %CHE_URL%[Workspace^], <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Commit Inventory'</strong></code></p>
+<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Commit Inventory'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -304,7 +298,7 @@ To http://gitea-server.gitea.svc:3000/user%USER_ID%/gitops-cn-project.git
 </div>
 </div>
 <div class="paragraph">
-<p>Once done, in %GIT_URL%/user%USER_ID%/gitops-cn-project, <code><strong>refresh the page of your 'gitops-cn-project' repository</strong></code>. You should
+<p>Once done, in <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>, <code><strong>refresh the page of your 'gitops-cn-project' repository</strong></code>. You should
 see the files in the repository.</p>
 </div>
 <div class="imageblock">
@@ -343,11 +337,11 @@ deployments can track updates to branches, tags, or pinned to a specific version
 <h2 id="_log_in_to_argo_cd"><a class="anchor" href="#_log_in_to_argo_cd"></a>Log in to Argo CD</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code><strong>Click on the below button called 'Developer GitOps'</strong></code></p>
+<p><code><strong>Click on the 'Developer GitOps' button below</strong></code></p>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock text-center params-link">
 <div class="content">
-<a class="image" href="%GITOPS_URL%" target="_blank" rel="noopener"><img src="_images/developer-gitops-button.png" alt="Developer GitOps - Button" width="300"></a>
+<a class="image" href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener"><img src="_images/developer-gitops-button.png" alt="Developer GitOps - Button" width="300"></a>
 </div>
 </div>
 <div class="paragraph">
@@ -372,7 +366,7 @@ deployments can track updates to branches, tags, or pinned to a specific version
 <h2 id="_add_your_newly_created_gitops_repository"><a class="anchor" href="#_add_your_newly_created_gitops_repository"></a>Add your Newly Created GitOps Repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In %GITOPS_URL%[Argo CD^], <code><strong>Select the 'Configuration menu' then click on 'Repositories'</strong></code></p>
+<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Configuration menu' then click on 'Repositories'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -422,7 +416,7 @@ deployments can track updates to branches, tags, or pinned to a specific version
 <h2 id="_create_a_gitops_application"><a class="anchor" href="#_create_a_gitops_application"></a>Create a GitOps Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In %GITOPS_URL%[Argo CD^], <code><strong>Select the 'Application menu' then click on '+ New App'</strong></code> and enter the following details:</p>
+<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Application menu' then click on '+ New App'</strong></code> and enter the following details:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -517,7 +511,7 @@ deployed into cn-project%USER_ID% OpenShift project, and no Kubernetes resources
 <h2 id="_deploy_a_resource_on_openshift"><a class="anchor" href="#_deploy_a_resource_on_openshift"></a>Deploy a Resource on OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In %GITOPS_URL%[Argo CD^], <code><strong>click on the 3 points at the left of the 'CM Inventory' resource then select 'Sync'</strong></code></p>
+<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, <code><strong>click on the 3 points at the left of the 'CM Inventory' resource then select 'Sync'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -529,7 +523,7 @@ deployed into cn-project%USER_ID% OpenShift project, and no Kubernetes resources
 with your environment.</p>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>select your 'cn-project%USER_ID%'</strong></code> and `*click on 'Config Maps'. You should find the resource you just
 deployed via Argo CD.</p>
 </div>
@@ -548,15 +542,15 @@ deployed via Argo CD.</p>
 which are not recorded or tracked.</p>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>select your 'cn-project%USER_ID%'</strong></code> and <code><strong>click on 'Config Maps' &#8594; 'CM inventory' &#8594; 'YAML'</strong></code>.</p>
 </div>
 <div class="paragraph">
 <p><code><strong>Add the following line in your configuration then click on 'Save'</strong></code></p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">simple.adhoc.change=This is a configuration drift</code></pre>
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">simple.adhoc.change=This is a configuration drift</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -565,7 +559,7 @@ which are not recorded or tracked.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In %GITOPS_URL%[Argo CD^], the 'CM Inventory' resource is no longer synchronized.
+<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, the 'CM Inventory' resource is no longer synchronized.
 <code><strong>Click on it then select 'Diff' tab and check 'Compact diff'</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -590,7 +584,7 @@ the Git Repository first to record and track your changes and so to avoid <em>co
 <p>To prepare the next lab, you need to push, on the Git repository, the configuration of the other services of the coolstore application.</p>
 </div>
 <div class="paragraph">
-<p>In your %CHE_URL%[Workspace^], <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Commit Coolstore'</strong></code></p>
+<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Commit Coolstore'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -619,7 +613,7 @@ To http://gitea-server.gitea.svc:3000/user%USER_ID%/gitops-cn-project.git
 </div>
 </div>
 <div class="paragraph">
-<p>Once done, in %GIT_URL%/user%USER_ID%/gitops-cn-project, <code><strong>refresh the page of your 'gitops-cn-project' repository</strong></code>. You should
+<p>Once done, in your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>, <code><strong>refresh the page of your 'gitops-cn-project' repository</strong></code>. You should
 see the project files in the repository.</p>
 </div>
 <div class="imageblock">
@@ -628,7 +622,7 @@ see the project files in the repository.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In %GITOPS_URL%[Argo CD^], the application status  is once again in yellow <strong>OutOfSync</strong> state since the Catalog, Gateway and Web services
+<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, the application status  is once again in yellow <strong>OutOfSync</strong> state since the Catalog, Gateway and Web services
 have not yet been deployed into cn-project%USER_ID% OpenShift project.</p>
 </div>
 <div class="imageblock">

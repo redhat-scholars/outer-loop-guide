@@ -159,8 +159,15 @@ the platform and enables defining truly complex workflows directly from within O
 <div class="sectionbody">
 <div class="paragraph">
 <p>You have learnt and understood how to create a simple <strong>Pipeline</strong>.
-Now, let&#8217;s <code><strong>create a task to deploy the OpenShift Configuration from Argo CD</strong></code> and add it the existing pipeline.</p>
+Now, let&#8217;s <strong>create a task to deploy the OpenShift Configuration from Argo CD and add it the existing pipeline</strong>.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
 <div class="paragraph">
 <p>A <strong>Task</strong> consists of a collection of steps that are executed sequentially.</p>
 </div>
@@ -168,14 +175,18 @@ Now, let&#8217;s <code><strong>create a task to deploy the OpenShift Configurati
 <p>Each <strong>Task</strong> is executed in a separate container within the same pod.
 They can also have inputs and outputs in order to interact with other tasks in the pipeline.</p>
 </div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Search' &#8594; 'Task' &#8594; 'T Task' &#8594; 'Create Task'</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p><code><strong>Then update the content as following:</strong></code></p>
+<p><code><strong>Then update the content as follows:</strong></code></p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
 kind: Task
@@ -228,10 +239,10 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s define the Argo CD server endpoint as well as the credentials to access to.</p>
+<p>Now let&#8217;s <strong>define the Argo CD server endpoint as well as the credentials to access to</strong>.</p>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Config Maps' then click on the 'Create Config Map' button</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -242,7 +253,7 @@ spec:
 <div class="paragraph">
 <p>Then <code><strong>replace the content</strong></code> with the following input:</p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
 kind: ConfigMap
@@ -254,11 +265,14 @@ data:
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Click on the 'Create button. Then click on 'Secret' then click on the 'Create Secret' button</strong></code>.</p>
+<p><code><strong>Click on the 'Create' button.</strong></code></p>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Secrets' &#8594; 'Create' &#8594; 'Key/Value Secret'</strong></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/openshift-create-keyvalue-secret.png" alt="Che - OpenShift Create Secret" width="900">
+<img src="_images/openshift-create-keyvalue-secret-menu.png" alt="Che - OpenShift Create Secret" width="900">
 </div>
 </div>
 <div class="paragraph">
@@ -291,8 +305,13 @@ data:
 </tr>
 </tbody>
 </table>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-create-keyvalue-secret.png" alt="Che - OpenShift Create Secret" width="500">
+</div>
+</div>
 <div class="paragraph">
-<p><code><strong>Click on the 'Create button</strong></code></p>
+<p><code><strong>Click on the 'Create' button</strong></code></p>
 </div>
 </div>
 </div>
@@ -300,14 +319,14 @@ data:
 <h2 id="_expand_your_pipeline"><a class="anchor" href="#_expand_your_pipeline"></a>Expand your Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now let&#8217;s expand your Inventory Pipeline to cover the Continuous Deployment.</p>
+<p>Now let&#8217;s <strong>expand your Inventory Pipeline to cover the Continuous Deployment</strong>.</p>
 </div>
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
-<code><strong>click on 'Pipelines' &#8594; 'PL inventory-pipeline' &#8594; 'Actions' &#8594; 'Edit'</strong></code></p>
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Pipelines' &#8594; 'PL inventory-pipeline' &#8594; 'Actions' &#8594; 'Edit Pipeline'</strong></code></p>
 </div>
 <div class="paragraph">
-<p>then, <code><strong>complete your pipeline with the two following tasks and their configurations</strong></code></p>
+<p>then, <code><strong>complete your pipeline</strong></code> with the two following tasks and their configurations:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -379,7 +398,7 @@ data:
 <h2 id="_run_the_full_pipeline"><a class="anchor" href="#_run_the_full_pipeline"></a>Run the Full Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Pipelines' &#8594; 'PL inventory-pipeline' &#8594; 'Actions' &#8594; 'Start' and enter the following parameters</strong></code></p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -405,7 +424,7 @@ data:
 </tbody>
 </table>
 <div class="paragraph">
-<p><code><strong>Finally click on 'Start'</strong></code></p>
+<p>Finally, <code><strong>click on 'Start'</strong></code></p>
 </div>
 <div class="paragraph">
 <p>Congratulations!! You have deployed your first application using OpenShift Pipeline!!</p>
@@ -416,7 +435,7 @@ data:
 </div>
 </div>
 <div class="paragraph">
-<p>Once finished,from the <strong>Topology view</strong>, <code><strong>select the 'cn-project%USER_ID%'</strong></code>.</p>
+<p>Once finished, from the <strong>Topology view</strong>, <code><strong>select the 'cn-project%USER_ID%'</strong></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -427,7 +446,7 @@ data:
 <p>Now, you can see that the <strong>Inventory Service has been deployed by OpenShift Pipeline</strong> and it is up and running.</p>
 </div>
 <div class="paragraph">
-<p>In the %GITOPS_URL%[Argo CD^], <code><strong>Select the 'Application menu' then click on the 'cn-project%USER_ID%' application</strong></code>:</p>
+<p>In the <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Application menu' then click on the 'cn-project%USER_ID%' application</strong></code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -435,7 +454,7 @@ data:
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Filter to only display  the <em>Synced</em> resources</strong></code>. Argo CD has synchronized all the Inventory OpenShift manifests stored into your %GIT_URL%/user%USER_ID%/gitops-cn-project['gitops-cn-project' Git Repository^]
+<p><code><strong>Filter to only display  the <em>Synced</em> resources</strong></code>. Argo CD has synchronized all the Inventory OpenShift manifests stored into your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>
 with your 'cn-project%USER_ID%' project on OpenShift.</p>
 </div>
 <div class="imageblock">
@@ -470,7 +489,7 @@ Now, <code><strong>let&#8217;s deploy the rest of the application</strong></code
 </div>
 </div>
 <div class="paragraph">
-<p>Once executed, in the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<p>Once executed, in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Pipelines' &#8594; 'PL - coolstore-java-pipeline' &#8594; 'Pipeline Runs'</strong></code></p>
 </div>
 <div class="imageblock">
@@ -493,7 +512,7 @@ Now, <code><strong>let&#8217;s deploy the rest of the application</strong></code
 <p>You should see 1 pipeline running for the Web services.</p>
 </div>
 <div class="paragraph">
-<p><code><strong>Click on 'Topology'</strong></code> from the <strong>Developer view</strong> of the %OPENSHIFT_CONSOLE_URL%/topology/ns/cn-project%USER_ID%[OpenShift Web Console^]
+<p><code><strong>Click on 'Topology'</strong></code> from the <strong>Developer view</strong> of the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>
 and validate that the CoolStore application is deployed, up and running in the <strong>cn-project%USER_ID%</strong> project.</p>
 </div>
 <div class="imageblock">
@@ -502,7 +521,7 @@ and validate that the CoolStore application is deployed, up and running in the <
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, in the %GITOPS_URL%[Argo CD^], <code><strong>Select the 'Application menu' then click on the 'cn-project%USER_ID%' application</strong></code>:</p>
+<p>Finally, in <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Application menu' then click on the 'cn-project%USER_ID%' application</strong></code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -510,7 +529,7 @@ and validate that the CoolStore application is deployed, up and running in the <
 </div>
 </div>
 <div class="paragraph">
-<p>Argo CD has synchronized all the OpenShift manifests stored into your %GIT_URL%/user%USER_ID%/gitops-cn-project['gitops-cn-project' Git Repository^]
+<p>Argo CD has synchronized all the OpenShift manifests stored into your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>
 with your 'cn-project%USER_ID%' project on OpenShift.</p>
 </div>
 <div class="imageblock">
