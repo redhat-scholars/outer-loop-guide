@@ -10,6 +10,9 @@
 :WORKSHOP_GIT_REF: %WORKSHOP_GIT_REF%
 :WEB_COOLSTORE_URL: http://web-coolstore-cn-project{USER_ID}.%APPS_HOSTNAME_SUFFIX%
 
+= Connect and Monitor your Application with OpenShift Service Mesh
+:navtitle: Connect and Monitor your Application with OpenShift Service Mesh
+
 _45 MINUTE EXERCISE_
 
 In this lab you will enable tracing and monitoring of your backend services using Service Mesh.

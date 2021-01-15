@@ -6,6 +6,9 @@
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project{USER_ID}
 
+= GitOps Workflow with Argo CD
+:navtitle: GitOps Workflow with Argo CD
+
 _20 MINUTE EXERCISE_
 
 In this lab you will learn about deploying and managing Kubernetes resources using a GitOps tool.
