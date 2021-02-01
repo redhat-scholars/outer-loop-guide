@@ -174,10 +174,10 @@ Now, let&#8217;s <strong>create a task to deploy the OpenShift Configuration fro
 </td>
 <td class="content">
 <div class="paragraph">
-<p>A <strong>Task</strong> consists of a collection of steps that are executed sequentially.</p>
+<p>A <strong>Task</strong> consists of a collection of <strong>Steps</strong> that are executed sequentially with a pod.</p>
 </div>
 <div class="paragraph">
-<p>Each <strong>Task</strong> is executed in a separate container within the same pod.
+<p>Each <strong>Step</strong> is executed in a separate container within the same pod.
 They can also have inputs and outputs in order to interact with other tasks in the pipeline.</p>
 </div>
 </td>
@@ -486,11 +486,6 @@ Now, <code><strong>let&#8217;s deploy the rest of the application</strong></code
 <div class="imageblock">
 <div class="content">
 <img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/che-pipeline-deploy-coolstore.png" alt="Che - Pipeline Deploy Coolstore" width="500">
 </div>
 </div>
 <div class="paragraph">
