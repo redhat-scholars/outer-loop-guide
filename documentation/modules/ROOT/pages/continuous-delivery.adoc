@@ -38,9 +38,9 @@ Now, let's **create a task to deploy the OpenShift Configuration from Argo CD an
 
 [TIP]
 ====
-A **Task** consists of a collection of steps that are executed sequentially. 
+A **Task** consists of a collection of **Steps** that are executed sequentially with a pod. 
 
-Each **Task** is executed in a separate container within the same pod. 
+Each **Step** is executed in a separate container within the same pod. 
 They can also have inputs and outputs in order to interact with other tasks in the pipeline.
 ====
 
@@ -248,8 +248,6 @@ Now, `*let's deploy the rest of the application*`.
 For doing so, `*click on 'Terminal' -> 'Run Task...' ->  'Pipeline - Deploy Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 500]
-
-image::che-pipeline-deploy-coolstore.png[Che - Pipeline Deploy Coolstore, 500]
 
 Once executed, in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Pipelines' -> 'PL - coolstore-java-pipeline' -> 'Pipeline Runs'*`

@@ -264,7 +264,7 @@ Then `*click on the 'Synchonize' button*`. Now the ConfigMap of Inventory has be
 with your environment.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*select your 'cn-project{USER_ID}'*` and `*click on 'Config Maps'. You should find the resource you just 
+`*select your 'cn-project{USER_ID}'*` and `*click on 'Config Maps'*`. You should find the resource you just 
 deployed via Argo CD.
 
 image::openshift-cm-inventory-deployed.png[OpenShift - CM Inventory Deployed, 500]
