@@ -244,7 +244,7 @@ image::openshift-add-git-clone-task.png[OpenShift - Add Git Clone Task, 500]
 
 |===
 
-Once done, let's add other tasks. `*Click on the blue plus icon at the left hand side of the 'git-clone' task*`
+Once done, let's add other tasks. `*Click on the blue plus icon at the right hand side of the 'git-clone' task*`
 
 image::openshift-add-task.png[OpenShift - Add task, 500]
 
