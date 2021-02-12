@@ -39,7 +39,7 @@ To achieve those core goals, https://access.redhat.com/products/red-hat-coderead
 [#get_your_developer_workspace]
 == Getting your Developer Workspace with a single click
 
-https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^]  will provide you an out-of-box 
+https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^]  will provide you an out-of-the-box 
 *Developer Workspace* with all the tools and the dependencies we need to do the job. **And with only one single click!**
 
 [NOTE]
@@ -65,7 +65,7 @@ to this file.
 [role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
 
-Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let's the magic happens...
+Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*`.
 
 image::che-login.png[Che - Login, 500]
 
@@ -164,7 +164,7 @@ image::developer-console-button.png[Developer Workspace - Button, 300]
 
 `*Enter your username and password (user{USER_ID}/{OPENSHIFT_PASSWORD})*` and 
 then log in. After you have authenticated to the web console, you will be presented with a
-list of projects that your user has permission to work with. 
+list of projects that you have permission to work with. 
 
 `*Select the 'Developer View' then your 'my-project{USER_ID}'*` to be taken to the project overview page
 which will list all of the routes, services, deployments, and pods that you have

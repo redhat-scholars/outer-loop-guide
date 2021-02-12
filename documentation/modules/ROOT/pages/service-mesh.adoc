@@ -220,10 +220,9 @@ IMPORTANT: Refresh your browser several times to generate traffic.
 image::kiali-logo.png[Kiali,400]
 
 A Microservice Architecture breaks up the monolith into many smaller pieces that are composed together. 
-Patterns to secure the communication between services like fault tolerance (via timeout, retry, circuit breaking, etc.) 
-have come up as well as distributed tracing to be able to see where calls are going.
+Patterns to secure the communication between services like fault tolerance (via timeout, retry, circuit breaking, etc.) are needed as well as distributed tracing to be able to see where calls are going.
 
-A service mesh can now provide these services on a platform level and frees the application writers from those tasks. 
+A service mesh can now provide these services at a platform level and free the developer from those tasks. 
 Routing decisions are done at the mesh level.
 
 https://www.kiali.io[Kiali^] works with Istio, in OpenShift or Kubernetes, to visualize the service mesh topology, to 

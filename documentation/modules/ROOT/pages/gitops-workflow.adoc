@@ -17,8 +17,7 @@ In this lab you will learn about deploying and managing Kubernetes resources usi
 .GitOps Methodology
 --
 **GitOps** is a set of practices that leverages Git workflows to manage infrastructure and application configurations.
-By using Git repositories as the source of truth, it allows DevOps teams to store the entire state of the cluster configuration in Git 
-so that the trail of changes are visible and auditable. 
+By using Git repositories as the source of truth, it allows the DevOps team to store the entire state of the cluster configuration in Git so that the trail of changes are visible and auditable. 
 
 **GitOps** simplifies the propagation of infrastructure and application 
 configuration changes across multiple clusters by defining your infrastructure and applications definitions as “code”.
@@ -34,7 +33,7 @@ configuration changes across multiple clusters by defining your infrastructure a
 different clusters in different environments, like development, stage, and production.
 
 - Promote applications across clusters, from stage to production.
-- Apply or revert application changes to multiple OpenShift Container Platform clusters.
+- Apply or revert application changes to multiple OpenShift clusters.
 
 OpenShift provides the flexibility to choose when and how you integrate GitOps methodology into your business practices and pipelines.
 --
@@ -90,7 +89,7 @@ In your {GIT_URL}[Git Repository^,role='params-link'], `*create a new Repository
 
 == Push the Configuration of Inventory Service into the Git Repository
 
-Now that you have a Git repository for the configuration, you should push it into this Git repository.
+Now that you have a Git repository for the configuration, you should push the exported Inventory configuration into it.
 
 In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Commit Inventory'*`
 
@@ -256,7 +255,7 @@ image::argocd-outofsync-inventory-details.png[Argo CD - OutOfSync Application, 9
 
 == Deploy a Resource on OpenShift
 
-In {GITOPS_URL}[Argo CD^,role='params-link'], `*click on the 3 points at the left of the 'CM Inventory' resource then select 'Sync'*`
+In {GITOPS_URL}[Argo CD^,role='params-link'], `*click on the 3 dots menu at the left of the 'CM Inventory' resource then select 'Sync'*`
 
 image::argocd-cm-inventory-sync.png[Argo CD - CM Inventory Sync, 700]
 
@@ -292,16 +291,13 @@ In {GITOPS_URL}[Argo CD^,role='params-link'], the 'CM Inventory' resource is no 
 
 image::argocd-cm-inventory-diff.png[Argo CD - CM Inventory Diff, 700]
 
-Argo CD detects automatically your modification which is not compliant with the desired state described in 
-Git, the source of truth. Indeed, from now, when you want to change the configuration, you will have to update 
-the Git Repository first to record and track your changes and so to avoid _configuration drifts_.
+Argo CD detects automatically your modification which is not compliant with the desired state described in Git - the source of truth. Indeed, from now, when you want to change the configuration, you will have to update the Git Repository first to record and track your changes to avoid _configuration drifts_.
 
 You can leave the configuration drift as it is. You will fix it in the next lab.
 
-
 == Push the Coolstore Configuration to the Git Repository
 
-To prepare the next lab, you need to push, on the Git repository, the configuration of the other services of the coolstore application.
+To prepare the next lab, you need to push the remaining coolstore application configuration to the Git repository.
 
 In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Commit Coolstore'*`
 

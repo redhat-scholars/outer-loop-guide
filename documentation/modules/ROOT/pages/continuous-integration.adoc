@@ -17,8 +17,8 @@ automate the build of the Inventory service.
 [sidebar]
 .Continuous Integration
 --
-So far you have been building and deploying each service manually to OpenShift. Although 
-it's convenient for local development, it's an error-prone way of delivering software if 
+So far you have been building each service manually to OpenShift. Although 
+it's convenient for local development, it's an error-prone way of building software if 
 extended to test and production environments.
 
 Continuous Integration (CI) is a phase in the software development cycle where code from different team members 
@@ -73,8 +73,7 @@ The Git repository is created now.
 [#push_inventory_code]
 == Push Inventory Code to the Git Repository
 
-Now that you have a Git repository for the Inventory service, you should push the 
-source code into this Git repository.
+Now that you have a Git repository for the Inventory service, you should push your local source code into this Git repository.
 
 
 [tabs, subs="attributes+,+macros"]
@@ -170,7 +169,7 @@ image::tekton-architecture.png[Tekton Architecture, 600]
 [#switch_to_staging_environment]
 == Switch to the Staging Environment
 
-First, let's switch your OpenShift Console to your Staging Environement eg 'cn-project{USER_ID}'.
+First, let's switch your OpenShift Console to your Staging Environement i.e 'cn-project{USER_ID}'.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Topology' then select your 'cn-project{USER_ID}'*`.
@@ -183,7 +182,7 @@ image::openshift-staging-project.png[OpenShift - Staging Project, 700]
 The container image you are about to create will be stored into the internal image registry of the OpenShift cluster by using
 an https://docs.openshift.com/container-platform/4.5/openshift_images/image-streams-manage.html[**ImageStream**^].
 
-It provides an abstraction for referencing container images from within OpenShift Container Platform. The imagestream and its 
+It provides an abstraction for referencing container images from within OpenShift. The imagestream and its 
 tags allow you to see what images are available and ensure that you are using the specific image you need even if the image 
 in the repository changes.
 
@@ -262,7 +261,7 @@ image::openshift-add-task.png[OpenShift - Add task, 500]
 |s2i-java-11
 
 |PATH_CONTEXT
-|.
+|. (dot)
 
 |TLSVERIFY
 |false
@@ -284,7 +283,12 @@ image::openshift-simple-pipeline.png[OpenShift - Simple Pipeline, 700]
 
 **Workspaces** allow **Tasks** to declare parts of the filesystem that need to be provided at runtime by TaskRuns. 
 
-A TaskRun can make these parts of the filesystem available in many ways: using a read-only ConfigMap or Secret, an existing PersistentVolumeClaim shared with other Tasks, create a PersistentVolumeClaim from a provided VolumeClaimTemplate, or simply an emptyDir that is discarded when the TaskRun completes.
+A TaskRun can make these parts of the filesystem available in many ways, using: 
+
+- a read-only ConfigMap or Secret
+- an existing PersistentVolumeClaim shared with other Tasks
+- a PersistentVolumeClaim from a provided VolumeClaimTemplate
+- an emptyDir that is discarded when the TaskRun completes.
 
 **Workspaces** are similar to Volumes except that they allow a Task author to defer to users and their TaskRuns when deciding which class of storage to use.
 

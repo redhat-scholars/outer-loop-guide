@@ -17,7 +17,7 @@ automate build and deployment of the Inventory service.
 [sidebar]
 .Continuous Delivery
 --
-So far you have been building and deploying each service manually to OpenShift. Although 
+So far you have been deploying each service manually to OpenShift. Although 
 it's convenient for local development, it's an error-prone way of delivering software if 
 extended to test and production environments.
 
@@ -97,7 +97,7 @@ spec:
 
 image::openshift-argocd-task.png[OpenShift - ArgoCD Task, 500]
 
-Now let's **define the Argo CD server endpoint as well as the credentials to access to**.
+Now let's **define the Argo CD server endpoint as well as the credentials so that the Task you just created has access to the server**.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Config Maps' then click on the 'Create Config Map' button*`.
@@ -134,11 +134,18 @@ image::openshift-create-keyvalue-secret-menu.png[Che - OpenShift Create Secret, 
 |Secret Name * 
 |argocd-env-secret
 
-|Key1/Value1
-|ARGOCD_USERNAME/user{USER_ID}
+|===
 
-|Key2/Value2
-|ARGOCD_PASSWORD/{OPENSHIFT_PASSWORD}
+[%header,cols=2*]
+|===
+|Key 
+|Value
+
+|ARGOCD_USERNAME
+|user{USER_ID}
+
+|ARGOCD_PASSWORD
+|{OPENSHIFT_PASSWORD}
 
 |===
 
@@ -236,8 +243,7 @@ with your 'cn-project{USER_ID}' project on OpenShift.
 
 image::argocd-synced-inventory.png[Argo CD - Synced Inventory, 900]
 
-Your Argo CD application is still 'OutofSync' because the other OpenShift Manifests (Catalog, Gateway and Web) are not synchronized yet.
-This is the next step.
+Your Argo CD application is still 'OutofSync' because the other OpenShift Manifests (Catalog, Gateway and Web) are not synchronized yet. That is the next step.
 
 
 == Deploy the whole application with Tekton
