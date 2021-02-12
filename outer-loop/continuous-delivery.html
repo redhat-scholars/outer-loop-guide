@@ -141,7 +141,7 @@ automate build and deployment of the Inventory service.</p>
 <div class="content">
 <div class="title">Continuous Delivery</div>
 <div class="paragraph">
-<p>So far you have been building and deploying each service manually to OpenShift. Although
+<p>So far you have been deploying each service manually to OpenShift. Although
 it&#8217;s convenient for local development, it&#8217;s an error-prone way of delivering software if
 extended to test and production environments.</p>
 </div>
@@ -244,7 +244,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s <strong>define the Argo CD server endpoint as well as the credentials to access to</strong>.</p>
+<p>Now let&#8217;s <strong>define the Argo CD server endpoint as well as the credentials so that the Task you just created has access to the server</strong>.</p>
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
@@ -300,13 +300,27 @@ data:
 <td class="tableblock halign-left valign-top"><p class="tableblock">Secret Name *</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">argocd-env-secret</p></td>
 </tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key1/Value1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ARGOCD_USERNAME/user%USER_ID%</p></td>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARGOCD_USERNAME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user%USER_ID%</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key2/Value2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ARGOCD_PASSWORD/%OPENSHIFT_PASSWORD%</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARGOCD_PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%OPENSHIFT_PASSWORD%</p></td>
 </tr>
 </tbody>
 </table>
@@ -468,8 +482,7 @@ with your 'cn-project%USER_ID%' project on OpenShift.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Your Argo CD application is still 'OutofSync' because the other OpenShift Manifests (Catalog, Gateway and Web) are not synchronized yet.
-This is the next step.</p>
+<p>Your Argo CD application is still 'OutofSync' because the other OpenShift Manifests (Catalog, Gateway and Web) are not synchronized yet. That is the next step.</p>
 </div>
 </div>
 </div>

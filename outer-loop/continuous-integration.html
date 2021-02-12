@@ -141,8 +141,8 @@ automate the build of the Inventory service.</p>
 <div class="content">
 <div class="title">Continuous Integration</div>
 <div class="paragraph">
-<p>So far you have been building and deploying each service manually to OpenShift. Although
-it&#8217;s convenient for local development, it&#8217;s an error-prone way of delivering software if
+<p>So far you have been building each service manually to OpenShift. Although
+it&#8217;s convenient for local development, it&#8217;s an error-prone way of building software if
 extended to test and production environments.</p>
 </div>
 <div class="paragraph">
@@ -226,8 +226,7 @@ Gitea git server.</p>
 <h2 id="push_inventory_code"><a class="anchor" href="#push_inventory_code"></a>Push Inventory Code to the Git Repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you have a Git repository for the Inventory service, you should push the
-source code into this Git repository.</p>
+<p>Now that you have a Git repository for the Inventory service, you should push your local source code into this Git repository.</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -393,7 +392,7 @@ CI/CD-style pipelines on Kubernetes.</p>
 <h2 id="switch_to_staging_environment"><a class="anchor" href="#switch_to_staging_environment"></a>Switch to the Staging Environment</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>First, let&#8217;s switch your OpenShift Console to your Staging Environement eg 'cn-project%USER_ID%'.</p>
+<p>First, let&#8217;s switch your OpenShift Console to your Staging Environement i.e 'cn-project%USER_ID%'.</p>
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
@@ -414,7 +413,7 @@ CI/CD-style pipelines on Kubernetes.</p>
 an <a href="https://docs.openshift.com/container-platform/4.5/openshift_images/image-streams-manage.html" target="_blank" rel="noopener"><strong>ImageStream</strong></a>.</p>
 </div>
 <div class="paragraph">
-<p>It provides an abstraction for referencing container images from within OpenShift Container Platform. The imagestream and its
+<p>It provides an abstraction for referencing container images from within OpenShift. The imagestream and its
 tags allow you to see what images are available and ensure that you are using the specific image you need even if the image
 in the repository changes.</p>
 </div>
@@ -540,7 +539,7 @@ with each other via <strong>Workspace</strong>.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PATH_CONTEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">. (dot)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TLSVERIFY</p></td>
@@ -573,7 +572,23 @@ with each other via <strong>Workspace</strong>.</p>
 <p><strong>Workspaces</strong> allow <strong>Tasks</strong> to declare parts of the filesystem that need to be provided at runtime by TaskRuns.</p>
 </div>
 <div class="paragraph">
-<p>A TaskRun can make these parts of the filesystem available in many ways: using a read-only ConfigMap or Secret, an existing PersistentVolumeClaim shared with other Tasks, create a PersistentVolumeClaim from a provided VolumeClaimTemplate, or simply an emptyDir that is discarded when the TaskRun completes.</p>
+<p>A TaskRun can make these parts of the filesystem available in many ways, using:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a read-only ConfigMap or Secret</p>
+</li>
+<li>
+<p>an existing PersistentVolumeClaim shared with other Tasks</p>
+</li>
+<li>
+<p>a PersistentVolumeClaim from a provided VolumeClaimTemplate</p>
+</li>
+<li>
+<p>an emptyDir that is discarded when the TaskRun completes.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><strong>Workspaces</strong> are similar to Volumes except that they allow a Task author to defer to users and their TaskRuns when deciding which class of storage to use.</p>

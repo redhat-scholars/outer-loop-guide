@@ -141,8 +141,7 @@
 <div class="title">GitOps Methodology</div>
 <div class="paragraph">
 <p><strong>GitOps</strong> is a set of practices that leverages Git workflows to manage infrastructure and application configurations.
-By using Git repositories as the source of truth, it allows DevOps teams to store the entire state of the cluster configuration in Git
-so that the trail of changes are visible and auditable.</p>
+By using Git repositories as the source of truth, it allows the DevOps team to store the entire state of the cluster configuration in Git so that the trail of changes are visible and auditable.</p>
 </div>
 <div class="paragraph">
 <p><strong>GitOps</strong> simplifies the propagation of infrastructure and application
@@ -177,7 +176,7 @@ different clusters in different environments, like development, stage, and produ
 <p>Promote applications across clusters, from stage to production.</p>
 </li>
 <li>
-<p>Apply or revert application changes to multiple OpenShift Container Platform clusters.</p>
+<p>Apply or revert application changes to multiple OpenShift clusters.</p>
 </li>
 </ul>
 </div>
@@ -266,7 +265,7 @@ a source code repository.</p>
 <h2 id="_push_the_configuration_of_inventory_service_into_the_git_repository"><a class="anchor" href="#_push_the_configuration_of_inventory_service_into_the_git_repository"></a>Push the Configuration of Inventory Service into the Git Repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you have a Git repository for the configuration, you should push it into this Git repository.</p>
+<p>Now that you have a Git repository for the configuration, you should push the exported Inventory configuration into it.</p>
 </div>
 <div class="paragraph">
 <p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Commit Inventory'</strong></code></p>
@@ -516,7 +515,7 @@ deployed into cn-project%USER_ID% OpenShift project, and no Kubernetes resources
 <h2 id="_deploy_a_resource_on_openshift"><a class="anchor" href="#_deploy_a_resource_on_openshift"></a>Deploy a Resource on OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, <code><strong>click on the 3 points at the left of the 'CM Inventory' resource then select 'Sync'</strong></code></p>
+<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, <code><strong>click on the 3 dots menu at the left of the 'CM Inventory' resource then select 'Sync'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -573,9 +572,7 @@ which are not recorded or tracked.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Argo CD detects automatically your modification which is not compliant with the desired state described in
-Git, the source of truth. Indeed, from now, when you want to change the configuration, you will have to update
-the Git Repository first to record and track your changes and so to avoid <em>configuration drifts</em>.</p>
+<p>Argo CD detects automatically your modification which is not compliant with the desired state described in Git - the source of truth. Indeed, from now, when you want to change the configuration, you will have to update the Git Repository first to record and track your changes to avoid <em>configuration drifts</em>.</p>
 </div>
 <div class="paragraph">
 <p>You can leave the configuration drift as it is. You will fix it in the next lab.</p>
@@ -586,7 +583,7 @@ the Git Repository first to record and track your changes and so to avoid <em>co
 <h2 id="_push_the_coolstore_configuration_to_the_git_repository"><a class="anchor" href="#_push_the_coolstore_configuration_to_the_git_repository"></a>Push the Coolstore Configuration to the Git Repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To prepare the next lab, you need to push, on the Git repository, the configuration of the other services of the coolstore application.</p>
+<p>To prepare the next lab, you need to push the remaining coolstore application configuration to the Git repository.</p>
 </div>
 <div class="paragraph">
 <p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Commit Coolstore'</strong></code></p>
