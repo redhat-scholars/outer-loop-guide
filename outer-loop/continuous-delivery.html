@@ -123,7 +123,7 @@
     <li><a href="continuous-delivery.html">5. Continuous Delivery with Openshift Pipelines</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/5.0/documentation/modules/ROOT/pages/continuous-delivery.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/master/documentation/modules/ROOT/pages/continuous-delivery.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
@@ -228,11 +228,11 @@ spec:
     - name: sync
       image: argoproj/argocd:v1.7.6
       script: |
-        argocd app sync $(params.application-name)%USER_ID%
+        argocd app sync cn-project%USER_ID% --label app.kubernetes.io/instance=$(params.application-name)
     - name: wait
       image: argoproj/argocd:v1.7.6
       script: |
-        argocd app wait $(params.application-name)%USER_ID% --health</code></pre>
+        argocd app wait -l app.kubernetes.io/instance=$(params.application-name) --health</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -465,20 +465,24 @@ data:
 <p>Now, you can see that the <strong>Inventory Service has been deployed by OpenShift Pipeline</strong> and it is up and running.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Application menu' then click on the 'inventory%USER_ID%' application</strong></code>:</p>
+<p>In the <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Application menu' then click on the 'cn-project%USER_ID%' application</strong></code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd-sync-inventory-application.png" alt="Argo CD - Out Of Sync Application" width="900">
+<img src="_images/argocd-outofsync-application.png" alt="Argo CD - Out Of Sync Application" width="500">
 </div>
 </div>
 <div class="paragraph">
-<p>Argo CD has synchronized all the Inventory OpenShift manifests stored into your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/inventory-gitops" class="params-link" target="_blank" rel="noopener">Inventory Repository</a> with your 'cn-project%USER_ID%' project on OpenShift.</p>
+<p><code><strong>Filter to only display  the <em>Synced</em> resources</strong></code>. Argo CD has synchronized all the Inventory OpenShift manifests stored into your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>
+with your 'cn-project%USER_ID%' project on OpenShift.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd-synced-inventory-details.png" alt="Argo CD - Synced Inventory" width="900">
+<img src="_images/argocd-synced-inventory.png" alt="Argo CD - Synced Inventory" width="900">
 </div>
+</div>
+<div class="paragraph">
+<p>Your Argo CD application is still 'OutofSync' because the other OpenShift Manifests (Catalog, Gateway and Web) are not synchronized yet. That is the next step.</p>
 </div>
 </div>
 </div>
@@ -530,12 +534,24 @@ and validate that the CoolStore application is deployed, up and running in the <
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, in <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, all Applications are now 'Synced'.</p>
+<p>Finally, in <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Application menu' then click on the 'cn-project%USER_ID%' application</strong></code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd-synced-coolstore.png" alt="Argo CD - Sync Application" width="900">
+<img src="_images/argocd-sync-application.png" alt="Argo CD - Sync Application" width="500">
 </div>
+</div>
+<div class="paragraph">
+<p>Argo CD has synchronized all the OpenShift manifests stored into your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>
+with your 'cn-project%USER_ID%' project on OpenShift.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-synced-coolstore.png" alt="Argo CD - Synced Coolstore" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Your Argo CD application is now 'Synced'.</p>
 </div>
 <div class="paragraph">
 <p>Well done! You are ready for the next lab.</p>

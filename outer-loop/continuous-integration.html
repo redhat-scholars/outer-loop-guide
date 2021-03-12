@@ -123,7 +123,7 @@
     <li><a href="continuous-integration.html">3. Continuous Integration with Openshift Pipelines</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/5.0/documentation/modules/ROOT/pages/continuous-integration.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/master/documentation/modules/ROOT/pages/continuous-integration.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
@@ -184,11 +184,11 @@ Gitea git server.</p>
 </div>
 <div class="paragraph">
 <p>Create a new repository called <strong>'inventory-quarkus'</strong>.
-<code><strong>Click on the '+' icon &#8594; '+ New Repository'</strong></code> as below and enter the following values:</p>
+<code><strong>Click on the plus icon</strong></code> as below and enter the following values:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/gitea-create-repository.png" alt="Create New Repository" width="900">
+<img src="_images/gitea-plus-icon.png" alt="Create New Repository" width="900">
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -204,6 +204,10 @@ Gitea git server.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Owner*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user%USER_ID%</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Repository Name*</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">inventory-quarkus</p></td>
@@ -496,6 +500,10 @@ with each other via <strong>Workspace</strong>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">revision</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">master</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteExisting</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -611,6 +619,10 @@ with each other via <strong>Workspace</strong>.</p>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Storage Class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gp2</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persistent Volume Claim Name *</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">inventory-pipeline-pvc</p></td>
 </tr>
@@ -654,56 +666,28 @@ metadata:
   namespace: cn-project%USER_ID%
   [...]
 spec:
-  <strong>workspaces: <i class="conum" data-value="1"></i><b>(1)</b>
+  <strong>workspaces:
     - name: shared-workspace</strong>
   tasks:
     - name: git-clone
-      <strong>workspaces: <i class="conum" data-value="2"></i><b>(2)</b>
-        - name: output <i class="conum" data-value="3"></i><b>(3)</b>
-          workspace: shared-workspace</strong> <i class="conum" data-value="4"></i><b>(4)</b>
       params:
         [...]
       taskRef:
         [...]
-    - name: s2i-java-11
       <strong>workspaces:
-        - name: source <i class="conum" data-value="5"></i><b>(5)</b>
-          workspace: shared-workspace</strong> <i class="conum" data-value="6"></i><b>(6)</b>
+        - name: output
+          workspace: shared-workspace</strong>
+    - name: s2i-java-11
       params:
         [...]
       taskRef:
         [...]
       runAfter:
-        [...]</code></pre>
+        [...]
+      <strong>workspaces:
+        - name: source
+          workspace: shared-workspace</strong></code></pre>
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>List of Workspaces shared between the Tasks defined in the Pipeline: <strong>shared-workspace</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>List of Workspaces used in the Task</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Name that uniquely identifies the Workspace used in the Task. This Task uses one Workspace named <strong>output</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Name of the Pipeline Workspace used by the Task. Note that the Workspace <strong>output</strong> in turn uses the Pipeline Workspace named <strong>shared-workspace</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>This Task uses one Workspace named <strong>source</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>The Pipeline Workspace attached is named <strong>shared-workspace</strong></td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>Finally, <code><strong>Click on 'Save'</strong></code>. A shared workspace is now configured into your Pipeline.</p>

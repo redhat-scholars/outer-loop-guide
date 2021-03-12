@@ -123,7 +123,7 @@
     <li><a href="gitops-workflow.html">4. GitOps Workflow with Argo CD</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/5.0/documentation/modules/ROOT/pages/gitops-workflow.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/master/documentation/modules/ROOT/pages/gitops-workflow.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
@@ -250,8 +250,12 @@ a source code repository.</p>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Owner*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user%USER_ID%</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Repository Name*</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">inventory-gitops</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gitops-cn-project</p></td>
 </tr>
 </tbody>
 </table>
@@ -276,29 +280,29 @@ a source code repository.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Initialized empty Git repository in /projects/workshop/labs/gitops/inventory-coolstore/.git/
-[master (root-commit) 918f5d6] Initial Inventory GitOps
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Initialized empty Git repository in /projects/workshop/labs/gitops/.git/
+[master (root-commit) b066fd2] Initial Inventory GitOps
  6 files changed, 251 insertions(+)
- create mode 100644 configmap.yaml
- create mode 100644 deployment.yaml
- create mode 100644 deploymentconfig.yaml
- create mode 100644 route.yaml
- create mode 100644 secret.yaml
- create mode 100644 service.yaml
+ create mode 100644 inventory-coolstore-configmap.yaml
+ create mode 100644 inventory-coolstore-deployment.yaml
+ create mode 100644 inventory-coolstore-deploymentconfig.yaml
+ create mode 100644 inventory-coolstore-route.yaml
+ create mode 100644 inventory-coolstore-secret.yaml
+ create mode 100644 inventory-coolstore-service.yaml
 Enumerating objects: 8, done.
 Counting objects: 100% (8/8), done.
-Delta compression using up to 16 threads
+Delta compression using up to 16 threads.
 Compressing objects: 100% (7/7), done.
-Writing objects: 100% (8/8), 2.42 KiB | 2.42 MiB/s, done.
-Total 8 (delta 1), reused 0 (delta 0), pack-reused 0
+Writing objects: 100% (8/8), 2.47 KiB | 2.47 MiB/s, done.
+Total 8 (delta 1), reused 0 (delta 0)
 remote: . Processing 1 references
 remote: Processed 1 references in total
-To http://gitea-server.gitea.svc:3000/user1/inventory-gitops.git
+To http://gitea-server.gitea.svc:3000/user%USER_ID%/gitops-cn-project.git
  * [new branch]      master -&gt; master</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Once done, in <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/inventory-gitops" class="params-link" target="_blank" rel="noopener">Git Repository</a>, <code><strong>refresh the page of your 'inventory-gitops' repository</strong></code>. You should
+<p>Once done, in <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>, <code><strong>refresh the page of your 'gitops-cn-project' repository</strong></code>. You should
 see the files in the repository.</p>
 </div>
 <div class="imageblock">
@@ -345,7 +349,15 @@ deployments can track updates to branches, tags, or pinned to a specific version
 </div>
 </div>
 <div class="paragraph">
-<p>Then <code><strong>log in as user%USER_ID%/%OPENSHIFT_PASSWORD%</strong></code>. Once completed, you will be redirected to the following page.</p>
+<p>Then <code><strong>login via OpenShift as user%USER_ID%/%OPENSHIFT_PASSWORD%</strong></code>, <code><strong>click on 'Allow selected permissions'</strong></code></p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/argocd-login-page.png" alt="Argo CD - Login Page" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Once completed, you will be redirected to the following page.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -387,7 +399,7 @@ deployments can track updates to branches, tags, or pinned to a specific version
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Repository URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://gitea-server.gitea.svc:3000/user%USER_ID%/inventory-gitops.git" class="bare">http://gitea-server.gitea.svc:3000/user%USER_ID%/inventory-gitops.git</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://gitea-server.gitea.svc:3000/user%USER_ID%/gitops-cn-project.git" class="bare">http://gitea-server.gitea.svc:3000/user%USER_ID%/gitops-cn-project.git</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -399,7 +411,7 @@ deployments can track updates to branches, tags, or pinned to a specific version
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd-inventory-repository.png" alt="Argo CD - Repository" width="800">
+<img src="_images/argocd-repository.png" alt="Argo CD - Repository" width="800">
 </div>
 </div>
 </div>
@@ -433,12 +445,12 @@ deployments can track updates to branches, tags, or pinned to a specific version
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GENERAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Application Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">inventory%USER_ID%</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cn-project%USER_ID%</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GENERAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Project</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cn-project%USER_ID%</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">default</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GENERAL</p></td>
@@ -448,7 +460,7 @@ deployments can track updates to branches, tags, or pinned to a specific version
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SOURCE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Repository URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://gitea-server.gitea.svc:3000/user%USER_ID%/inventory-gitops.git" class="bare">http://gitea-server.gitea.svc:3000/user%USER_ID%/inventory-gitops.git</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://gitea-server.gitea.svc:3000/user%USER_ID%/gitops-cn-project.git" class="bare">http://gitea-server.gitea.svc:3000/user%USER_ID%/gitops-cn-project.git</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SOURCE</p></td>
@@ -485,7 +497,7 @@ deployments can track updates to branches, tags, or pinned to a specific version
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd-outofsync-inventory-application.png" alt="Argo CD - OutOfSync Application" width="700">
+<img src="_images/argocd-outofsync-application.png" alt="Argo CD - OutOfSync Application" width="700">
 </div>
 </div>
 <div class="paragraph">
@@ -574,7 +586,7 @@ which are not recorded or tracked.</p>
 <p>To prepare the next lab, you need to push the remaining coolstore application configuration to the Git repository.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Commit &amp; Configure Coolstore'</strong></code></p>
+<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'GitOps - Commit Coolstore'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -582,7 +594,29 @@ which are not recorded or tracked.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Once done, in your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%" class="params-link" target="_blank" rel="noopener">Git Repository</a>, you should see the 3 new '*-gitops' repositories.</p>
+<p>A terminal should be opened with the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Reinitialized existing Git repository in /projects/gitops/.git/
+[master 7d5e824] Initial Coolstore GitOps
+ 18 files changed, 612 insertions(+)
+ [...]
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 16 threads.
+Compressing objects: 100% (14/14), done.
+Writing objects: 100% (14/14), 3.80 KiB | 3.80 MiB/s, done.
+Total 14 (delta 8), reused 0 (delta 0)
+remote: . Processing 1 references
+remote: Processed 1 references in total
+To http://gitea-server.gitea.svc:3000/user%USER_ID%/gitops-cn-project.git
+   d35eafe..7d5e824  master -&gt; master</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once done, in your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>, <code><strong>refresh the page of your 'gitops-cn-project' repository</strong></code>. You should
+see the project files in the repository.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -590,11 +624,12 @@ which are not recorded or tracked.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, you should see the 4 Applications in the  <strong>OutOfSync</strong> state since no service has not yet been deployed into cn-project%USER_ID% OpenShift project.</p>
+<p>In <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, the application status  is once again in yellow <strong>OutOfSync</strong> state since the Catalog, Gateway and Web services
+have not yet been deployed into cn-project%USER_ID% OpenShift project.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd-outofsync-coolstore.png" alt="Argo CD - OutOfSync Application" width="700">
+<img src="_images/argocd-outofsync-coolstore-details.png" alt="Argo CD - OutOfSync Application" width="700">
 </div>
 </div>
 <div class="paragraph">
