@@ -79,11 +79,8 @@ In your {GIT_URL}[Git Repository^,role='params-link'], `*create a new Repository
 |Parameter 
 |Value
 
-|Owner*
-|user{USER_ID}
-
 |Repository Name*
-|gitops-cn-project
+|inventory-gitops
 
 |===
 
@@ -99,28 +96,28 @@ A terminal should be opened with the following output:
 
 [source,shell,subs="{markup-in-source}"]
 ----
-Initialized empty Git repository in /projects/workshop/labs/gitops/.git/
-[master (root-commit) b066fd2] Initial Inventory GitOps
+Initialized empty Git repository in /projects/workshop/labs/gitops/inventory-coolstore/.git/
+[master (root-commit) 918f5d6] Initial Inventory GitOps
  6 files changed, 251 insertions(+)
- create mode 100644 inventory-coolstore-configmap.yaml
- create mode 100644 inventory-coolstore-deployment.yaml
- create mode 100644 inventory-coolstore-deploymentconfig.yaml
- create mode 100644 inventory-coolstore-route.yaml
- create mode 100644 inventory-coolstore-secret.yaml
- create mode 100644 inventory-coolstore-service.yaml
+ create mode 100644 configmap.yaml
+ create mode 100644 deployment.yaml
+ create mode 100644 deploymentconfig.yaml
+ create mode 100644 route.yaml
+ create mode 100644 secret.yaml
+ create mode 100644 service.yaml
 Enumerating objects: 8, done.
 Counting objects: 100% (8/8), done.
-Delta compression using up to 16 threads.
+Delta compression using up to 16 threads
 Compressing objects: 100% (7/7), done.
-Writing objects: 100% (8/8), 2.47 KiB | 2.47 MiB/s, done.
-Total 8 (delta 1), reused 0 (delta 0)
+Writing objects: 100% (8/8), 2.42 KiB | 2.42 MiB/s, done.
+Total 8 (delta 1), reused 0 (delta 0), pack-reused 0
 remote: . Processing 1 references
 remote: Processed 1 references in total
-To http://gitea-server.gitea.svc:3000/user{USER_ID}/gitops-cn-project.git
+To http://gitea-server.gitea.svc:3000/user1/inventory-gitops.git
  * [new branch]      master -> master
 ----
 
-Once done, in {GIT_URL}/user{USER_ID}/gitops-cn-project[Git Repository^, role='params-link'], `*refresh the page of your 'gitops-cn-project' repository*`. You should 
+Once done, in {GIT_URL}/user{USER_ID}/inventory-gitops[Git Repository^, role='params-link'], `*refresh the page of your 'inventory-gitops' repository*`. You should 
 see the files in the repository.
 
 image::gitea-inventory-gitops-repo.png[GitOps Repository,900]
@@ -151,15 +148,9 @@ deployments can track updates to branches, tags, or pinned to a specific version
 [role='params-link']
 image::developer-gitops-button.png[Developer GitOps - Button, 300]
 
-Then `*login via OpenShift as user{USER_ID}/{OPENSHIFT_PASSWORD}*`, `*click on 'Allow selected permissions'*`
-
-[window=_blank, align="center"]
-image::argocd-login-page.png[Argo CD - Login Page, 500]
-
-Once completed, you will be redirected to the following page.
+Then `*log in as user{USER_ID}/{OPENSHIFT_PASSWORD}*`. Once completed, you will be redirected to the following page.
 
 image::argocd-home.png[Argo CD - Home Page, 500]
-
 
 == Add your Newly Created GitOps Repository 
 
@@ -179,7 +170,7 @@ image::argocd-configure-repositories.png[Argo CD - Configure Repositories, 500]
 |git
 
 |Repository URL
-|http://gitea-server.gitea.svc:3000/user{USER_ID}/gitops-cn-project.git
+|http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-gitops.git
 
 |===
 
@@ -187,7 +178,7 @@ Finally, `*Click on 'CONNECT'*`.
 
 Your GitOps repository is now added to Argo CD.
 
-image::argocd-repository.png[Argo CD - Repository, 800]
+image::argocd-inventory-repository.png[Argo CD - Repository, 800]
 
 
 == Create a GitOps Application
@@ -205,11 +196,11 @@ image::argocd-configure-application.png[Argo CD - Configure Application, 500]
 
 |GENERAL
 |Application Name
-|cn-project{USER_ID}
+|inventory{USER_ID}
 
 |GENERAL
 |Project
-|default
+|cn-project{USER_ID}
 
 |GENERAL
 |SYNC POLICY
@@ -217,7 +208,7 @@ image::argocd-configure-application.png[Argo CD - Configure Application, 500]
 
 |SOURCE
 |Repository URL
-|http://gitea-server.gitea.svc:3000/user{USER_ID}/gitops-cn-project.git
+|http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-gitops.git
 
 |SOURCE
 |Revision
@@ -245,7 +236,7 @@ Finally, `*Click on 'CREATE'*`.
 
 Your Coolstore Application has been created in Argo CD.
 
-image::argocd-outofsync-application.png[Argo CD - OutOfSync Application, 700]
+image::argocd-outofsync-inventory-application.png[Argo CD - OutOfSync Application, 700]
 
 The application status is initially in yellow **OutOfSync** state since the application has yet to be 
 deployed into cn-project{USER_ID} OpenShift project, and no Kubernetes resources have been created.
@@ -299,41 +290,18 @@ You can leave the configuration drift as it is. You will fix it in the next lab.
 
 To prepare the next lab, you need to push the remaining coolstore application configuration to the Git repository.
 
-In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Commit Coolstore'*`
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'GitOps - Commit & Configure Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 500]
 
-A terminal should be opened with the following output:
-
-[source,shell,subs="{markup-in-source}"]
-----
-Reinitialized existing Git repository in /projects/gitops/.git/
-[master 7d5e824] Initial Coolstore GitOps
- 18 files changed, 612 insertions(+)
- [...]
-Enumerating objects: 15, done.
-Counting objects: 100% (15/15), done.
-Delta compression using up to 16 threads.
-Compressing objects: 100% (14/14), done.
-Writing objects: 100% (14/14), 3.80 KiB | 3.80 MiB/s, done.
-Total 14 (delta 8), reused 0 (delta 0)
-remote: . Processing 1 references
-remote: Processed 1 references in total
-To http://gitea-server.gitea.svc:3000/user{USER_ID}/gitops-cn-project.git
-   d35eafe..7d5e824  master -> master
-----
-
-Once done, in your {GIT_URL}/user{USER_ID}/gitops-cn-project[Git Repository^,role='params-link'], `*refresh the page of your 'gitops-cn-project' repository*`. You should 
-see the project files in the repository.
+Once done, in your {GIT_URL}/user{USER_ID}[Git Repository^,role='params-link'], you should see the 3 new '*-gitops' repositories.
 
 image::gitea-gitops-repo.png[GitOps Repository,900]
 
-In {GITOPS_URL}[Argo CD^,role='params-link'], the application status  is once again in yellow **OutOfSync** state since the Catalog, Gateway and Web services 
-have not yet been deployed into cn-project{USER_ID} OpenShift project.
+In {GITOPS_URL}[Argo CD^,role='params-link'], you should see the 4 Applications in the  **OutOfSync** state since no service has not yet been deployed into cn-project{USER_ID} OpenShift project.
 
-image::argocd-outofsync-coolstore-details.png[Argo CD - OutOfSync Application, 700]
+image::argocd-outofsync-coolstore.png[Argo CD - OutOfSync Application, 700]
 
 **You are going to fix it in the next lab.**
-
 
 Well done! You are ready for the next lab.

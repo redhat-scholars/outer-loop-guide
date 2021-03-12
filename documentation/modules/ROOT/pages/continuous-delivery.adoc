@@ -86,11 +86,11 @@ spec:
     - name: sync
       image: argoproj/argocd:v1.7.6
       script: |
-        argocd app sync cn-project{USER_ID} --label app.kubernetes.io/instance=$(params.application-name)
+        argocd app sync $(params.application-name){USER_ID}
     - name: wait
       image: argoproj/argocd:v1.7.6
       script: |
-        argocd app wait -l app.kubernetes.io/instance=$(params.application-name) --health
+        argocd app wait $(params.application-name){USER_ID} --health
 ----
 
 `*Then click on 'create'*`. Your Argo CD Task is now created.
@@ -234,17 +234,13 @@ image::openshift-tekton-inventory-deployed.png[OpenShift - Inventory Deployed by
 
 Now, you can see that the **Inventory Service has been deployed by OpenShift Pipeline** and it is up and running.
 
-In the {GITOPS_URL}[Argo CD^], `*Select the 'Application menu' then click on the 'cn-project{USER_ID}' application*`:
+In the {GITOPS_URL}[Argo CD^], `*Select the 'Application menu' then click on the 'inventory{USER_ID}' application*`:
 
-image::argocd-outofsync-application.png[Argo CD - Out Of Sync Application, 500]
+image::argocd-sync-inventory-application.png[Argo CD - Out Of Sync Application, 900]
 
-`*Filter to only display  the _Synced_ resources*`. Argo CD has synchronized all the Inventory OpenShift manifests stored into your {GIT_URL}/user{USER_ID}/gitops-cn-project[Git Repository^,role='params-link'] 
-with your 'cn-project{USER_ID}' project on OpenShift.
+Argo CD has synchronized all the Inventory OpenShift manifests stored into your {GIT_URL}/user{USER_ID}/inventory-gitops[Inventory Repository^,role='params-link'] with your 'cn-project{USER_ID}' project on OpenShift.
 
-image::argocd-synced-inventory.png[Argo CD - Synced Inventory, 900]
-
-Your Argo CD application is still 'OutofSync' because the other OpenShift Manifests (Catalog, Gateway and Web) are not synchronized yet. That is the next step.
-
+image::argocd-synced-inventory-details.png[Argo CD - Synced Inventory, 900]
 
 == Deploy the whole application with Tekton
 
@@ -273,16 +269,9 @@ and validate that the CoolStore application is deployed, up and running in the *
 
 image::openshift-tekton-coolstore-deployed.png[OpenShift - Coolstore Deployed by Tekton, 700]
 
-Finally, in {GITOPS_URL}[Argo CD^,role='params-link'], `*Select the 'Application menu' then click on the 'cn-project{USER_ID}' application*`:
+Finally, in {GITOPS_URL}[Argo CD^,role='params-link'], all Applications are now 'Synced'.
 
-image::argocd-sync-application.png[Argo CD - Sync Application, 500]
-
-Argo CD has synchronized all the OpenShift manifests stored into your {GIT_URL}/user{USER_ID}/gitops-cn-project[Git Repository^,role='params-link'] 
-with your 'cn-project{USER_ID}' project on OpenShift.
-
-image::argocd-synced-coolstore.png[Argo CD - Synced Coolstore, 900]
-
-Your Argo CD application is now 'Synced'.
+image::argocd-synced-coolstore.png[Argo CD - Sync Application, 900]
 
 
 Well done! You are ready for the next lab.

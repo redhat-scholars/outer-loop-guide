@@ -48,18 +48,15 @@ Then, `*click on 'Sign In' and login via OpenShift as user{USER_ID}/{OPENSHIFT_P
 image::gitea-signin.png[Sign Up Gitea,700]
 
 Create a new repository called *'inventory-quarkus'*.
-`*Click on the plus icon*` as below and enter the following values:
+`*Click on the '+' icon -> '+ New Repository'*` as below and enter the following values:
 
-image::gitea-plus-icon.png[Create New Repository,900]
+image::gitea-create-repository.png[Create New Repository,900]
 
 .Inventory Repository
 [%header,cols=2*]
 |===
 |Parameter 
 |Value
-
-|Owner*
-|user{USER_ID}
 
 |Repository Name*
 |inventory-quarkus
@@ -238,9 +235,6 @@ image::openshift-add-git-clone-task.png[OpenShift - Add Git Clone Task, 500]
 |revision
 |master
 
-|deleteExisting
-|true
-
 |===
 
 Once done, let's add other tasks. `*Click on the blue plus icon at the right hand side of the 'git-clone' task*`
@@ -305,9 +299,6 @@ image::openshift-create-pvc.png[OpenShift - Create PVC, 700]
 |Parameter 
 |Value
 
-|Storage Class
-|gp2
-
 |Persistent Volume Claim Name *
 |inventory-pipeline-pvc
 
@@ -340,28 +331,35 @@ metadata:
   namespace: cn-project{USER_ID}
   [...]
 spec:
-  **workspaces:
-    - name: shared-workspace**
+  **workspaces: # <1>
+    - name: shared-workspace** 
   tasks:
     - name: git-clone
+      **workspaces: # <2>
+        - name: output # <3>
+          workspace: shared-workspace** # <4>
       params:
         [...]
       taskRef:
         [...]
-      **workspaces:
-        - name: output
-          workspace: shared-workspace**
     - name: s2i-java-11
+      **workspaces:
+        - name: source # <5>
+          workspace: shared-workspace** # <6>
       params:
         [...]
       taskRef:
         [...]
       runAfter:
         [...]
-      **workspaces:
-        - name: source
-          workspace: shared-workspace**
 ----
+<1> List of Workspaces shared between the Tasks defined in the Pipeline: **shared-workspace**
+<2> List of Workspaces used in the Task
+<3> Name that uniquely identifies the Workspace used in the Task. This Task uses one Workspace named **output**
+<4> Name of the Pipeline Workspace used by the Task. Note that the Workspace **output** in turn uses the Pipeline Workspace named **shared-workspace**
+<5> This Task uses one Workspace named **source**
+<6> The Pipeline Workspace attached is named **shared-workspace**
+
 
 Finally, `*Click on 'Save'*`. A shared workspace is now configured into your Pipeline.
 
