@@ -122,7 +122,7 @@
     <li><a href="service-mesh.html">6. Connect and Monitor your Application with OpenShift Service Mesh</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/master/documentation/modules/ROOT/pages/service-mesh.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/5.0/documentation/modules/ROOT/pages/service-mesh.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
@@ -195,7 +195,7 @@
 <h2 id="_enabling_service_mesh_to_inventory_service"><a class="anchor" href="#_enabling_service_mesh_to_inventory_service"></a>Enabling Service Mesh to Inventory Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenShift Service Mesh automatically injects the sidecar into the Pod by specifying <strong>sidecar.istio.io/inject:true</strong> annotation in the DeploymentConfig.</p>
+<p>OpenShift Service Mesh automatically injects the sidecar into the Pod by specifying a specific annotation in the DeploymentConfig.</p>
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
@@ -207,7 +207,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Then, <code><strong>click on the 'YAML' tab and add <mark>sidecar.istio.io/inject: 'true'</mark> under the 'spec.template.metadata.annotations' tag</strong></code></p>
+<p>Then, <code><strong>click on the 'YAML' tab and add <em>sidecar.istio.io/inject: 'true'</em> under the 'spec.template.metadata.annotations' tag</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -610,7 +610,7 @@ except that all product descriptions are returned in <strong>UPPERCASE</strong>.
 </table>
 <div class="imageblock">
 <div class="content">
-<img src="_images/openshift-catalogv2-topology.png" alt="OpenShift - Catalog Topology" width="700">
+<img src="_images/openshift-catalogv2-topology.png" alt="OpenShift - Catalog v2 Topology" width="700">
 </div>
 </div>
 </div>
