@@ -10,7 +10,7 @@ content:
   sources:
     - url: git@github.com:redhat-scholars/outer-loop-guide.git
       tags: []
-      branches: "5.0"
+      branches: ["5.0", master]
       start_path: documentation
 
 asciidoc:
