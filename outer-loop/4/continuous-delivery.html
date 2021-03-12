@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Continuous Delivery with Openshift Pipelines :: OpenShift Outer Loop Workshop</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/outer-loop/4/continuous-delivery.html">
+    <link rel="prev" href="gitops-workflow.html">
+    <link rel="next" href="service-mesh.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Outer Loop Workshop</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="outer-loop" data-version="4">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Outer Loop Workshop</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="developer-workspace-outer-loop.html">2. Get your Developer Workspace</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="continuous-integration.html">3. Continuous Integration with Openshift Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="gitops-workflow.html">4. GitOps Workflow with Argo CD</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="continuous-delivery.html">5. Continuous Delivery with Openshift Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="service-mesh.html">6. Connect and Monitor your Application with OpenShift Service Mesh</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Outer Loop Workshop</span>
+    <span class="version">4</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Outer Loop Workshop</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Outer Loop Workshop</a></li>
+    <li><a href="continuous-delivery.html">5. Continuous Delivery with Openshift Pipelines</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/outer-loop-guide/edit/master/documentation/modules/ROOT/pages/continuous-delivery.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Continuous Delivery with Openshift Pipelines</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>20 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this lab you will learn about deployment pipelines and you will create a pipeline to
+automate build and deployment of the Inventory service.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Continuous Delivery</div>
+<div class="paragraph">
+<p>So far you have been deploying each service manually to OpenShift. Although
+it&#8217;s convenient for local development, it&#8217;s an error-prone way of delivering software if
+extended to test and production environments.</p>
+</div>
+<div class="paragraph">
+<p>Continuous Delivery (CD) refers to a set of practices with the intention of automating
+various aspects of delivery software. One of these practices is called <strong>Delivery Pipeline</strong>
+which is an automated process to define the steps a change in code or configuration has
+to go through in order to reach upper environments and eventually to production.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift simplifies building CI/CD Pipelines by integrating TektonCD into
+the platform and enables defining truly complex workflows directly from within OpenShift.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_custom_task"><a class="anchor" href="#_create_a_custom_task"></a>Create a custom Task</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have learnt and understood how to create a simple <strong>Pipeline</strong>.
+Now, let&#8217;s <strong>create a task to deploy the OpenShift Configuration from Argo CD and add it the existing pipeline</strong>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A <strong>Task</strong> consists of a collection of <strong>Steps</strong> that are executed sequentially with a pod.</p>
+</div>
+<div class="paragraph">
+<p>Each <strong>Step</strong> is executed in a separate container within the same pod.
+They can also have inputs and outputs in order to interact with other tasks in the pipeline.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Search' &#8594; 'Task' &#8594; 'T Task' &#8594; 'Create Task'</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Then update the content as follows:</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: argocd-task-sync-and-wait
+  namespace: cn-project%USER_ID%
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: deploy
+    tekton.dev/displayName: "argocd"
+spec:
+  description: &gt;-
+    This task syncs (deploys) an Argo CD application and waits for it to be healthy.
+    To do so, it requires the address of the Argo CD server and some form of
+    authentication either a username/password or an authentication token.
+  params:
+    - name: application-name
+      description: name of the application to sync
+  stepTemplate:
+    envFrom:
+      - configMapRef:
+          name: argocd-env-configmap  # used for server address
+      - secretRef:
+          name: argocd-env-secret  # used for authentication (username/password or auth token)
+  steps:
+    - name: login
+      image: argoproj/argocd:v1.7.6
+      script: |
+        if [ -z $ARGOCD_AUTH_TOKEN ]; then
+          yes | argocd login $ARGOCD_SERVER --username=$ARGOCD_USERNAME --password=$ARGOCD_PASSWORD --plaintext;
+        fi
+    - name: sync
+      image: argoproj/argocd:v1.7.6
+      script: |
+        argocd app sync cn-project%USER_ID% --label app.kubernetes.io/instance=$(params.application-name)
+    - name: wait
+      image: argoproj/argocd:v1.7.6
+      script: |
+        argocd app wait -l app.kubernetes.io/instance=$(params.application-name) --health</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Then click on 'create'</strong></code>. Your Argo CD Task is now created.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-argocd-task.png" alt="OpenShift - ArgoCD Task" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s <strong>define the Argo CD server endpoint as well as the credentials so that the Task you just created has access to the server</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Config Maps' then click on the 'Create Config Map' button</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-create-configmap.png" alt="Che - OpenShift Create Config Map" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>replace the content</strong></code> with the following input:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-env-configmap
+  namespace: cn-project%USER_ID%
+data:
+  ARGOCD_SERVER: argocd-server.argocd.svc</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Click on the 'Create' button.</strong></code></p>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Secrets' &#8594; 'Create' &#8594; 'Key/Value Secret'</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-create-keyvalue-secret-menu.png" alt="Che - OpenShift Create Secret" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Enter the following configuration</strong></code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. ArgoCD Task Secret</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Secret Name *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">argocd-env-secret</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARGOCD_USERNAME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user%USER_ID%</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARGOCD_PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%OPENSHIFT_PASSWORD%</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-create-keyvalue-secret.png" alt="Che - OpenShift Create Secret" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Click on the 'Create' button</strong></code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_expand_your_pipeline"><a class="anchor" href="#_expand_your_pipeline"></a>Expand your Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now let&#8217;s <strong>expand your Inventory Pipeline to cover the Continuous Deployment</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Pipelines' &#8594; 'PL inventory-pipeline' &#8594; 'Actions' &#8594; 'Edit Pipeline'</strong></code></p>
+</div>
+<div class="paragraph">
+<p>then, <code><strong>complete your pipeline</strong></code> with the two following tasks and their configurations:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-full-inventory-pipeline.png" alt="OpenShift Pipeline" width="900">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. ArgoCD Task Configuration</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Section</th>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">application-name *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inventory</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. OpenShift Client Task Configuration</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Section</th>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SCRIPT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">oc $@</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARGS1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rollout</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARGS2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">latest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARGS3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inventory-coolstore</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_the_full_pipeline"><a class="anchor" href="#_run_the_full_pipeline"></a>Run the Full Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Pipelines' &#8594; 'PL inventory-pipeline' &#8594; 'Actions' &#8594; 'Start' and enter the following parameters</strong></code></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Pipeline Workspaces</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">shared-workspace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PVC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PVC inventory-pipeline-pvc</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Finally, <code><strong>click on 'Start'</strong></code></p>
+</div>
+<div class="paragraph">
+<p>Congratulations!! You have deployed your first application using OpenShift Pipeline!!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-run-full-inventory-pipeline.png" alt="OpenShift Pipeline" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Once finished, from the <strong>Topology view</strong>, <code><strong>select the 'cn-project%USER_ID%'</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-tekton-inventory-deployed.png" alt="OpenShift - Inventory Deployed by Tekton" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, you can see that the <strong>Inventory Service has been deployed by OpenShift Pipeline</strong> and it is up and running.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Application menu' then click on the 'cn-project%USER_ID%' application</strong></code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-outofsync-application.png" alt="Argo CD - Out Of Sync Application" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Filter to only display  the <em>Synced</em> resources</strong></code>. Argo CD has synchronized all the Inventory OpenShift manifests stored into your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>
+with your 'cn-project%USER_ID%' project on OpenShift.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-synced-inventory.png" alt="Argo CD - Synced Inventory" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Your Argo CD application is still 'OutofSync' because the other OpenShift Manifests (Catalog, Gateway and Web) are not synchronized yet. That is the next step.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_the_whole_application_with_tekton"><a class="anchor" href="#_deploy_the_whole_application_with_tekton"></a>Deploy the whole application with Tekton</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Previously, for the <strong>Inventory Service</strong>, you have learned how to create, configure and run an OpenShift pipeline.
+Now, <code><strong>let&#8217;s deploy the rest of the application</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>For doing so, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Pipeline - Deploy Coolstore'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Once executed, in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Pipelines' &#8594; 'PL - coolstore-java-pipeline' &#8594; 'Pipeline Runs'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-coolstore-java-pipeline-run.png" alt="OpenShift Pipeline Runs" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>You should see 2 pipelines running for the 2 Java services (Catalog and Gateway).</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Click on 'Pipelines' &#8594; 'PL - coolstore-nodejs-pipeline' &#8594; 'Pipeline Runs'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-coolstore-nodejs-pipeline-run.png" alt="OpenShift Pipeline Runs" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>You should see 1 pipeline running for the Web services.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Click on 'Topology'</strong></code> from the <strong>Developer view</strong> of the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>
+and validate that the CoolStore application is deployed, up and running in the <strong>cn-project%USER_ID%</strong> project.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-tekton-coolstore-deployed.png" alt="OpenShift - Coolstore Deployed by Tekton" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, in <a href="https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Argo CD</a>, <code><strong>Select the 'Application menu' then click on the 'cn-project%USER_ID%' application</strong></code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-sync-application.png" alt="Argo CD - Sync Application" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Argo CD has synchronized all the OpenShift manifests stored into your <a href="https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%/user%USER_ID%/gitops-cn-project" class="params-link" target="_blank" rel="noopener">Git Repository</a>
+with your 'cn-project%USER_ID%' project on OpenShift.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-synced-coolstore.png" alt="Argo CD - Synced Coolstore" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Your Argo CD application is now 'Synced'.</p>
+</div>
+<div class="paragraph">
+<p>Well done! You are ready for the next lab.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="gitops-workflow.html" class="query-params-link">4. GitOps Workflow with Argo CD</a></span>
+  <span class="next"><a href="service-mesh.html" class="query-params-link">6. Connect and Monitor your Application with OpenShift Service Mesh</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
