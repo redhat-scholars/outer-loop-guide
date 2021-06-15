@@ -263,6 +263,9 @@ In the **'Graph' view**, `*enter the following configuration*`:
 |Display
 |'Traffic Animation' checked
 
+|Hide
+|node = unknown OR service*=PassthroughCluster
+
 |===
 
 The outcome is a graph with all the services, connected by the requests going through them. 
