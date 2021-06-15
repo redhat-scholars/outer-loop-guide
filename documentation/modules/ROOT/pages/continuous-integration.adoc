@@ -241,18 +241,18 @@ Once done, let's add other tasks. `*Click on the blue plus icon at the right han
 
 image::openshift-add-task.png[OpenShift - Add task, 500]
 
-`*Then click on 'Select task' and select 's2i-java-11' task*`
+`*Then click on 'Select task' and select 's2i-java' task*`
 
-`*Click on the newly created 's2i-java-11' task and enter the following configuration*`:
+`*Click on the newly created 's2i-java' task and enter the following configuration*`:
 
-.s2i-java-11 cluster task
+.s2i-java cluster task
 [%header,cols=2*]
 |===
 |Parameter 
 |Value
 
 |Display Name
-|s2i-java-11
+|s2i-java
 
 |PATH_CONTEXT
 |. (dot)
@@ -342,7 +342,7 @@ spec:
         [...]
       taskRef:
         [...]
-    - name: s2i-java-11
+    - name: s2i-java
       **workspaces:
         - name: source # <5>
           workspace: shared-workspace** # <6>
