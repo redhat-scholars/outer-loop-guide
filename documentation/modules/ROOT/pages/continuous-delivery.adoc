@@ -234,7 +234,7 @@ image::openshift-tekton-inventory-deployed.png[OpenShift - Inventory Deployed by
 
 Now, you can see that the **Inventory Service has been deployed by OpenShift Pipeline** and it is up and running.
 
-In the {GITOPS_URL}[Argo CD^], `*Select the 'Application menu' then click on the 'inventory{USER_ID}' application*`:
+In the {GITOPS_URL}[Argo CD^,role='params-link'], `*Select the 'Application menu' then click on the 'inventory{USER_ID}' application*`:
 
 image::argocd-sync-inventory-application.png[Argo CD - Out Of Sync Application, 900]
 
