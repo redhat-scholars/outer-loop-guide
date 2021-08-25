@@ -207,14 +207,22 @@ image::openshift-inventory-imagestream.png[OpenShift - Inventory ImageStream, 90
 == Create a Pipeline
 
 A **Pipeline** defines a number of **Task** that should be executed and how they interact 
-with each other via *Workspace*.
+with each other via **Workspace**. Let's define and configure these different components.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Pipelines' -> 'Create Pipeline'*`.
 
 image::openshift-create-pipeline.png[OpenShift - Create Pipeline, 700]
 
-`*Specify 'inventory-pipeline' as Name then click on 'Select task' and select 'git-clone' task.*`
+In the "Pipeline Builder" page, `*specify 'inventory-pipeline' as Name*`
+
+image::openshift-add-pipeline-name.png[OpenShift - Pipeline Name, 400]
+
+`*Scroll down to the 'Workspaces' section and define a Workspace called 'shared-workspace'*`
+
+image::openshift-add-pipeline-workspace.png[OpenShift - Pipeline Workspace, 600]
+
+`*Scroll up to the 'Tasks' section then click on 'Select task' and select 'git-clone' task*`
 
 image::openshift-add-git-clone-task.png[OpenShift - Add Git Clone Task, 500]
 
@@ -232,12 +240,12 @@ image::openshift-add-git-clone-task.png[OpenShift - Add Git Clone Task, 500]
 |url
 |http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-quarkus.git
 
-|revision
-|master
+|Workspaces output
+|shared-workspace
 
 |===
 
-Once done, let's add other tasks. `*Click on the blue plus icon at the right hand side of the 'git-clone' task*`
+Once done, let's add another task. `*Click on the blue plus icon at the right hand side of the 'git-clone' task*`
 
 image::openshift-add-task.png[OpenShift - Add task, 500]
 
@@ -254,9 +262,6 @@ image::openshift-add-task.png[OpenShift - Add task, 500]
 |Display Name
 |s2i-java
 
-|PATH_CONTEXT
-|. (dot)
-
 |TLSVERIFY
 |false
 
@@ -266,104 +271,15 @@ image::openshift-add-task.png[OpenShift - Add task, 500]
 |Image*
 |image-registry.openshift-image-registry.svc:5000/cn-project{USER_ID}/inventory-coolstore
 
+|Workspaces source
+|shared-workspace
+
 |===
 
 Once done, `*click on 'Create'*`. Your simple Pipeline is now created.
 
-image::openshift-simple-pipeline.png[OpenShift - Simple Pipeline, 700]
+image::openshift-ci-pipeline.png[OpenShift - CI Pipeline, 700]
 
-[#attach_shared_workspace]
-== Attach a Shared Workspace to the Pipeline
-
-**Workspaces** allow **Tasks** to declare parts of the filesystem that need to be provided at runtime by TaskRuns. 
-
-A TaskRun can make these parts of the filesystem available in many ways, using: 
-
-- a read-only ConfigMap or Secret
-- an existing PersistentVolumeClaim shared with other Tasks
-- a PersistentVolumeClaim from a provided VolumeClaimTemplate
-- an emptyDir that is discarded when the TaskRun completes.
-
-**Workspaces** are similar to Volumes except that they allow a Task author to defer to users and their TaskRuns when deciding which class of storage to use.
-
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*click on 'Search' -> 'Resources' -> 'PVC PersistentVolumeClaim' -> 'Create Persistent Volume Claim'*`.
-
-image::openshift-create-pvc.png[OpenShift - Create PVC, 700]
-
-`*Enter the following configuration*`:
-
-.Inventory PVC
-[%header,cols=2*]
-|===
-|Parameter 
-|Value
-
-|Persistent Volume Claim Name *
-|inventory-pipeline-pvc
-
-|Access Mode *
-|Single User (RWO)
-
-|Size *
-|1 GiB
-
-|===
-
-Then, `*Click on 'Create'*`. The Shared Storage for your pipeline is ready.
-
-image::openshift-inventory-pvc.png[OpenShift - Inventory PVC, 500]
-
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'YAML'*`
-
-image::openshift-inventory-pipeline-yaml.png[OpenShift - Inventory Pipeline YAML, 700]
-
-`*Add the three (3) workspace configurations*` as follows:
-
-[source,yaml,subs="{markup-in-source}"]
-----
-apiVersion: tekton.dev/v1beta1
-kind: Pipeline
-metadata:
-  [...]
-  name: inventory-pipeline
-  namespace: cn-project{USER_ID}
-  [...]
-spec:
-  **workspaces: # <1>
-    - name: shared-workspace** 
-  tasks:
-    - name: git-clone
-      **workspaces: # <2>
-        - name: output # <3>
-          workspace: shared-workspace** # <4>
-      params:
-        [...]
-      taskRef:
-        [...]
-    - name: s2i-java
-      **workspaces:
-        - name: source # <5>
-          workspace: shared-workspace** # <6>
-      params:
-        [...]
-      taskRef:
-        [...]
-      runAfter:
-        [...]
-----
-<1> List of Workspaces shared between the Tasks defined in the Pipeline: **shared-workspace**
-<2> List of Workspaces used in the Task
-<3> Name that uniquely identifies the Workspace used in the Task. This Task uses one Workspace named **output**
-<4> Name of the Pipeline Workspace used by the Task. Note that the Workspace **output** in turn uses the Pipeline Workspace named **shared-workspace**
-<5> This Task uses one Workspace named **source**
-<6> The Pipeline Workspace attached is named **shared-workspace**
-
-
-Finally, `*Click on 'Save'*`. A shared workspace is now configured into your Pipeline.
-
-[#run_pipeline]
 == Run the Pipeline
 
 Now that your pipeline is created and configured, let's run it.
@@ -376,23 +292,21 @@ image::openshift-start-inventory-pipeline.png[OpenShift Start Inventory Pipeline
 `*Enter the following parameters then click on 'Start'*`
 
 .Pipeline Parameters
-[%header,cols=3*]
+[%header,cols=2*]
 |===
 |Name 
-|Type
 |Value
 
 |shared-workspace
-|PVC
-|PVC inventory-pipeline-pvc
+|VolumeClaimTemplate
 
 |===
 
-image::openshift-inventory-pipeline-parameters.png[OpenShift Inventory Pipeline Parameters,500]
+image::openshift-inventory-pipeline-parameters.png[OpenShift Inventory Pipeline Parameters,600]
 
 Congratulations!! You have created and run your first **CI Pipeline on OpenShift**!!
 
-image::openshift-inventory-pipeline-run.png[OpenShift Inventory Pipeline Run,700]
+image::openshift-inventory-pipeline-run.png[OpenShift Inventory Pipeline Run,500]
 
 
 Well done! You are ready for the next lab.

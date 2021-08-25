@@ -1,6 +1,6 @@
 name: outer-loop
 title: OpenShift Outer Loop Workshop
-version: "5.0"
+version: "5.1"
 nav:
   - modules/ROOT/nav.adoc
 
