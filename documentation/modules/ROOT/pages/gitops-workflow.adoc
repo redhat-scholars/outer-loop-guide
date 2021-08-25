@@ -226,10 +226,6 @@ image::argocd-configure-application.png[Argo CD - Configure Application, 500]
 |Namespace
 |cn-project{USER_ID}
 
-|ALL OTHER SECTIONS
-|*
-|_leave them empty/by default_
-
 |===
 
 Finally, `*Click on 'CREATE'*`.

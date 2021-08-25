@@ -187,19 +187,7 @@ image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 
 |Parameters
 |SCRIPT 
-|oc $@
-
-|Parameters
-|ARGS1
-|rollout
-
-|Parameters
-|ARGS2
-|latest
-
-|Parameters
-|ARGS3
-|inventory-coolstore
+|oc rollout latest inventory-coolstore
 
 |===
 
@@ -207,22 +195,12 @@ image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 == Run the Full Pipeline
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'Actions' -> 'Start' and enter the following parameters*`
+`*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'Actions' -> 'Start last run'*`
 
-.Pipeline Workspaces
-[%header,cols=3*]
-|===
-|Name 
-|Type
-|Value
-
-|shared-workspace
-|PVC
-|PVC inventory-pipeline-pvc
-
-|===
-
-Finally, `*click on 'Start'*`
+[TIP]
+====
+**Start last run** will run your pipeline with the previous parameters i.e with the previous PVC created for the shared workspace
+====
 
 Congratulations!! You have deployed your first application using OpenShift Pipeline!!
 
