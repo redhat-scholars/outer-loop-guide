@@ -406,22 +406,7 @@ data:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SCRIPT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">oc $@</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ARGS1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">rollout</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ARGS2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">latest</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ARGS3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">inventory-coolstore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">oc rollout latest inventory-coolstore</p></td>
 </tr>
 </tbody>
 </table>
@@ -432,32 +417,21 @@ data:
 <div class="sectionbody">
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Pipelines' &#8594; 'PL inventory-pipeline' &#8594; 'Actions' &#8594; 'Start' and enter the following parameters</strong></code></p>
+<code><strong>click on 'Pipelines' &#8594; 'PL inventory-pipeline' &#8594; 'Actions' &#8594; 'Start last run'</strong></code></p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Pipeline Workspaces</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
+<div class="admonitionblock tip">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">shared-workspace</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PVC</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PVC inventory-pipeline-pvc</p></td>
-</tr>
-</tbody>
-</table>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Finally, <code><strong>click on 'Start'</strong></code></p>
+<p><strong>Start last run</strong> will run your pipeline with the previous parameters i.e with the previous PVC created for the shared workspace</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Congratulations!! You have deployed your first application using OpenShift Pipeline!!</p>
