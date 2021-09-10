@@ -238,7 +238,7 @@ image::openshift-add-git-clone-task.png[OpenShift - Add Git Clone Task, 500]
 |git-clone
 
 |url
-|http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-quarkus.git
+|\http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-quarkus.git
 
 |Workspaces output
 |shared-workspace
@@ -266,7 +266,7 @@ image::openshift-add-task.png[OpenShift - Add task, 500]
 |false
 
 |MAVEN_MIRROR_URL
-|http://nexus.opentlc-shared.svc:8081/repository/maven-all-public
+|\http://nexus.opentlc-shared.svc:8081/repository/maven-all-public
 
 |Image*
 |image-registry.openshift-image-registry.svc:5000/cn-project{USER_ID}/inventory-coolstore

@@ -198,7 +198,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from 
 |Value
 
 |COOLSTORE_GW_ENDPOINT
-|http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}
+|\http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}
 
 |===
 

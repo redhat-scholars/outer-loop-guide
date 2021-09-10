@@ -170,7 +170,7 @@ image::argocd-configure-repositories.png[Argo CD - Configure Repositories, 500]
 |git
 
 |Repository URL
-|http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-gitops.git
+|\http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-gitops.git
 
 |===
 
@@ -208,7 +208,7 @@ image::argocd-configure-application.png[Argo CD - Configure Application, 500]
 
 |SOURCE
 |Repository URL
-|http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-gitops.git
+|\http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-gitops.git
 
 |SOURCE
 |Revision
@@ -220,7 +220,7 @@ image::argocd-configure-application.png[Argo CD - Configure Application, 500]
 
 |DESTINATION
 |Cluster
-|https://kubernetes.default.svc
+|\https://kubernetes.default.svc
 
 |DESTINATION
 |Namespace
