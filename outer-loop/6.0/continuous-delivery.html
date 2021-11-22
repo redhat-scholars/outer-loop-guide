@@ -490,8 +490,10 @@ Now, <code><strong>let&#8217;s deploy the rest of the application</strong></code
 </div>
 </div>
 <div class="paragraph">
-<p>Once executed, in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Pipelines' &#8594; 'PL - coolstore-java-pipeline' &#8594; 'Pipeline Runs'</strong></code></p>
+<p>Once executed, in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Click on 'Pipelines' &#8594; 'PL - coolstore-java-pipeline' &#8594; 'Pipeline Runs'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -499,7 +501,18 @@ Now, <code><strong>let&#8217;s deploy the rest of the application</strong></code
 </div>
 </div>
 <div class="paragraph">
-<p>You should see 2 pipelines running for the 2 Java services (Catalog and Gateway).</p>
+<p>You should see 1 pipeline running for the other Java service (Catalog).</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Click on 'Pipelines' &#8594; 'PL - coolstore-dotnet-pipeline' &#8594; 'Pipeline Runs'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-coolstore-dotnet-pipeline-run.png" alt="OpenShift Pipeline Runs" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>You should see 1 pipeline running for the the .Net service (Gateway).</p>
 </div>
 <div class="paragraph">
 <p><code><strong>Click on 'Pipelines' &#8594; 'PL - coolstore-nodejs-pipeline' &#8594; 'Pipeline Runs'</strong></code></p>
@@ -510,7 +523,7 @@ Now, <code><strong>let&#8217;s deploy the rest of the application</strong></code
 </div>
 </div>
 <div class="paragraph">
-<p>You should see 1 pipeline running for the Web services.</p>
+<p>You should see 1 pipeline running for the NodeJs service (Web).</p>
 </div>
 <div class="paragraph">
 <p><code><strong>Click on 'Topology'</strong></code> from the <strong>Developer view</strong> of the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>
@@ -518,7 +531,7 @@ and validate that the CoolStore application is deployed, up and running in the <
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/openshift-tekton-coolstore-deployed.png" alt="OpenShift - Coolstore Deployed by Tekton" width="700">
+<img src="_images/openshift-tekton-coolstore-deployed.png" alt="OpenShift - Coolstore Deployed by Tekton" width="500">
 </div>
 </div>
 <div class="paragraph">
