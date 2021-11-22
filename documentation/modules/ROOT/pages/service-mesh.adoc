@@ -50,7 +50,7 @@ The components that make up the data plane and the control plane are:
 OpenShift Service Mesh automatically injects the sidecar into the Pod by specifying a specific annotation in the DeploymentConfig.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*click on the 'DC inventory-coolstore' bubble -> 'DC inventory-coolstore'*`
+`*click on the 'D inventory-coolstore' bubble -> 'D inventory-coolstore'*`
 
 image::openshift-dc-inventory-topology.png[OpenShift - Inventory Topology, 700]
 
