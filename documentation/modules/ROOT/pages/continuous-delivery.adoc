@@ -187,7 +187,7 @@ image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 
 |Parameters
 |SCRIPT 
-|oc rollout latest inventory-coolstore
+|oc rollout status deployment/inventory-coolstore
 
 |===
 
