@@ -60,7 +60,7 @@ to this file.
 
 `*Click on the 'Developer Workspace' button below*`
 
-[link={CHE_URL}/dashboard/#/ide/user{USER_ID}/wksp-cloud-native]
+[link={CHE_URL}/dashboard/#/ide/user{USER_ID}/wksp-end-to-end-dev]
 [window=_blank, align="center"]
 [role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
