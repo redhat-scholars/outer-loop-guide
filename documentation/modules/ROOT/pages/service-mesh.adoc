@@ -60,18 +60,16 @@ image::openshift-enable-istio-inventory.png[OpenShift - Enable Istio Inventory, 
 
 `*Click on the 'Save' button*`
 
-Now, let's deploy this new configuration. `*Click on the 'POD' tab -> 'Actions' -> 'Start Rollout'*`
+Now, let's check the outcome. `*Click on the 'POD' tab*`
 
-image::openshift-rollout-inventory.png[OpenShift - Rollout Inventory, 700]
-
-The current pod will be terminated and a new one will be deployed with 2/2 containers in the **Ready** column.
+The current pod will be terminated and a new one will be deployed with 2/2 containers in the **Ready** column as follows
 
 image::openshift-istio-inventory.png[OpenShift - Istio Inventory, 700]
 
 `*Click on 'P inventory-coolstore-xxxx' then scroll down.*` 
-In the Container section, we should have 2 containers: *One for the inventory-coolstore application and one for the istio-proxy sidecar.*
+In the Container section, we should have 2 containers: **One for the application and one for the istio-proxy sidecar.**
 
-image::openshift-istio-inventory-details.png[OpenShift - Istio Inventory, 700]
+image::openshift-istio-inventory-details.png[OpenShift - Istio Inventory, 900]
 
 Congratulations!! You successfully put the Inventory Service under Service Mesh control.
 
@@ -81,12 +79,7 @@ Congratulations!! You successfully put the Inventory Service under Service Mesh 
 Now, we understand how to enable Service Mesh for a service, `*reproduce the previous step for Catalog and Gateway Services*`.
 
 Once done, to verify the deployment, *in the Container section* of the *'catalog-coolstore-xxxx' and 'gateway-coolstore-xxxx'* pods, 
-`*we should find the 2 containers*`, one for the application, the other the istio-proxy sidecar.
-
-image::openshift-istio-catalog-details.png[OpenShift - Istio Catalog, 700]
-
-image::openshift-istio-gateway-details.png[OpenShift - Istio Gateway, 700]
-
+`*we should find the 2 containers as well*`, one for the application, the other the istio-proxy sidecar.
 
 == Controlling Ingress Traffic
 
@@ -112,7 +105,7 @@ image::openshift-create-gateway.png[OpenShift - Create Gateway, 700]
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: gateway-coolstore
+  name: ingressgateway
   namespace: cn-project{USER_ID}
 spec:
   selector:
@@ -123,7 +116,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "*"
+        - "ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}"
 ----
 
 `*Click on 'create'*`. Your Istio Gateway is now created.
@@ -143,16 +136,11 @@ metadata:
   namespace: cn-project{USER_ID}
 spec:
   hosts:
-    - "*"
+    - "ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}"
   gateways:
-    - gateway-coolstore
+    - ingressgateway
   http:
-    - match:
-        - uri:
-            prefix: /cn-project{USER_ID}/api
-      rewrite:
-        uri: "/api"
-      route:
+    - route:
         - destination:
             port:
               number: 8080
@@ -162,7 +150,7 @@ spec:
 `*Then click on 'create'*`. The Virtual Service for the Gateway Service is now created.
 
 To confirm that the **Istio Gateway** is properly configured, 
-`*click on http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}/api/products[http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}/api/products^,role='params-link']*`
+`*click on http://ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/api/products[http://ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/api/products^,role='params-link']*`
 
 You should have the following result:
 
@@ -198,7 +186,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from 
 |Value
 
 |COOLSTORE_GW_ENDPOINT
-|\http://istio-ingressgateway-istio-system.{APPS_HOSTNAME_SUFFIX}/cn-project{USER_ID}
+|\http://ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}
 
 |===
 
