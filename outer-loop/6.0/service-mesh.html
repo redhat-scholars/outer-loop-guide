@@ -236,15 +236,10 @@
 <p><code><strong>Click on the 'Save' button</strong></code></p>
 </div>
 <div class="paragraph">
-<p>Now, let&#8217;s deploy this new configuration. <code><strong>Click on the 'POD' tab &#8594; 'Actions' &#8594; 'Start Rollout'</strong></code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/openshift-rollout-inventory.png" alt="OpenShift - Rollout Inventory" width="700">
-</div>
+<p>Now, let&#8217;s check the outcome. <code><strong>Click on the 'POD' tab</strong></code></p>
 </div>
 <div class="paragraph">
-<p>The current pod will be terminated and a new one will be deployed with 2/2 containers in the <strong>Ready</strong> column.</p>
+<p>The current pod will be terminated and a new one will be deployed with 2/2 containers in the <strong>Ready</strong> column as follows</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -253,11 +248,11 @@
 </div>
 <div class="paragraph">
 <p><code><strong>Click on 'P inventory-coolstore-xxxx' then scroll down.</strong></code>
-In the Container section, we should have 2 containers: <strong>One for the inventory-coolstore application and one for the istio-proxy sidecar.</strong></p>
+In the Container section, we should have 2 containers: <strong>One for the application and one for the istio-proxy sidecar.</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/openshift-istio-inventory-details.png" alt="OpenShift - Istio Inventory" width="700">
+<img src="_images/openshift-istio-inventory-details.png" alt="OpenShift - Istio Inventory" width="900">
 </div>
 </div>
 <div class="paragraph">
@@ -273,17 +268,7 @@ In the Container section, we should have 2 containers: <strong>One for the inven
 </div>
 <div class="paragraph">
 <p>Once done, to verify the deployment, <strong>in the Container section</strong> of the <strong>'catalog-coolstore-xxxx' and 'gateway-coolstore-xxxx'</strong> pods,
-<code><strong>we should find the 2 containers</strong></code>, one for the application, the other the istio-proxy sidecar.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/openshift-istio-catalog-details.png" alt="OpenShift - Istio Catalog" width="700">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/openshift-istio-gateway-details.png" alt="OpenShift - Istio Gateway" width="700">
-</div>
+<code><strong>we should find the 2 containers as well</strong></code>, one for the application, the other the istio-proxy sidecar.</p>
 </div>
 </div>
 </div>
@@ -328,7 +313,7 @@ In an OpenShift Service Mesh, a better approach is to use a different configurat
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: gateway-coolstore
+  name: ingressgateway
   namespace: cn-project%USER_ID%
 spec:
   selector:
@@ -339,7 +324,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "*"</code></pre>
+        - "ingressgateway-cn-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -365,16 +350,11 @@ metadata:
   namespace: cn-project%USER_ID%
 spec:
   hosts:
-    - "*"
+    - "ingressgateway-cn-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%"
   gateways:
-    - gateway-coolstore
+    - ingressgateway
   http:
-    - match:
-        - uri:
-            prefix: /cn-project%USER_ID%/api
-      rewrite:
-        uri: "/api"
-      route:
+    - route:
         - destination:
             port:
               number: 8080
@@ -386,7 +366,7 @@ spec:
 </div>
 <div class="paragraph">
 <p>To confirm that the <strong>Istio Gateway</strong> is properly configured,
-<code><strong>click on <a href="http://istio-ingressgateway-istio-system.%APPS_HOSTNAME_SUFFIX%/cn-project%USER_ID%/api/products" class="params-link" target="_blank" rel="noopener">http://istio-ingressgateway-istio-system.%APPS_HOSTNAME_SUFFIX%/cn-project%USER_ID%/api/products</a></strong></code></p>
+<code><strong>click on <a href="http://ingressgateway-cn-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%/api/products" class="params-link" target="_blank" rel="noopener">http://ingressgateway-cn-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%/api/products</a></strong></code></p>
 </div>
 <div class="paragraph">
 <p>You should have the following result:</p>
@@ -436,7 +416,7 @@ spec:
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">COOLSTORE_GW_ENDPOINT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">http://istio-ingressgateway-istio-system.%APPS_HOSTNAME_SUFFIX%/cn-project%USER_ID%</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">http://ingressgateway-cn-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%</p></td>
 </tr>
 </tbody>
 </table>
