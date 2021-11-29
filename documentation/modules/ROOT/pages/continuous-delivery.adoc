@@ -241,7 +241,7 @@ You should see 1 pipeline running for the other Java service (Catalog).
 
 image::openshift-coolstore-dotnet-pipeline-run.png[OpenShift Pipeline Runs, 700]
 
-You should see 1 pipeline running for the the .Net service (Gateway).
+You should see 1 pipeline running for the the .NET service (Gateway).
 
 `*Click on 'Pipelines' -> 'PL - coolstore-nodejs-pipeline' -> 'Pipeline Runs'*`
 
