@@ -180,7 +180,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from 
 `*Click on '+ Add Value' then add the following environment variable*`
 
 .Web Environment Variables
-[%header,cols=2*]
+[%header,cols="30%,70%"]
 |===
 |Key 
 |Value
@@ -269,14 +269,14 @@ except that all product descriptions are returned in **UPPERCASE**.
 
 
 Let's deploy the service. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*click on '+ Add' and select 'From Docker'*`
+`*click on '+Add' and select 'From Git'*`
 
-image::openshift-add-from-docker.png[OpenShift - Add from Docker, 700]
+image::openshift-add-from-git.png[OpenShift - Add from git, 700]
 
-Then, `*enter the following information and click on 'Create' button*` :
+Then, `*enter the following information:*`
 
 .Catalog v2 Project
-[%header,cols=2*]
+[%header,cols="30%,70%"]
 |===
 |Parameter 
 |Value
@@ -306,6 +306,14 @@ Then, `*enter the following information and click on 'Create' button*` :
 |app.kubernetes.io/name=golang
 
 |===
+
+OpenShift will automatically detect 
+you have a *Dockerfile* based project so `*click on 'Create' button*` to 
+start the deployment:
+
+image::openshift-add-from-docker.png[OpenShift - Add from Docker, 700]
+
+Shortly you should see the additional *Go* based Catalog service appear in the topology:
 
 image::openshift-catalogv2-topology.png[OpenShift - Catalog v2 Topology, 700]
 
@@ -381,7 +389,7 @@ In {KIALI_URL}[Kiali Console^,role='params-link'], from the **'Graph' view**,
 `*enter the following parameters*` to see the traffic distribution between Catalog v1 and v2:
 
 .Graph Settings
-[%header,cols=2*]
+[%header,cols="30%,70%"]
 |===
 |Parameter
 |Value

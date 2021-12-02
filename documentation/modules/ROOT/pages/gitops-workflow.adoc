@@ -161,7 +161,7 @@ image::argocd-configure-repositories.png[Argo CD - Configure Repositories, 500]
 `*Click on 'CONNECT REPO USING HTTPS'*` and enter the following:
 
 .Repository Configuration
-[%header,cols=2*]
+[%header,cols="30%,70%"]
 |===
 |Parameter 
 |Value

@@ -192,14 +192,19 @@ image::openshift-add-pipeline-name.png[OpenShift - Pipeline Name, 400]
 
 image::openshift-add-pipeline-workspace.png[OpenShift - Pipeline Workspace, 600]
 
-`*Scroll up to the 'Tasks' section then click on 'Select task' and select 'git-clone' task*`
+`*Scroll up to the 'Tasks' section then click Add task.*`
+
+image::openshift-add-pipeline-task.png[OpenShift - Add task, 600]
+
+`*Start typing 'git-' next to the (+) and select 'git-clone'*`. 
+There are several options to choose from, look out for the *Red Hat* one. `*Then hit Add.*`
 
 image::openshift-add-git-clone-task.png[OpenShift - Add Git Clone Task, 500]
 
 `*Click on the newly created 'git-clone' task and enter the following configuration*`:
 
 .git-clone cluster task
-[%header,cols=2*]
+[%header,cols="30%,70%"]
 |===
 |Parameter 
 |Value
@@ -219,12 +224,12 @@ Once done, let's add another task. `*Click on the blue plus icon at the right ha
 
 image::openshift-add-task.png[OpenShift - Add task, 500]
 
-`*Then click on 'Select task' and select 's2i-java' task*`
+`*Then click on 'Add task'*` and as before `*next to the (+) type 's2i-java'*` When you see the *Red Hat* one `*select and add the 's2i-java' task*`
 
 `*Click on the newly created 's2i-java' task and enter the following configuration*`:
 
 .s2i-java cluster task
-[%header,cols=2*]
+[%header,cols="30%,70%"]
 |===
 |Parameter 
 |Value
