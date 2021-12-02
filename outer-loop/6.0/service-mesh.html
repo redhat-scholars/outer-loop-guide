@@ -404,8 +404,8 @@ spec:
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Web Environment Variables</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 30%;">
+<col style="width: 70%;">
 </colgroup>
 <thead>
 <tr>
@@ -553,21 +553,21 @@ except that all product descriptions are returned in <strong>UPPERCASE</strong>.
 </div>
 <div class="paragraph">
 <p>Let&#8217;s deploy the service. In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on '+ Add' and select 'From Docker'</strong></code></p>
+<code><strong>click on '+Add' and select 'From Git'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/openshift-add-from-docker.png" alt="OpenShift - Add from Docker" width="700">
+<img src="_images/openshift-add-from-git.png" alt="OpenShift - Add from git" width="700">
 </div>
 </div>
 <div class="paragraph">
-<p>Then, <code><strong>enter the following information and click on 'Create' button</strong></code> :</p>
+<p>Then, <code><strong>enter the following information:</strong></code></p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. Catalog v2 Project</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 30%;">
+<col style="width: 70%;">
 </colgroup>
 <thead>
 <tr>
@@ -610,6 +610,19 @@ except that all product descriptions are returned in <strong>UPPERCASE</strong>.
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>OpenShift will automatically detect
+you have a <strong>Dockerfile</strong> based project so <code><strong>click on 'Create' button</strong></code> to
+start the deployment:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-add-from-docker.png" alt="OpenShift - Add from Docker" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Shortly you should see the additional <strong>Go</strong> based Catalog service appear in the topology:</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/openshift-catalogv2-topology.png" alt="OpenShift - Catalog v2 Topology" width="700">
@@ -727,8 +740,8 @@ You can also access <a href="http://web-coolstore-cn-project%USER_ID%.%APPS_HOST
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 4. Graph Settings</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 30%;">
+<col style="width: 70%;">
 </colgroup>
 <thead>
 <tr>
