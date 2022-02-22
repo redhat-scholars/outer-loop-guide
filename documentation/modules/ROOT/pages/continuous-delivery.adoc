@@ -155,7 +155,7 @@ Now let's **expand your Inventory Pipeline to cover the Continuous Deployment**.
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on 'Pipelines' -> 'PL inventory-pipeline' -> 'Actions' -> 'Edit Pipeline'*`
 
-then, `*complete your pipeline*` with the two following tasks and their configurations:
+then, `*complete your pipeline*` with the following two *Red Hat tasks* and their configurations:
 
 image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 
@@ -166,6 +166,9 @@ image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 |Parameter 
 |Value
 
+|Name
+|argocd-task-sync-and-wait 
+|
 |Parameters
 |application-name * 
 |inventory
@@ -179,6 +182,9 @@ image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 |Parameter 
 |Value
 
+|Name
+|openshift-client 
+|
 |Parameters
 |SCRIPT 
 |oc rollout status deployment/inventory-coolstore
