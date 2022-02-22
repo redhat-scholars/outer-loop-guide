@@ -1,6 +1,6 @@
 * xref:introduction.adoc[1. Introduction]
 * xref:developer-workspace-outer-loop.adoc[2. Get your Developer Workspace]
-* xref:continuous-integration.adoc[3. Continuous Integration with Openshift Pipelines]
+* xref:continuous-integration.adoc[3. Continuous Integration with OpenShift Pipelines]
 * xref:gitops-workflow.adoc[4. GitOps Workflow with Argo CD]
-* xref:continuous-delivery.adoc[5. Continuous Delivery with Openshift Pipelines]
+* xref:continuous-delivery.adoc[5. Continuous Delivery with OpenShift Pipelines]
 * xref:service-mesh.adoc[6. Connect and Monitor your Application with OpenShift Service Mesh]
