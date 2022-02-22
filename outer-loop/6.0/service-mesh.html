@@ -369,7 +369,7 @@ spec:
 <code><strong>click on <a href="http://ingressgateway-cn-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%/api/products" class="params-link" target="_blank" rel="noopener">http://ingressgateway-cn-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%/api/products</a></strong></code></p>
 </div>
 <div class="paragraph">
-<p>You should have the following result:</p>
+<p>You should see an array of json output looking a little like this but with many more products:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -553,7 +553,7 @@ except that all product descriptions are returned in <strong>UPPERCASE</strong>.
 </div>
 <div class="paragraph">
 <p>Let&#8217;s deploy the service. In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on '+Add' and select 'From Git'</strong></code></p>
+<code><strong>click on '+Add' and select 'Import from Git'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -589,7 +589,7 @@ except that all product descriptions are returned in <strong>UPPERCASE</strong>.
 <td class="tableblock halign-left valign-top"><p class="tableblock">/labs/catalog-go</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Application Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
 </tr>
 <tr>
@@ -647,7 +647,7 @@ It is also possible to launch the new features only for a small set of users, to
 For this lab, you want to answer the following question:</p>
 </div>
 <div class="paragraph">
-<p><strong>Do the product descriptions written in uppercase increase sales rate?</strong></p>
+<p><strong>Do product descriptions written in UPPERCASE increase sales?</strong></p>
 </div>
 <div class="paragraph">
 <p>The only step is to define the rules to distribute the traffic between the services. A <strong>VirtualService</strong> defines a set of traffic routing rules
@@ -700,7 +700,8 @@ the <strong>10%</strong> remaining to pods of the <strong>Catalog Service v2</st
 First, we need to generate HTTP traffic by sending several requests to the <strong>Gateway Service</strong> from the <strong>Istio Gateway</strong></p>
 </div>
 <div class="paragraph">
-<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Gateway - Generate Traffic'</strong></code></p>
+<p>In your <a href="https://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Gateway - Generate Traffic'</strong></code>
+Watch out though, make sure you choose <strong>Gateway</strong> and NOT Catalog.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -782,7 +783,7 @@ You can also access <a href="http://web-coolstore-cn-project%USER_ID%.%APPS_HOST
 <h2 id="_validate_the_result"><a class="anchor" href="#_validate_the_result"></a>Validate the result</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After one week trial, you have collected enough information to confirm that product descriptions in uppercase do increate sales rates.
+<p>After one week trial, you have collected enough information to confirm that product descriptions in uppercase do increate sales.
 So <strong>you will route all the traffic to Catalog Service v2</strong>.</p>
 </div>
 <div class="paragraph">
@@ -824,7 +825,8 @@ you likely see only <strong>'Gateway &#8658; Catalog GoLang (v2)'</strong> in th
 </div>
 </div>
 <div class="paragraph">
-<p>And from <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Kiali Console</a>, you can visualize that <strong>100%</strong> of the traffic is switching gradually to <strong>Catalog Service v2</strong>.</p>
+<p>And from <a href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Kiali Console</a>, you can visualize that <strong>100%</strong> of the traffic is switching gradually to <strong>Catalog Service v2</strong>.
+It may take at least a minute for all the Kiali traffic to route to just Catalog Service v2 and confirm what the 'Generate Traffic' script is telling you.</p>
 </div>
 <div class="imageblock">
 <div class="content">
