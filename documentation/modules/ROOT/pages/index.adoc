@@ -11,5 +11,25 @@ image::outer-loop.png[Developer Outer Loop, 400]
 
 The goal of this hands-workshop is to provide a Developer Experience through the Outer Loop using Cloud Native Technologies.
 
-To be a part of this journey, all you need is to come your modern web browser. 
-Everything else is running on the Cloud, on OpenShift
+To be a part of this journey, all you need is bring your modern web browser. 
+Everything else is running on the Cloud, on OpenShift.
+
+== Session Summary
+
+Looking at the Developer Outer Loop you will build and deploy simple microservices to OpenShift. 
+
+Explore Pipelines and GitOps with Tekton and ArgoCD.
+
+Finally use the observability of Service Mesh to monitor application network activity.
+
+=== Audience
+
+A Developer, Architect, DevOps, or manager wishing to learn about the Cloud Native development with OpenShift. 
+
+[cols="1,3,4"]  
+|===
+| *Duration* | *Audience* | *Level*
+|3.5 hour
+|Developers that want to learn OpenShift and Kubernetes
+|Basic experience of development and deployment on Kubernetes such as the Inner Loop Workshop
+|===
