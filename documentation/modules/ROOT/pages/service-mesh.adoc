@@ -13,7 +13,7 @@
 = Connect and Monitor your Application with OpenShift Service Mesh
 :navtitle: Connect and Monitor your Application with OpenShift Service Mesh
 
-_45 MINUTE EXERCISE_
+_30 MINUTE EXERCISE_
 
 In this lab you will enable tracing and monitoring of your backend services using Service Mesh.
 
@@ -45,24 +45,75 @@ The components that make up the data plane and the control plane are:
 --
 
 
-== Enabling Service Mesh to Inventory Service
+== What is Kiali?
+[sidebar]
+--
+image::kiali-logo.png[Kiali,400]
 
-OpenShift Service Mesh automatically injects the sidecar into the Pod by specifying a specific annotation in the DeploymentConfig.
+A Microservice Architecture breaks up the monolith into many smaller pieces that are composed together. 
+Patterns to secure the communication between services like fault tolerance (via timeout, retry, circuit breaking, etc.) are needed as well as distributed tracing to be able to see where calls are going.
+
+A service mesh can now provide these services at a platform level and free the developer from those tasks. 
+Routing decisions are done at the mesh level.
+
+https://www.kiali.io[Kiali^] works with Istio, in OpenShift or Kubernetes, to visualize the service mesh topology, to 
+provide visibility into features like circuit breakers, request rates and more. It offers insights about the mesh components at different levels, 
+from abstract Applications to Services and Workloads.
+--
+
+== Observability with Kiali
+
+Kiali provides an interactive graph view of your namespace in real time, being able to display the interactions at several 
+levels (applications, versions, workloads), with contextual information and charts on the selected graph node or edge.
+
+Kiali also provides a way of inspecting and configuring your service mesh.
+
+`*Click on the 'Developer Observability' button below*`
+
+[link={KIALI_URL}]
+[window=_blank, align="center"]
+[role='params-link']
+image::developer-observability-button.png[Developer Observability - Button, 300]
+
+Then, `*log in with OpenShift as user{USER_ID}/{OPENSHIFT_PASSWORD}'*`
+
+image::kiali-login.png[Kiali- Log In,300]
+
+== Enabling Service Mesh for the Catalog, Inventory and Gateway Service
+
+From the *Kiali* side-bar menu `**select Workloads**` to get a Kiali view of your application components.
+Notice how some components are marked as *Missing Sidecar* which we need to fix.
+Use the `**Type**` sort-option to display your *Deployments* then `**select the (W) catalog-coolstore**` *workload*.
+
+image::kiali-workloads.png[Kiali- select workload,800]
+
+Once the *Catalog-coolstore* workload has been selected, use the `**Actions drop-down to Enable Auto Injection**`
+
+image::kiali-workload-enable-inject.png[Kiali- enable auto ijection,800]
+
+For about a minute the workload will be displayed with errors as the Pod restarts.
+
+Congratulations!! You successfully put the Catalog Service under Service Mesh control.
+
+Now `**repeat these Kiali steps**` for the `*inventory-coolstore*` and `*gateway-coolstore*` workloads.
+
+=== Checking Sidecar Configuration
+
+OpenShift Service Mesh automatically injects the sidecar into the Pod according to a specific annotation in the Deployment.
+This is what *Kiali* has just added for you, lets check how that has changed the *Deployment*.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
 `*click on the 'D inventory-coolstore' bubble -> 'D inventory-coolstore'*`
 
 image::openshift-dc-inventory-topology.png[OpenShift - Inventory Topology, 700]
 
-Then, `*click on the 'YAML' tab and add __sidecar.istio.io/inject: 'true'__ under the 'spec.template.metadata.annotations' tag*`
+Then, `*click on the 'YAML' tab.*`
 
 image::openshift-enable-istio-inventory.png[OpenShift - Enable Istio Inventory, 700]
 
-`*Click on the 'Save' button*`
-
 Now, let's check the outcome. `*Click on the 'POD' tab*`
 
-The current pod will be terminated and a new one will be deployed with 2/2 containers in the **Ready** column as follows
+The current pod will have been terminated and a new deployed with 2/2 containers in the **Ready** column as follows
 
 image::openshift-istio-inventory.png[OpenShift - Istio Inventory, 700]
 
@@ -71,15 +122,9 @@ In the Container section, we should have 2 containers: **One for the application
 
 image::openshift-istio-inventory-details.png[OpenShift - Istio Inventory, 900]
 
-Congratulations!! You successfully put the Inventory Service under Service Mesh control.
+For the *catalog-coolstore-xxxx* and *gateway-coolstore-xxxx* pods, 
+`*we should find the 2 containers as well*`.
 
-
-== Enabling Service Mesh to Catalog and Gateway Service
-
-Now, we understand how to enable Service Mesh for a service, `*reproduce the previous step for Catalog and Gateway Services*`.
-
-Once done, to verify the deployment, *in the Container section* of the *'catalog-coolstore-xxxx' and 'gateway-coolstore-xxxx'* pods, 
-`*we should find the 2 containers as well*`, one for the application, the other the istio-proxy sidecar.
 
 == Controlling Ingress Traffic
 
@@ -169,7 +214,6 @@ You should see an array of json output looking a little like this but with many 
 ]
 ----
 
-
 == Updating the WebUI to use the Istio Gateway
 
 Configure the WebUI Service to use the Istio Gateway instead of the OpenShift Route.
@@ -201,40 +245,9 @@ Point your browser at the Web UI route url. You should be able to see the CoolSt
 
 IMPORTANT: Refresh your browser several times to generate traffic.
 
+== Using Kiali to Viewing Network Topology Graph
 
-== What is Kiali?
-[sidebar]
---
-image::kiali-logo.png[Kiali,400]
-
-A Microservice Architecture breaks up the monolith into many smaller pieces that are composed together. 
-Patterns to secure the communication between services like fault tolerance (via timeout, retry, circuit breaking, etc.) are needed as well as distributed tracing to be able to see where calls are going.
-
-A service mesh can now provide these services at a platform level and free the developer from those tasks. 
-Routing decisions are done at the mesh level.
-
-https://www.kiali.io[Kiali^] works with Istio, in OpenShift or Kubernetes, to visualize the service mesh topology, to 
-provide visibility into features like circuit breakers, request rates and more. It offers insights about the mesh components at different levels, 
-from abstract Applications to Services and Workloads.
---
-
-
-== Observability with Kiali
-
-Kiali provides an interactive graph view of your namespace in real time, being able to display the interactions at several levels (applications, versions, workloads), with contextual information and charts on the selected graph node or edge.
-
-`*Click on the 'Developer Observability' button below*`
-
-[link={KIALI_URL}]
-[window=_blank, align="center"]
-[role='params-link']
-image::developer-observability-button.png[Developer Observability - Button, 300]
-
-Then, `*log in with OpenShift as user{USER_ID}/{OPENSHIFT_PASSWORD}'*`
-
-image::kiali-login.png[Kiali- Log In,300]
-
-In the **'Graph' view**, `*enter the following configuration*`:
+In the *Kiali* side-bar menu, select the *Kiali* **'Graph' view**, and `*enter the following configuration*`:
 
 .Graph Settings
 [%header,cols=2*]
@@ -302,10 +315,18 @@ Then, `*enter the following information:*`
 |Create a route to the application
 |Checked
 
+|Show advanced routing options
+|**_Expand - see below_**
+
 |Labels
 |app.kubernetes.io/name=golang
 
 |===
+
+From the advanced routing options `*de-select the Secure Route option*`, so this creates an *HTTP* route
+like below:-
+
+image::openshift-add-http-route.png[OpenShift - Add route, 600]
 
 OpenShift will automatically detect 
 you have a *Dockerfile* based project so `*click on 'Create' button*` to 
