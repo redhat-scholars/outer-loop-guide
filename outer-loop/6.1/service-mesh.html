@@ -148,7 +148,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>45 MINUTE EXERCISE</em></p>
+<p><em>30 MINUTE EXERCISE</em></p>
 </div>
 <div class="paragraph">
 <p>In this lab you will enable tracing and monitoring of your backend services using Service Mesh.</p>
@@ -210,10 +210,95 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_enabling_service_mesh_to_inventory_service"><a class="anchor" href="#_enabling_service_mesh_to_inventory_service"></a>Enabling Service Mesh to Inventory Service</h2>
+<h2 id="_what_is_kiali"><a class="anchor" href="#_what_is_kiali"></a>What is Kiali?</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/kiali-logo.png" alt="Kiali" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>A Microservice Architecture breaks up the monolith into many smaller pieces that are composed together.
+Patterns to secure the communication between services like fault tolerance (via timeout, retry, circuit breaking, etc.) are needed as well as distributed tracing to be able to see where calls are going.</p>
+</div>
+<div class="paragraph">
+<p>A service mesh can now provide these services at a platform level and free the developer from those tasks.
+Routing decisions are done at the mesh level.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.kiali.io" target="_blank" rel="noopener">Kiali</a> works with Istio, in OpenShift or Kubernetes, to visualize the service mesh topology, to
+provide visibility into features like circuit breakers, request rates and more. It offers insights about the mesh components at different levels,
+from abstract Applications to Services and Workloads.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_observability_with_kiali"><a class="anchor" href="#_observability_with_kiali"></a>Observability with Kiali</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenShift Service Mesh automatically injects the sidecar into the Pod by specifying a specific annotation in the DeploymentConfig.</p>
+<p>Kiali provides an interactive graph view of your namespace in real time, being able to display the interactions at several
+levels (applications, versions, workloads), with contextual information and charts on the selected graph node or edge.</p>
+</div>
+<div class="paragraph">
+<p>Kiali also provides a way of inspecting and configuring your service mesh.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Click on the 'Developer Observability' button below</strong></code></p>
+</div>
+<div class="imageblock text-center params-link">
+<div class="content">
+<a class="image" href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener"><img src="_images/developer-observability-button.png" alt="Developer Observability - Button" width="300"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, <code><strong>log in with OpenShift as user%USER_ID%/%OPENSHIFT_PASSWORD%'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/kiali-login.png" alt="Kiali- Log In" width="300">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_enabling_service_mesh_for_the_catalog_inventory_and_gateway_service"><a class="anchor" href="#_enabling_service_mesh_for_the_catalog_inventory_and_gateway_service"></a>Enabling Service Mesh for the Catalog, Inventory and Gateway Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>From the <strong>Kiali</strong> side-bar menu <code><strong>select Workloads</strong></code> to get a Kiali view of your application components.
+Notice how some components are marked as <strong>Missing Sidecar</strong> which we need to fix.
+Use the <code><strong>Type</strong></code> sort-option to display your <strong>Deployments</strong> then <code><strong>select the (W) catalog-coolstore</strong></code> <strong>workload</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/kiali-workloads.png" alt="Kiali- select workload" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the <strong>Catalog-coolstore</strong> workload has been selected, use the <code><strong>Actions drop-down to Enable Auto Injection</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/kiali-workload-enable-inject.png" alt="Kiali- enable auto ijection" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>For about a minute the workload will be displayed with errors as the Pod restarts.</p>
+</div>
+<div class="paragraph">
+<p>Congratulations!! You successfully put the Catalog Service under Service Mesh control.</p>
+</div>
+<div class="paragraph">
+<p>Now <code><strong>repeat these Kiali steps</strong></code> for the <code><strong>inventory-coolstore</strong></code> and <code><strong>gateway-coolstore</strong></code> workloads.</p>
+</div>
+<div class="sect2">
+<h3 id="_checking_sidecar_configuration"><a class="anchor" href="#_checking_sidecar_configuration"></a>Checking Sidecar Configuration</h3>
+<div class="paragraph">
+<p>OpenShift Service Mesh automatically injects the sidecar into the Pod according to a specific annotation in the Deployment.
+This is what <strong>Kiali</strong> has just added for you, lets check how that has changed the <strong>Deployment</strong>.</p>
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
@@ -225,7 +310,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Then, <code><strong>click on the 'YAML' tab and add <em>sidecar.istio.io/inject: 'true'</em> under the 'spec.template.metadata.annotations' tag</strong></code></p>
+<p>Then, <code><strong>click on the 'YAML' tab.</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -233,13 +318,10 @@
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Click on the 'Save' button</strong></code></p>
-</div>
-<div class="paragraph">
 <p>Now, let&#8217;s check the outcome. <code><strong>Click on the 'POD' tab</strong></code></p>
 </div>
 <div class="paragraph">
-<p>The current pod will be terminated and a new one will be deployed with 2/2 containers in the <strong>Ready</strong> column as follows</p>
+<p>The current pod will have been terminated and a new deployed with 2/2 containers in the <strong>Ready</strong> column as follows</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -256,19 +338,9 @@ In the Container section, we should have 2 containers: <strong>One for the appli
 </div>
 </div>
 <div class="paragraph">
-<p>Congratulations!! You successfully put the Inventory Service under Service Mesh control.</p>
+<p>For the <strong>catalog-coolstore-xxxx</strong> and <strong>gateway-coolstore-xxxx</strong> pods,
+<code><strong>we should find the 2 containers as well</strong></code>.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_enabling_service_mesh_to_catalog_and_gateway_service"><a class="anchor" href="#_enabling_service_mesh_to_catalog_and_gateway_service"></a>Enabling Service Mesh to Catalog and Gateway Service</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now, we understand how to enable Service Mesh for a service, <code><strong>reproduce the previous step for Catalog and Gateway Services</strong></code>.</p>
-</div>
-<div class="paragraph">
-<p>Once done, to verify the deployment, <strong>in the Container section</strong> of the <strong>'catalog-coolstore-xxxx' and 'gateway-coolstore-xxxx'</strong> pods,
-<code><strong>we should find the 2 containers as well</strong></code>, one for the application, the other the istio-proxy sidecar.</p>
 </div>
 </div>
 </div>
@@ -451,56 +523,10 @@ Refresh your browser several times to generate traffic.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_is_kiali"><a class="anchor" href="#_what_is_kiali"></a>What is Kiali?</h2>
-<div class="sectionbody">
-<div class="sidebarblock">
-<div class="content">
-<div class="imageblock">
-<div class="content">
-<img src="_images/kiali-logo.png" alt="Kiali" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p>A Microservice Architecture breaks up the monolith into many smaller pieces that are composed together.
-Patterns to secure the communication between services like fault tolerance (via timeout, retry, circuit breaking, etc.) are needed as well as distributed tracing to be able to see where calls are going.</p>
-</div>
-<div class="paragraph">
-<p>A service mesh can now provide these services at a platform level and free the developer from those tasks.
-Routing decisions are done at the mesh level.</p>
-</div>
-<div class="paragraph">
-<p><a href="https://www.kiali.io" target="_blank" rel="noopener">Kiali</a> works with Istio, in OpenShift or Kubernetes, to visualize the service mesh topology, to
-provide visibility into features like circuit breakers, request rates and more. It offers insights about the mesh components at different levels,
-from abstract Applications to Services and Workloads.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_observability_with_kiali"><a class="anchor" href="#_observability_with_kiali"></a>Observability with Kiali</h2>
+<h2 id="_using_kiali_to_viewing_network_topology_graph"><a class="anchor" href="#_using_kiali_to_viewing_network_topology_graph"></a>Using Kiali to Viewing Network Topology Graph</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Kiali provides an interactive graph view of your namespace in real time, being able to display the interactions at several levels (applications, versions, workloads), with contextual information and charts on the selected graph node or edge.</p>
-</div>
-<div class="paragraph">
-<p><code><strong>Click on the 'Developer Observability' button below</strong></code></p>
-</div>
-<div class="imageblock text-center params-link">
-<div class="content">
-<a class="image" href="https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener"><img src="_images/developer-observability-button.png" alt="Developer Observability - Button" width="300"></a>
-</div>
-</div>
-<div class="paragraph">
-<p>Then, <code><strong>log in with OpenShift as user%USER_ID%/%OPENSHIFT_PASSWORD%'</strong></code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/kiali-login.png" alt="Kiali- Log In" width="300">
-</div>
-</div>
-<div class="paragraph">
-<p>In the <strong>'Graph' view</strong>, <code><strong>enter the following configuration</strong></code>:</p>
+<p>In the <strong>Kiali</strong> side-bar menu, select the <strong>Kiali</strong> <strong>'Graph' view</strong>, and <code><strong>enter the following configuration</strong></code>:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. Graph Settings</caption>
@@ -605,11 +631,24 @@ except that all product descriptions are returned in <strong>UPPERCASE</strong>.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Checked</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Show advanced routing options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Expand - see below</em></strong></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Labels</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">app.kubernetes.io/name=golang</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>From the advanced routing options <code><strong>de-select the Secure Route option</strong></code>, so this creates an <strong>HTTP</strong> route
+like below:-</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-add-http-route.png" alt="OpenShift - Add route" width="600">
+</div>
+</div>
 <div class="paragraph">
 <p>OpenShift will automatically detect
 you have a <strong>Dockerfile</strong> based project so <code><strong>click on 'Create' button</strong></code> to
