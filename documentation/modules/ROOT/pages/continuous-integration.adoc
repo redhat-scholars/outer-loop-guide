@@ -6,8 +6,8 @@
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project{USER_ID}
 
-= Continuous Integration with Openshift Pipelines
-:navtitle: Continuous Integration with Openshift Pipelines
+= Continuous Integration with OpenShift Pipelines
+:navtitle: Continuous Integration with OpenShift Pipelines
 
 _30 MINUTE EXERCISE_
 
