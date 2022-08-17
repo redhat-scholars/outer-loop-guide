@@ -60,10 +60,19 @@ to this file.
 
 `*Click on the 'Developer Workspace' button below*`
 
-[link={CHE_URL}/dashboard/#/ide/user{USER_ID}-devspaces/wksp-end-to-end-dev]
+// CRW
+//[link={CHE_URL}/dashboard/#/ide/user{USER_ID}-devspaces/wksp-end-to-end-dev]
+// Vscode IDE
+//[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml?che-editor=https://eclipse-che.github.io/che-plugin-registry/main/v3/plugins/che-incubator/che-code/insiders/devfile.yaml]
+// Default IDE
+[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml]
 [window=_blank, align="center"]
 [role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
+
+Then `*Click 'Log in with OpenShift'*`
+
+image::login-with-openshift.png[OpenShift - Login, 500]
 
 Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*`.
 
