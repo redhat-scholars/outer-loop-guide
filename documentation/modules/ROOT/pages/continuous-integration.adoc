@@ -1,5 +1,5 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: https://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%
+:CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
 :GIT_URL: https://gitea-server-gitea.%APPS_HOSTNAME_SUFFIX%
 :GITOPS_URL: https://argocd-server-argocd.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%

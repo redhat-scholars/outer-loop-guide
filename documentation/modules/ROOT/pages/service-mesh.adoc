@@ -1,5 +1,5 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: https://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%
+:CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
 :KIALI_URL: https://kiali-istio-system.%APPS_HOSTNAME_SUFFIX%
 :JAEGER_URL: https://jaeger-istio-system.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
