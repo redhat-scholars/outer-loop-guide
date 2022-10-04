@@ -18,8 +18,6 @@ and getting familiar with the OpenShift CLI and OpenShift Web Console.
 .Red Hat OpenShift DevSpaces
 ****
 [window=_blank, align="center"]
-image::codereadyworkspaces-logo.png[OpenShift Dev Spaces, 400]
-
 https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] is a Kubernetes-native IDE and developer collaboration platform.
 
 As an open-source project, the core goals of https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  are to:
