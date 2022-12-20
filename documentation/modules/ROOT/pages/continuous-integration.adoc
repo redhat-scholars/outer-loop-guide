@@ -79,15 +79,15 @@ Now that you have a Git repository for the Inventory service, you should push yo
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Commit'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Commit'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -99,7 +99,7 @@ git commit -m "Initial"
 git push http://user{USER_ID}:openshift@gitea-server.gitea.svc:3000/user{USER_ID}/inventory-quarkus.git
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 
 --
 ====
