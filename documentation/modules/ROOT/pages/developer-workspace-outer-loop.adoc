@@ -97,7 +97,7 @@ First, in your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: OpenShift - Login'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: OpenShift - Login'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -139,7 +139,7 @@ Welcome! See 'odo help' to get started.
 == Deploy the CoolStore Application in your Development Environment
 
 In your {CHE_URL}[Workspace^,role='params-link'], 
-`*click on 'Terminal' -> 'Run Task...' ->  'che: Inner Loop - Deploy Coolstore'*`
+`*click on 'Terminal' -> 'Run Task...' ->  'devfile: Inner Loop - Deploy Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 

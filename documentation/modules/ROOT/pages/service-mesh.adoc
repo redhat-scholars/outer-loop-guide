@@ -393,7 +393,7 @@ the **10%** remaining to pods of the **Catalog Service v2**.
 Let's now see the A/B testing with Site Mesh in action.
 First, we need to generate HTTP traffic by sending several requests to the **Gateway Service** from the **Istio Gateway**
 
-In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'che: Gateway - Generate Traffic'*` 
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Gateway - Generate Traffic'*` 
 Watch out though, make sure you choose *Gateway* and NOT Catalog.
 
 image::che-runtask.png[Che - RunTask, 600]

@@ -79,7 +79,7 @@ Now that you have a Git repository for the Inventory service, you should push yo
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Commit'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Commit'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --

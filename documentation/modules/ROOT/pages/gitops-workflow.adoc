@@ -43,7 +43,7 @@ OpenShift provides the flexibility to choose when and how you integrate GitOps m
 
 First, you need to export the project resources from OpenShift.
 
-In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'che: GitOps - Export Coolstore'*`
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: GitOps - Export Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 
@@ -88,7 +88,7 @@ In your {GIT_URL}[Git Repository^,role='params-link'], `*create a new Repository
 
 Now that you have a Git repository for the configuration, you should push the exported Inventory configuration into it.
 
-In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'che: GitOps - Commit Inventory'*`
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: GitOps - Commit Inventory'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 
@@ -286,7 +286,7 @@ You can leave the configuration drift as it is. You will fix it in the next lab.
 
 To prepare the next lab, you need to push the remaining coolstore application configuration to the Git repository.
 
-In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'che: GitOps - Commit & Configure Coolstore'*`
+In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: GitOps - Commit & Configure Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 

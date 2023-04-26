@@ -225,7 +225,7 @@ image::argocd-synced-inventory-details.png[Argo CD - Synced Inventory, 900]
 Previously, for the **Inventory Service**, you have learned how to create, configure and run an OpenShift pipeline.
 Now, `*let's deploy the rest of the application*`.
 
-For doing so, `*click on 'Terminal' -> 'Run Task...' ->  'che: Pipeline - Deploy Coolstore'*`
+For doing so, `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Pipeline - Deploy Coolstore'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 
