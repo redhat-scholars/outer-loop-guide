@@ -54,7 +54,7 @@ the provisioning of a specific workspace by defining:
 * tools that you need
 * application runtime definition
 
-Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/6.4/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] to configure the project and runtime according 
+Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/6.5/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] to configure the project and runtime according 
 to this file.
 ====
 
@@ -109,7 +109,7 @@ CLI::
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-odo login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
+oc login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
 ----
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
@@ -125,14 +125,13 @@ Connecting to the OpenShift cluster
 
 Login successful.
 
-You have access to the following projects and can switch between them with 'odo project set <project-name>':
+You have access to the following projects and can switch between them with 'oc project <projectname>':
 
   * cn-project{USER_ID}
     user{USER_ID} -devspaces
 
-Using project "cn-project{USER_ID}".
+Using project "user{USER_ID} -devspaces".
 
-Welcome! See 'odo help' to get started.
 ----
 
 [#deploy_coolstore_application]
