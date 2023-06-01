@@ -315,7 +315,7 @@ Then, `*enter the following information:*`
 |Create a route to the application
 |Checked
 
-|Show advanced routing options
+|Show advanced Routing options
 |**_Expand - see below_**
 
 |Labels
@@ -323,7 +323,7 @@ Then, `*enter the following information:*`
 
 |===
 
-From the advanced routing options `*de-select the Secure Route option*`, so this creates an *HTTP* route
+From the advanced Routing options `*de-select the Secure Route option*`, so this creates an *HTTP* route
 like below:-
 
 image::openshift-add-http-route.png[OpenShift - Add route, 600]
