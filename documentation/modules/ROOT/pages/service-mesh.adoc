@@ -277,7 +277,7 @@ image::kiali-graph.png[Kiali- Graph,900]
 
 == Deploy the new Catalog Service
 
-A new **Catalog Service v2** has been implemented in https://golang.org/[Golang^] which uses the same business logic than **Catalog Service v1** 
+A new **Catalog Service v2** has been implemented in https://golang.org/[Golang^] which uses the same business logic as the **Catalog Service v1** 
 except that all product descriptions are returned in **UPPERCASE**.
 
 
@@ -394,7 +394,7 @@ Let's now see the A/B testing with Site Mesh in action.
 First, we need to generate HTTP traffic by sending several requests to the **Gateway Service** from the **Istio Gateway**
 
 In your {CHE_URL}[Workspace^,role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Gateway - Generate Traffic'*` 
-Watch out though, make sure you choose *Gateway* and NOT Catalog.
+Watch out though, make sure you choose *Gateway* and NOT Inventory.
 
 image::che-runtask.png[Che - RunTask, 600]
 
