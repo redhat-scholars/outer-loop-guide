@@ -219,7 +219,7 @@ You should see an array of json output looking a little like this but with many 
 Configure the WebUI Service to use the Istio Gateway instead of the OpenShift Route.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*click on the 'D web-coolstore' bubble -> 'D web-coolstore' and go to the 'Environement' tab*`
+`*click on the 'D web-coolstore' bubble -> 'D web-coolstore' and go to the 'Environment' tab*`
 
 `*Click on '+ Add Value' then add the following environment variable*`
 
@@ -345,7 +345,7 @@ image::openshift-catalogv2-topology.png[OpenShift - Catalog v2 Topology, 700]
 .A/B Testing
 --
 https://en.wikipedia.org/wiki/A/B_testing[A/B testing^] allows running multiple versions of a functionality in parallel and using analytics of the user behavior it is possible to determine which version is the best. 
-It is also possible to launch the new features only for a small set of users, to prepare the general avalability of a new feature. 
+It is also possible to launch the new features only for a small set of users, to prepare the general availability of a new feature. 
 --
 
 The implementation of such procedure like **A/B Testing** is one are the advantages coming with OpenShift Service Mesh.
@@ -437,7 +437,7 @@ You can see that the traffic between the two version of the **Catalog** is share
 
 == Validate the result
 
-After one week trial, you have collected enough information to confirm that product descriptions in uppercase do increate sales. 
+After one week trial, you have collected enough information to confirm that product descriptions in uppercase does increase sales. 
 So **you will route all the traffic to Catalog Service v2**.
 
 In {KIALI_URL}[Kiali Console^,role='params-link'], `*click on 'Istio Config' then 'catalog-coolstore' VirtualService*`
