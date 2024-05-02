@@ -189,4 +189,27 @@ You should have the whole Coolstore Application up and running in your Developme
 
 image::openshift-inner-loop-coolstore.png[OpenShift - Inner Loop Coolstore, 700]
 
+You should test out the application deployment by `*clicking on the Route icon*` for the NodeJS based web-coolstore component.
+
+
+== Fix up the Browser URL
+
+If you see the following result in the browser window then its likely your (Chromium) 
+browser is upgrading the simple *http://* based URLs to *https* - but the deployed apps don't support that.
+
+image::inventory-quarkus-url-unavailable.png[Che - Preview Not Available, 600]
+
+To fix this you need to `*click in the URL bar*` in the browser 
+
+image::inventory-quarkus-edit-url.png[Che - Preview Not Available, 600] 
+and `*remove that "s"*` making it *Not Secure* - like this: 
+
+image::inventory-quarkus-edited-url.png[Che - Preview Not Available, 600]
+
+[TIP]
+====
+
+You will need to do this with all your application URLs, but fortunately the browser quickly remembers.
+====
+
 Now you are ready to get started with the labs!
