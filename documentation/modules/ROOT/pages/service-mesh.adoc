@@ -274,6 +274,11 @@ You can see how the services interact with each other.
 
 image::kiali-graph.png[Kiali- Graph,900]
 
+[TIP]
+====
+Use the `*show/hide>>*` control to close the side bar and make your topology chart bigger.
+====
+
 
 == Deploy the new Catalog Service
 
