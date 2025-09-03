@@ -195,11 +195,11 @@ They can also have inputs and outputs in order to interact with other tasks in t
 </table>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Search' &#8594; 'Task' &#8594; 'T Task' &#8594; 'Create Task'</strong></code>.</p>
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/cn-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>, in the header bar next to (?)
+<code><strong>click on '(+)' to 'Import YAML'</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p><code><strong>Then update the content as follows:</strong></code></p>
+<p><code><strong>Then copy in the following content:</strong></code></p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
@@ -216,7 +216,7 @@ metadata:
     tekton.dev/displayName: "argocd"
 spec:
   description: &gt;-
-    This task syncs (deploys) an Argo CD application and waits for it to be healthy.
+    As part of the Outer Loop lab this task syncs (deploys) an Argo CD application and waits for it to be healthy.
     To do so, it requires the address of the Argo CD server and some form of
     authentication either a username/password or an authentication token.
   params:
@@ -240,7 +240,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Then click on 'create'</strong></code>. Your Argo CD Task is now created.</p>
+<p><code><strong>Then click on 'Create'</strong></code>. Your Argo CD Task is now created.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -377,14 +377,33 @@ data:
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(T) Task</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">application-name *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">application-name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">inventory</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It&#8217;s important that you choose the Red Hat ArgoCD task-sync-and-wait that you created earlier and this is marked with a green (T)</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. OpenShift Client Task Configuration</caption>
+<caption class="title">Table 3. OpenShift Client Cluster Task Configuration</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -401,6 +420,11 @@ data:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">openshift-client</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(CT) Cluster Task</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
