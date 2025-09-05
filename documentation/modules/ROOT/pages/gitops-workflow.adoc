@@ -249,8 +249,8 @@ image::argocd-cm-inventory-sync.png[Argo CD - CM Inventory Sync, 700]
 Then `*click on the 'Synchonize' button*`. Now the ConfigMap of Inventory has been deployed and synchronized 
 with your environment.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*select your 'cn-project{USER_ID}'*` and `*click on 'Config Maps'*`. You should find the resource you just 
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'],
+`*select your 'cn-project{USER_ID}'*` and `*click on 'Workloads' menu and  'Config Maps'*`. You should find the resource you just 
 deployed via Argo CD.
 
 image::openshift-cm-inventory-deployed.png[OpenShift - CM Inventory Deployed, 500]
@@ -261,8 +261,8 @@ image::openshift-cm-inventory-deployed.png[OpenShift - CM Inventory Deployed, 50
 A _Configuration Drift_ is a term used whenever someone makes ad hoc changes in a (production) environment
 which are not recorded or tracked.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], from the **Developer view**,
-`*select your 'cn-project{USER_ID}'*` and `*click on 'Config Maps' -> 'CM inventory' -> 'YAML'*`.
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], 
+`*select your 'cn-project{USER_ID}'*` and `*click on the 'Workloads' menu and 'Config Maps' -> 'CM inventory' -> 'YAML'*`.
 
 `*Add the following line in your configuration then click on 'Save'*`
 
