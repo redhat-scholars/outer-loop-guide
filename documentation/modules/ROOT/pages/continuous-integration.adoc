@@ -237,6 +237,9 @@ image::openshift-add-task.png[OpenShift - Add task, 500]
 |Display Name
 |s2i-java
 
+|VERSION
+|openjdk-21-ubi8
+
 |TLSVERIFY
 |false
 
