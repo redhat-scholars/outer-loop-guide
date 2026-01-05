@@ -18,7 +18,7 @@ _30 MINUTE EXERCISE_
 In this lab you will enable tracing and monitoring of your backend services using Service Mesh.
 
 [sidebar]
-.OpenShift Service Mesh
+.OpenShift Service Mesh V3
 --
 The term **Service Mesh** describes the network of microservices that make up applications in a distributed microservice architecture and the interactions between those microservices. As a service mesh grows in size and complexity, it can become harder to understand and manage.
 
@@ -42,6 +42,9 @@ The components that make up the data plane and the control plane are:
 * **Mixer** - is the control plane component responsible for enforcing access control and usage policies (such as authorization, rate limits, quotas, authentication, request tracing) and collecting telemetry data from the Envoy proxy and other services.
 * **Pilot** - is the control plane component responsible for configuring the proxies at runtime. Pilot provides service discovery for the Envoy sidecars, traffic management capabilities for intelligent routing (for example, A/B tests or canary deployments), and resiliency (timeouts, retries, and circuit breakers).
 * **Citadel** - is the control plane component responsible for certificate issuance and rotation. Citadel provides strong service-to-service and end-user authentication with built-in identity and credential management. You can use Citadel to upgrade unencrypted traffic in the service mesh. Using Citadel, operators can enforce policies based on service identity rather than on network controls.
+
+* **Ambient Mode** - is a new way of deploying service mesh without sidecars that significantly lowers the resource costs of using the mesh. This provides a low overhead solution for zero trust networking with lightweight pod-to-pod mTLS encryption and authorization policies based on workload identities, 
+with the ability to add more advanced features as required. For this workshop we will continue to use Envoy proxies, but logically the behavior is very similar.
 --
 
 
@@ -99,7 +102,7 @@ Now `**repeat these Kiali steps**` for the `*inventory-coolstore*` and `*gateway
 
 === Checking Sidecar Configuration
 
-OpenShift Service Mesh automatically injects the sidecar into the Pod according to a specific annotation in the Deployment.
+OpenShift Service Mesh automatically injects the sidecar into the Pod according to a specific label in the Deployment.
 This is what *Kiali* has just added for you, lets check how that has changed the *Deployment*.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], `*click on the 'D inventory-coolstore' bubble -> 'D inventory-coolstore'*`
@@ -117,7 +120,7 @@ The current pod will have been terminated and a new deployed with 2/2 containers
 image::openshift-istio-inventory.png[OpenShift - Istio Inventory, 700]
 
 `*Click on 'P inventory-coolstore-xxxx' then scroll down.*` 
-In the Container section, we should have 2 containers: **One for the application and one for the istio-proxy sidecar.**
+In the Container section, we should have 2 running containers: **One for the application and one for the istio-proxy sidecar.**
 
 image::openshift-istio-inventory-details.png[OpenShift - Istio Inventory, 900]
 
@@ -128,7 +131,7 @@ For the *catalog-coolstore-xxxx* and *gateway-coolstore-xxxx* pods,
 == Controlling Ingress Traffic
 
 In a OpenShift environment, the OpenShift Route is used to specify services that should be exposed outside the cluster. 
-In an OpenShift Service Mesh, a better approach is to use a different configuration model, namely **Istio Gateway**. 
+In an OpenShift Service Mesh, a better approach is to use a different configuration model, namely the **Istio Gateway**. 
 
 [TIP]
 ====
@@ -137,6 +140,76 @@ In an OpenShift Service Mesh, a better approach is to use a different configurat
 **VirtualService** defines a set of traffic routing rules to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.
 ====
 
+There are two parts to deploying a Gateway, firstly we create an application deployment for the ingress gateway and run this in our cn-project{USER_ID} project. 
+
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], in the header bar next to (?)
+`*click on '(+)' to 'Import YAML'*`.
+
+`*Then copy in the following content:*`
+
+[source,yaml,subs="{markup-in-source}",role=copypaste]
+----
+apiVersion: v1
+kind: Service
+metadata:
+  name: istio-ingressgateway
+  namespace: cn-project${USER_ID}
+spec:
+  type: ClusterIP
+  selector:
+    istio: ingressgateway
+  ports:
+  - name: http2
+    port: 80
+    targetPort: 8080
+  - name: https
+    port: 443
+    targetPort: 8443
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-ingressgateway
+  namespace: cn-project${USER_ID}
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  template:
+    metadata:
+      annotations:
+        # Select the gateway injection template (rather than the default sidecar template)
+        inject.istio.io/templates: gateway
+      labels:
+        # Set a unique label for the gateway. This is required to ensure Gateways can select this workload
+        istio: ingressgateway
+        # Enable gateway injection. If connecting to a revisioned control plane, replace with "istio.io/rev: revision-name"
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - name: istio-proxy
+        image: auto # The image will automatically update each time the pod starts.
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: istio-ingressgateway
+  namespace: cn-project${USER_ID}
+spec:
+  to:
+    kind: Service
+    name: istio-ingressgateway
+    weight: 100
+  port:
+    targetPort: http2
+  wildcardPolicy: None
+----
+
+`*Click on 'create'*`. Your ingress gateway application (Deployment, Service and Route) are now created.
+
+
+The next step is to tell Istio about this Gateway option by configuring the the Gateway object and the VirtualService which describes the network 
+relationship (in terms of ports and URLs)
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'], in the header bar next to (?)
 `*click on '(+)' to 'Import YAML'*`.
@@ -149,17 +222,17 @@ apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: ingressgateway
-  namespace: cn-project{USER_ID}
+  namespace: cn-project${USER_ID}
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
   servers:
     - port:
-        number: 80
+        number: 8080
         name: http
         protocol: HTTP
       hosts:
-        - "ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}"
+        - "*"
 ----
 
 `*Click on 'create'*`. Your Istio Gateway is now created.
@@ -177,10 +250,10 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: gateway-coolstore
-  namespace: cn-project{USER_ID}
+  namespace: cn-project${USER_ID}
 spec:
   hosts:
-    - "ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}"
+    - "*"
   gateways:
     - ingressgateway
   http:
@@ -193,8 +266,14 @@ spec:
 
 `*Then click on 'create'*`. The Virtual Service for the Gateway Service is now created.
 
+[NOTE]
+====
+There are other deployment models for the ingress gateway, in this example each user gets their own private gateway, but it is possible to use a shared 
+gateway and distribute inbound traffic to the correct service according to its URL.
+====
+
 To confirm that the **Istio Gateway** is properly configured, 
-`*click on http://ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/api/products[http://ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/api/products^,role='params-link']*`
+`*click on http://istio-ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/api/products[http://istio-ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/api/products^,role='params-link']*`
 
 You should see an array of json output looking a little like this but with many more products:
 
@@ -240,9 +319,9 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^,role='params-link'],
 |Value
 
 |COOLSTORE_GW_ENDPOINT
-|\http://ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}
-
+|\http://istio-ingressgateway-cn-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}
 |===
+FIXME
 
 image::openshift-add-web-envvars.png[OpenShift - Add Web Environment Variables, 700]
 
@@ -253,7 +332,7 @@ image::openshift-add-web-envvars.png[OpenShift - Add Web Environment Variables, 
 
 Point your browser at the Web UI route url. You should be able to see the CoolStore with all products and their inventory status.
 
-IMPORTANT: Refresh your browser several times to generate traffic.
+IMPORTANT: Refresh your browser maybe 20 times to generate traffic.
 
 == Using Kiali to Viewing Network Topology Graph
 
@@ -281,6 +360,8 @@ In the *Kiali* side-bar menu, select the *Kiali* **'Graph' view**, and `*enter t
 
 The outcome is a graph with all the services, connected by the requests going through them. 
 You can see how the services interact with each other. 
+
+FIXME
 
 image::kiali-graph.png[Kiali- Graph,900]
 
