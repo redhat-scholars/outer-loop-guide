@@ -197,13 +197,13 @@ image::openshift-add-pipeline-workspace.png[OpenShift - Pipeline Workspace, 600]
 image::openshift-add-pipeline-task.png[OpenShift - Add task, 600]
 
 `*Start typing 'git-' next to the (+) and select 'git-clone'*`. 
-There are several options to choose from, look out for the *Red Hat* Cluster Task (CT) one. `*Then hit Add.*`
+There are several options to choose from, look out for the *Red Hat* one. `*Then hit Add.*`
 
 image::openshift-add-git-clone-task.png[OpenShift - Add Git Clone Task, 500]
 
 `*Click on the newly created 'git-clone' task and enter the following configuration*`:
 
-.git-clone Cluster Task (CT)
+.git-clone Task
 [%header,cols="30%,70%"]
 |===
 |Parameter 
@@ -224,11 +224,11 @@ Once done, let's add another task. `*Click on the blue plus icon at the right ha
 
 image::openshift-add-task.png[OpenShift - Add task, 500]
 
-`*Then click on 'Add task'*` and as before `*next to the (+) type 's2i-java'*` When you see the *Red Hat* Cluster Task (CT) one `*select and add the 's2i-java' task*`
+`*Then click on 'Add task'*` and as before `*next to the (+) type 's2i-java'*` When you see the *Red Hat* one `*select and add the 's2i-java' task*`
 
 `*Click on the newly created 's2i-java' task and enter the following configuration*`:
 
-.s2i-java Cluster Task (CT)
+.s2i-java Task
 [%header,cols="30%,70%"]
 |===
 |Parameter 
@@ -237,19 +237,19 @@ image::openshift-add-task.png[OpenShift - Add task, 500]
 |Display Name
 |s2i-java
 
-|VERSION
-|openjdk-21-ubi8
-
-|TLSVERIFY
-|false
-
-|MAVEN_MIRROR_URL
-|\http://nexus.opentlc-shared.svc:8081/repository/maven-all-public
-
 |Image*
 |image-registry.openshift-image-registry.svc:5000/cn-project{USER_ID}/inventory-coolstore
 
-|Workspaces source
+|VERSION
+|openjdk-21-ubi8
+
+|ENV_VARS (+Add values)
+|MAVEN_MIRROR_URL=http://nexus.opentlc-shared.svc:8081/repository/maven-all-public
+
+|TLS_VERIFY
+|false
+
+|Workspaces source*
 |shared-workspace
 
 |===

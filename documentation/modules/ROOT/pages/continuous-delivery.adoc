@@ -171,22 +171,19 @@ image::openshift-full-inventory-pipeline.png[OpenShift Pipeline,900]
 |Name
 |argocd-task-sync-and-wait 
 |
-|Type
-|(T) Task
-|
 |Parameters
-|application-name 
+|application-name* 
 |inventory
 
 |===
 
 [NOTE]
 ====
-It's important that you choose the Red Hat ArgoCD task-sync-and-wait that you created earlier and this is marked with a green (T) 
+It's important that you choose the Red Hat ArgoCD task-sync-and-wait that you created earlier.
 ====
 
 
-.OpenShift Client Cluster Task Configuration
+.OpenShift Client Task Configuration
 [%header,cols=3*]
 |===
 |Section
@@ -194,10 +191,7 @@ It's important that you choose the Red Hat ArgoCD task-sync-and-wait that you cr
 |Value
 
 |Name
-|openshift-client 
-|
-|Type
-|(CT) Cluster Task
+|openshift-client (Red Hat)
 |
 |Parameters
 |SCRIPT 
