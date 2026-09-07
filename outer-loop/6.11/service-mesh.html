@@ -391,7 +391,7 @@ In an OpenShift Service Mesh, a better approach is to use a different configurat
 kind: Service
 metadata:
   name: istio-ingressgateway
-  namespace: cn-project$%USER_ID%
+  namespace: cn-project%USER_ID%
 spec:
   type: ClusterIP
   selector:
@@ -408,7 +408,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: istio-ingressgateway
-  namespace: cn-project$%USER_ID%
+  namespace: cn-project%USER_ID%
 spec:
   selector:
     matchLabels:
@@ -432,7 +432,7 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: istio-ingressgateway
-  namespace: cn-project$%USER_ID%
+  namespace: cn-project%USER_ID%
 spec:
   to:
     kind: Service
@@ -463,7 +463,7 @@ relationship (in terms of ports and URLs)</p>
 kind: Gateway
 metadata:
   name: ingressgateway
-  namespace: cn-project$%USER_ID%
+  namespace: cn-project%USER_ID%
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -492,7 +492,7 @@ spec:
 kind: VirtualService
 metadata:
   name: gateway-coolstore
-  namespace: cn-project$%USER_ID%
+  namespace: cn-project%USER_ID%
 spec:
   hosts:
     - "*"
