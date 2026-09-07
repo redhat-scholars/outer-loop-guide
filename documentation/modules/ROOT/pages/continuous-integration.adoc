@@ -212,10 +212,13 @@ image::openshift-add-git-clone-task.png[OpenShift - Add Git Clone Task, 500]
 |Display Name
 |git-clone
 
-|url
+|URL
 |\http://gitea-server.gitea.svc:3000/user{USER_ID}/inventory-quarkus.git
 
-|Workspaces output
+|REVISION
+|master
+
+|Workspaces output*
 |shared-workspace
 
 |===
@@ -237,7 +240,7 @@ image::openshift-add-task.png[OpenShift - Add task, 500]
 |Display Name
 |s2i-java
 
-|Image*
+|IMAGE*
 |image-registry.openshift-image-registry.svc:5000/cn-project{USER_ID}/inventory-coolstore
 
 |VERSION
