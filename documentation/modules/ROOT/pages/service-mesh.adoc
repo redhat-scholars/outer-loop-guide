@@ -153,7 +153,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: istio-ingressgateway
-  namespace: cn-project${USER_ID}
+  namespace: cn-project{USER_ID}
 spec:
   type: ClusterIP
   selector:
@@ -170,7 +170,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: istio-ingressgateway
-  namespace: cn-project${USER_ID}
+  namespace: cn-project{USER_ID}
 spec:
   selector:
     matchLabels:
@@ -194,7 +194,7 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: istio-ingressgateway
-  namespace: cn-project${USER_ID}
+  namespace: cn-project{USER_ID}
 spec:
   to:
     kind: Service
@@ -222,7 +222,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: ingressgateway
-  namespace: cn-project${USER_ID}
+  namespace: cn-project{USER_ID}
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -250,7 +250,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: gateway-coolstore
-  namespace: cn-project${USER_ID}
+  namespace: cn-project{USER_ID}
 spec:
   hosts:
     - "*"
